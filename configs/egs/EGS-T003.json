@@ -1,0 +1,360 @@
+{
+  "task_id": "EGS-T003",
+  "experiment_protocol": "EGS_TR_v1_OVERNIGHT_AUTONOMOUS",
+  "model_id": "EGS-TR-v1.0",
+  "request": "EGS-R001",
+  "grid": {
+    "nx": 768,
+    "ny": 512,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -1.7902097902097902,
+    "ymax": 1.7902097902097902,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded",
+    "extension": "ymin_new = ymin_old - 128h; original rows embedded at [128:384]; filler rows = background"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "dt": 0.25,
+  "T": 120000.0,
+  "steps": 480000,
+  "params": {
+    "Da": 1e-05,
+    "lam": 0.005,
+    "theta": 0.3,
+    "beta": 0.02,
+    "a_star": 0.6,
+    "a_width": 0.05,
+    "rho": 0.005,
+    "eta": 0.01,
+    "s0": 0.05,
+    "s_sense_width": 0.05,
+    "s_u": 0.4,
+    "s_v": 0.26,
+    "note": "eta/rho = 2 is the ideal sustained-activation total relaxation strength (magnitude estimate only)"
+  },
+  "geometry": {
+    "omega1": [
+      0.45,
+      1.5,
+      -0.85,
+      -0.25
+    ],
+    "chi_d": {
+      "center": [
+        0.56,
+        -0.55
+      ],
+      "r_on": 0.045,
+      "r_off": 0.06
+    },
+    "chi_e": {
+      "center_formula": "(0.5734265734 + 86h, 0.3986013986 - 136h)",
+      "center": [
+        1.1748251747986014,
+        -0.552447552448951
+      ],
+      "r_on": 0.26,
+      "r_off": 0.3
+    },
+    "disks_disjoint_required": true,
+    "chi_e_rule": "ideal disk intersected with Omega1; truncation audit counts ideal-positive cells outside the rectangle; ANY positive-support truncation => GEOMETRY_INVALID (no auto fix)"
+  },
+  "target": {
+    "deviation_path": "results/T053/inputs/D_shift7.npz",
+    "deviation_array_sha256": [
+      "cf2c7f5a6a7672c668257ecc618e216f7c24342b9305b7d67ab7898d96215d8a",
+      "c72d44c9531796e6fb29cd9eaed411d7f7972ee0b757d18b2fc5dc651339d8de"
+    ],
+    "shift": [
+      -136,
+      86
+    ],
+    "recipe": "U*,V* = ub,vb + chi_E * roll(D_shift7 dev, rows -136, cols +86); exact background outside chi_E>0; constructed once at t0; no later script injection/reset"
+  },
+  "measurement": {
+    "core_threshold": 0.1,
+    "minimum_core_pixels": 5,
+    "s_quantiles": [
+      0.5,
+      0.9,
+      0.99
+    ],
+    "s_quantile_region": "over chi_D > 0 support",
+    "d_area_def": "count(chi_D > 0 and a > theta)",
+    "e_area_def": "count(chi_E > 0 and a > a_star)",
+    "output_window": [
+      1.05,
+      1.3,
+      -1.35,
+      -0.95
+    ],
+    "core_note": "local detector replicating project caliber (u > ub + 0.100, 4-connected, >=5 px, own-mask weighted centroid); independent EGS code"
+  },
+  "records": {
+    "diagnostic_every_tu": 100,
+    "snapshot_every_tu": 5000,
+    "checkpoint_every_tu": 10000,
+    "diagnostic_fields": [
+      "a_max",
+      "d_area",
+      "e_area",
+      "s_quantiles",
+      "r_min",
+      "r_mean",
+      "g_max",
+      "g_cum",
+      "n_cores",
+      "output_window_cores",
+      "u_min",
+      "v_min"
+    ],
+    "event_rule": "save adjacent full four-field snapshots on first a>theta (D), first a>a* with chi_E>0 (emission/g>0), and first core overlapping the output window"
+  },
+  "run": {
+    "branches": [
+      "WAIT",
+      "QUERY"
+    ],
+    "release_this_task": [
+      "QUERY_CONTINUATION"
+    ],
+    "order": [
+      "QUERY_CONTINUATION"
+    ],
+    "note": "EGS-T003 continues the T002 QUERY checkpoint to120000 on ECS; WAIT remains the referenced complete control"
+  },
+  "standby_rules": {
+    "trigger_indicator": "first sample with g_max > 0 (emission active: a > a_star on chi_E > 0)",
+    "output_indicator": "first sample with any detected core overlapping the output window",
+    "judgment": "ANY trigger or output indicator => standby FAILED with actual time and saved field; if neither occurs, only claim 'not seen within this finite window' (local0-120000)",
+    "lineage_note": "cores overlapping the output window are identity-matched to the initial sources so drifted pre-existing cores are transparent"
+  },
+  "fail_rules": {
+    "post_step_checks": [
+      "u,v,a,r finite",
+      "u,v >= 0",
+      "a >= 0 and a <= 1 + 1e-9",
+      "r >= 0 and r <= 1 + 1e-9"
+    ],
+    "action": "save state and STOP (no clipping, no rescue)",
+    "core_acceptance": {
+      "neg_tol": 1e-10,
+      "over_tol": 5.0,
+      "source": "same frozen rule as the standard pipeline"
+    }
+  },
+  "notes": [
+    "both branches share the S06 history (not a uniform background)",
+    "the relaxation term uses the OLD g with the OLD u,v (synchronous Euler); the frozen core produces the GS base, then the g increment is added",
+    "no external time-varying control; target fixed at t0",
+    "prechecks cover numerical-stability necessities only -- not consistency or dynamics validation"
+  ],
+  "initials": {
+    "WAIT": {
+      "path": "results/T050/T050_WAIT_C/snapshots/fields_00620000.npz",
+      "array_sha256": [
+        "ef83f50c27e11d67248fc80877112eec4838ce44cf4c50c6dff229ec32e22c6e",
+        "5a853aeec1592c122e43012ae4a620f574b70b0da1b376134f5ce7c2930ddf52"
+      ],
+      "expected_cores_t0": 14
+    },
+    "QUERY": {
+      "path": "results/T053/inputs/T053_S0_QUERY.npz",
+      "array_sha256": [
+        "0744122d62ae39329dd8d1057e4ec09c5212967cbbeab96e7a95352bef64e8fa",
+        "9b18e65e3299aa6bc54261e3c0182011125cefdd87061293e8e8ad3dd4c16f21"
+      ],
+      "expected_cores_t0": 15
+    }
+  },
+  "sources": {
+    "T053_config": {
+      "path": "configs/T053.json",
+      "sha256": "372a03114d261b6dd6a44563fcea98393b19141673f1ea5a98abf8b1e2332725"
+    },
+    "task": {
+      "path": "coordination/egs/tasks/EGS-T001.md",
+      "sha256": "9c58c06f0b4b17e4aa5260ffc868c10b30073d2584df16f176183178373cae34"
+    },
+    "spec": {
+      "path": "coordination/egs/plans/EGS-TR-v1.0_SPEC.md",
+      "sha256": "37e0d62b2351521571ec7a64238a9e94675767a95d64a9afe641d9f1c09653b0"
+    },
+    "agent0_plan": {
+      "path": "coordination/plans/GS_TRIGGERED_REGENERATOR_AGENT0_v01.md",
+      "sha256": "6d51fc53a531a85d75efd549adfe1e1bfb164eb9e907a16ec63ef904e76d7cbf"
+    },
+    "registry": {
+      "path": "coordination/egs/MODEL_REGISTRY.md",
+      "sha256": "f7b7bd12bf833f83f37194a339b874bcae5b05faa9267b979921c044bb5d7382"
+    },
+    "masks_target": {
+      "path": "results/egs/EGS-T001/inputs/masks_target.npz",
+      "sha256": "f8a113e9925be3e7d7d8b97d06257a6cb194ac5b838e6e5a64d3a7133d1dec64"
+    },
+    "T001_config": {
+      "path": "configs/egs/EGS-T001.json",
+      "sha256": "5a7e3ef55b9b4db14acda4751f3549f137ebf60f6aaf1353d7cf7be2083a0fde"
+    },
+    "T001_task": {
+      "path": "coordination/egs/tasks/EGS-T001.md",
+      "sha256": "9c58c06f0b4b17e4aa5260ffc868c10b30073d2584df16f176183178373cae34"
+    },
+    "T001_wait_diagnostics": {
+      "path": "results/egs/EGS-T001/wait_run/diagnostics.jsonl",
+      "sha256": "293f67563d03a004ef28b76e441a099588d4ee9f8eb05ff78ff83d7d4aeebee0",
+      "note": "SAME-condition long WAIT control (ECS); referenced, never rerun"
+    },
+    "T002_task": {
+      "path": "coordination/egs/tasks/EGS-T002.md",
+      "sha256": "8007f58ea96a21587bb3a1894b34e10e265a207d7396a63fa8e9780655b73f00"
+    },
+    "T002_run_summary": {
+      "path": "results/egs/EGS-T002/query_run/run_summary.json",
+      "sha256": "90c959103a19b4b6b5da6ce04d81c1a369ccc10a5995161471338191ab68614e"
+    },
+    "T002_checkpoint": {
+      "path": "results/egs/EGS-T002/query_run/checkpoints/ckpt_0240000.npz",
+      "sha256": "f29d687d7c4d3a72ff55e5ed5f6a57c913580856f73835af24308aec98d5c866"
+    }
+  },
+  "task": "coordination/egs/tasks/EGS-T003.md",
+  "task_sha256": "42a3d272882312bb3bbd739e89f22f4e3be1f402f16db2aaa015af211e5ed160",
+  "wait_reference": {
+    "path": "results/T050/T050_WAIT_C/snapshots/fields_00620000.npz",
+    "array_sha256": [
+      "ef83f50c27e11d67248fc80877112eec4838ce44cf4c50c6dff229ec32e22c6e",
+      "5a853aeec1592c122e43012ae4a620f574b70b0da1b376134f5ce7c2930ddf52"
+    ],
+    "result": "results/egs/EGS-T001/wait_run/",
+    "note": "complete T001 WAIT trajectory (480000 steps, ECS); same-condition control, NOT rerun"
+  },
+  "parent_config": {
+    "path": "configs/egs/EGS-T002.json",
+    "sha256": "e08623b25d94c56828f457b84dc63a76307d43ca02d467cab12ef9e35764566d"
+  },
+  "execution": {
+    "platform": "ECS (mandated by the task); tmux background; laptop independence required",
+    "total_wall_budget_hours": 12,
+    "budget_note": "user available time is >12h; the budget is a cap, not a target -- early wrap-up is expected",
+    "phase_state": "results/egs/EGS-T003/phase_state.json (atomic; rerun resumes from the first incomplete phase)",
+    "heartbeat": "progress.json written atomically at every record",
+    "atomicity": "checkpoints/summaries written to tmp then renamed",
+    "peak_memory": "ru_maxrss recorded per branch",
+    "exit_status": "results/egs/EGS-T003/exit_status.json written in all outcomes (success/fail/interrupt)"
+  },
+  "validation": {
+    "purpose": "prove real checkpoint resume + one uninterrupted short path agree BEFORE continuing (cross-platform: NOT a bit-level resume claim)",
+    "checkpoint_readback": {
+      "file": "results/egs/EGS-T002/query_run/checkpoints/ckpt_0240000.npz",
+      "expect": {
+        "step": 240000,
+        "t": 60000.0
+      },
+      "must_record": [
+        "four-field array shas",
+        "events dict",
+        "g_cum",
+        "clock"
+      ]
+    },
+    "uninterrupted_reference": {
+      "run": "ECS fresh [0 -> 61000] from the registered QUERY initial (light records: scalars+events every100tu, detect at60000/61000, four-field at60000 and61000)",
+      "dir": "results/egs/EGS-T003/u_run/"
+    },
+    "junction_check_at_60000": {
+      "compare": "macOS checkpoint state vs ECS uninterrupted state",
+      "criteria": {
+        "four_field_max_abs_diff": 1e-09,
+        "d_area_equal": true,
+        "e_area_equal": true,
+        "a_max_abs_diff": 1e-09,
+        "s_crossed_state_equal": true
+      },
+      "note": "expected ~1e-14 from platform rounding; thresholds and identity must remain decidable"
+    },
+    "lockstep_check_60000_to_61000": {
+      "method": "step BOTH states in parallel for4000 steps, record every100tu",
+      "criteria": {
+        "n_cores_equal_at_61000": true,
+        "d_area_equal_at_61000": true,
+        "e_area_equal_at_61000": true,
+        "event_sets_equal": true,
+        "first_event_times_within_one_sample": 100.0,
+        "four_field_max_abs_diff_at_61000": 1e-09
+      },
+      "on_fail": "STOP the whole task and report (no continuation)"
+    }
+  },
+  "decision_tree": {
+    "preauthorized": true,
+    "source": "EGS-T003 task (Agent1, human overnight authorization)",
+    "steps": [
+      {
+        "id": "B1",
+        "action": "resume ckpt_0240000 -> run to 120000 with full records (no re-injection)"
+      },
+      {
+        "id": "B2",
+        "when": "decidable emission output candidate by 120000",
+        "action": "f64 dt=0.125 sensitivity from original time0 (same input/physical initial) to the fixed observation time120000; NOT grid convergence; never start fine from the coarse endpoint",
+        "config": "configs/egs/EGS-T003_FINE_DT0125.json"
+      },
+      {
+        "id": "B3",
+        "when": "E region NEVER reached emission activation (e_area==0 all records) and no engineering/identity undecidable",
+        "action": "alt Da=2e-5: alt WAIT to60000 first (misfire check: D activation/g>0/established output => record misfire and STOP this variant), then alt QUERY to120000",
+        "config": "configs/egs/EGS-T003_ALT_DA.json",
+        "hypothesis_note": "aux propagation too slow; success must NOT be auto-attributed to diffusion as the only mechanism"
+      },
+      {
+        "id": "B4",
+        "action": "any other outcome: classify and wrap with pending/negative results; no geometry/time adjustments, no new branches"
+      }
+    ],
+    "stop_rules": [
+      "non-finite / negative / unexplainable identity mixing / engineering error => stop that branch; a fault is NEVER judged a scientific failure",
+      "invisible endpoints or key fields => UNDECIDABLE (missing is not negative)",
+      "no two-level device launch; no extra parameter variants"
+    ]
+  },
+  "output_candidate_criteria": {
+    "frozen_from": "EGS-TR-v1.0 (registered output window and direction/displacement rules)",
+    "output_window": [
+      1.05,
+      1.3,
+      -1.35,
+      -0.95
+    ],
+    "all_required": [
+      "unique NEW core first appears with centroid inside chi_E support (r < r_off)",
+      "later its centroid leaves chi_E support (chi_E evaluated at the centroid == 0)",
+      "later it enters the fixed output window",
+      "direction downward (net cy decrease across the window segment)",
+      "subsequent downward centroid displacement >=0.05",
+      "denominators and identity (lineage vs initial sources) recorded"
+    ],
+    "evaluation": "from per100tu records (e_region_cores + output_window_cores with lineages); a trigger is NOT a release"
+  },
+  "observation": {
+    "per_region_stats": "a/r recorded separately for D (chi_D>0), channel (Omega1 minus both disks), E (chi_E>0) -- global r_min is NEVER used as the E-region resource",
+    "records_every_tu": 100,
+    "snapshot_every_tu": 5000,
+    "checkpoint_every_tu": 10000,
+    "events": [
+      "s_cross",
+      "d_threshold",
+      "r_depletion",
+      "emission_g",
+      "output_core"
+    ],
+    "contamination": "lineage ambiguity / mixed cores recorded as contamination, never resolved by fiat",
+    "download": "summary/diagnostics/necessary checkpoints/key-event pre-post fields returned and hash-verified; large snapshots may stay on ECS with a manifest and paths"
+  }
+}

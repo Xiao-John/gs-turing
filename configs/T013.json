@@ -1,0 +1,172 @@
+{
+  "task_id": "T013",
+  "request": "R011",
+  "experiment_protocol": "R011_Q6_RESPONSE_v1",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T013.md",
+  "task_sha256": "74b979ff233374e8195b3434a18800994211704f1f7f292f036f757132e10700",
+  "authorization": {
+    "path": "coordination/requests/R011.md",
+    "sha256": "80c6bf99f71474be8a6cf78f4f00d00b93754bce08cf44ee81a5af7eced4e944",
+    "status": "APPROVED"
+  },
+  "ideas": [
+    "I004",
+    "I008",
+    "I011"
+  ],
+  "output_root": "results/T013",
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "ymax": 0.8951048951048951,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "grid": {
+    "nx": 768,
+    "ny": 256,
+    "h": 0.006993006993006993
+  },
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "sources": {
+    "Q6": {
+      "path": "results/T010/R007B_B0_ABP_c/snapshots/fields_00260000.npz",
+      "sha256": "c3772ca31348cdc6fe98797bfcd055a43a07b62a8276108e4ea347283bdba58d"
+    },
+    "P": {
+      "path": "results/T009/inputs/R007B_B0_P_c.npz",
+      "sha256": "4cd4fae1ac5211ca957516d73e8b717bff2745eeeb3d2f9d74f4fd0d04f91f45"
+    },
+    "E": {
+      "path": "results/T009/inputs/R007B_B0_E_c.npz",
+      "sha256": "16efb0f0d56f3d33921ea3c84a4d4e018c32051d2990ede2d05a0f8c9a8c3d2c"
+    }
+  },
+  "source_age_tu": 130000,
+  "new_experiment_time_zero": true,
+  "regions": {
+    "W": {
+      "xmin": -0.4,
+      "xmax": 0.4,
+      "ymin": -0.25,
+      "ymax": 0.25
+    },
+    "V": {
+      "xmin": -0.6,
+      "xmax": 0.6,
+      "ymin": -0.35,
+      "ymax": 0.35
+    }
+  },
+  "initial_input": {
+    "P_anchor": [
+      1.2,
+      0.0
+    ],
+    "direction": -1,
+    "deviation": "P-E; each component; Q6+(P-E); preserve full fields"
+  },
+  "cases": [
+    {
+      "case_id": "T013_D0_Q6_wait",
+      "initial_recipe": "Q6",
+      "dt": 0.25,
+      "T": 80000,
+      "steps": 320000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000
+    },
+    {
+      "case_id": "T013_D1_Q6_P",
+      "initial_recipe": "Q6+(P-E)",
+      "dt": 0.25,
+      "T": 80000,
+      "steps": 320000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000
+    }
+  ],
+  "measurement": {
+    "core_offsets": [
+      0.1,
+      0.095,
+      0.105
+    ],
+    "connectivity": 4,
+    "minimum_core_pixels": 5,
+    "centroid_weight": "max(u-ub-0.1,0) for primary threshold; corresponding offset for sensitivity segmentation",
+    "containment": "all core pixels; record full-field components at each threshold",
+    "norm": "h*sqrt(sum((u-u_ref)^2+(v-v_ref)^2))",
+    "final_window": [
+      70000,
+      80000
+    ],
+    "final_window_samples": 101,
+    "identity_distance_max": 0.05,
+    "core_displacement_max": 0.02,
+    "outside_W_norm_over_NS_max": 0.25,
+    "outside_V_norm_over_NS_max": 0.25,
+    "paired_W_norm_over_NS_min_strict": 0.25,
+    "paired_V_norm_over_NS_min_strict": 0.25,
+    "V_drift_from_first_final_over_NS_max": 0.05,
+    "shape_e1_max": 0.25,
+    "shape_patch_half": 65,
+    "direction_history_tu": 5000,
+    "direction_history_points": 51,
+    "left_port": -0.6,
+    "right_port": 0.6,
+    "port_y_aperture": [
+      -0.25,
+      0.25
+    ],
+    "replay_max_steps": 400,
+    "event_bracket_width_max_tu": 0.25,
+    "all_events_preserved": true,
+    "mechanism_labels_additive": true
+  },
+  "save": {
+    "initial_full_fields": true,
+    "full_field_every_tu": 5000,
+    "full_final_field_every_tu": 100,
+    "reuse_identical_snapshot_reference": true,
+    "actual_event_pre_and_post_fields": true,
+    "rolling_prestate_tu": 100,
+    "source_archive_per_actual_launch": true,
+    "launch_archival_must_cover_actual_case_entry": true
+  },
+  "execution_policy": {
+    "max_invocation_wall_seconds": 3600,
+    "safety_margin_before_wall_stop": true,
+    "automatic_next_stage": false,
+    "automatic_full_case_retry": false,
+    "no_additional_research_cases": true,
+    "approximate_resources_only": true,
+    "checkpoint_resumable": "must be demonstrated on actual path before claiming; otherwise complete-case batches and honest safety stop"
+  },
+  "intake_record": "results/T013/intake.json"
+}

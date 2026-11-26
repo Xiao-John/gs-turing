@@ -1,0 +1,241 @@
+{
+  "task_id": "EGS-T002",
+  "experiment_protocol": "EGS_TR_v1_QUERY_STAGE1",
+  "model_id": "EGS-TR-v1.0",
+  "request": "EGS-R001",
+  "grid": {
+    "nx": 768,
+    "ny": 512,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -1.7902097902097902,
+    "ymax": 1.7902097902097902,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded",
+    "extension": "ymin_new = ymin_old - 128h; original rows embedded at [128:384]; filler rows = background"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "dt": 0.25,
+  "T": 60000.0,
+  "steps": 240000,
+  "params": {
+    "Da": 1e-05,
+    "lam": 0.005,
+    "theta": 0.3,
+    "beta": 0.02,
+    "a_star": 0.6,
+    "a_width": 0.05,
+    "rho": 0.005,
+    "eta": 0.01,
+    "s0": 0.05,
+    "s_sense_width": 0.05,
+    "s_u": 0.4,
+    "s_v": 0.26,
+    "note": "eta/rho = 2 is the ideal sustained-activation total relaxation strength (magnitude estimate only)"
+  },
+  "geometry": {
+    "omega1": [
+      0.45,
+      1.5,
+      -0.85,
+      -0.25
+    ],
+    "chi_d": {
+      "center": [
+        0.56,
+        -0.55
+      ],
+      "r_on": 0.045,
+      "r_off": 0.06
+    },
+    "chi_e": {
+      "center_formula": "(0.5734265734 + 86h, 0.3986013986 - 136h)",
+      "center": [
+        1.1748251747986014,
+        -0.552447552448951
+      ],
+      "r_on": 0.26,
+      "r_off": 0.3
+    },
+    "disks_disjoint_required": true,
+    "chi_e_rule": "ideal disk intersected with Omega1; truncation audit counts ideal-positive cells outside the rectangle; ANY positive-support truncation => GEOMETRY_INVALID (no auto fix)"
+  },
+  "target": {
+    "deviation_path": "results/T053/inputs/D_shift7.npz",
+    "deviation_array_sha256": [
+      "cf2c7f5a6a7672c668257ecc618e216f7c24342b9305b7d67ab7898d96215d8a",
+      "c72d44c9531796e6fb29cd9eaed411d7f7972ee0b757d18b2fc5dc651339d8de"
+    ],
+    "shift": [
+      -136,
+      86
+    ],
+    "recipe": "U*,V* = ub,vb + chi_E * roll(D_shift7 dev, rows -136, cols +86); exact background outside chi_E>0; constructed once at t0; no later script injection/reset"
+  },
+  "measurement": {
+    "core_threshold": 0.1,
+    "minimum_core_pixels": 5,
+    "s_quantiles": [
+      0.5,
+      0.9,
+      0.99
+    ],
+    "s_quantile_region": "over chi_D > 0 support",
+    "d_area_def": "count(chi_D > 0 and a > theta)",
+    "e_area_def": "count(chi_E > 0 and a > a_star)",
+    "output_window": [
+      1.05,
+      1.3,
+      -1.35,
+      -0.95
+    ],
+    "core_note": "local detector replicating project caliber (u > ub + 0.100, 4-connected, >=5 px, own-mask weighted centroid); independent EGS code"
+  },
+  "records": {
+    "diagnostic_every_tu": 100,
+    "snapshot_every_tu": 5000,
+    "checkpoint_every_tu": 10000,
+    "diagnostic_fields": [
+      "a_max",
+      "d_area",
+      "e_area",
+      "s_quantiles",
+      "r_min",
+      "r_mean",
+      "g_max",
+      "g_cum",
+      "n_cores",
+      "output_window_cores",
+      "u_min",
+      "v_min"
+    ],
+    "event_rule": "save adjacent full four-field snapshots on first a>theta (D), first a>a* with chi_E>0 (emission/g>0), and first core overlapping the output window"
+  },
+  "run": {
+    "branches": [
+      "WAIT",
+      "QUERY"
+    ],
+    "release_this_task": [
+      "QUERY"
+    ],
+    "order": [
+      "QUERY"
+    ],
+    "note": "EGS-T002 stage1 runs QUERY only (0-60000tu); the T001 WAIT complete trajectory is the SAME-condition long control, referenced not rerun; environment differences between any prior local partials and this run are never interpreted causally"
+  },
+  "standby_rules": {
+    "trigger_indicator": "first sample with g_max > 0 (emission active: a > a_star on chi_E > 0)",
+    "output_indicator": "first sample with any detected core overlapping the output window",
+    "judgment": "ANY trigger or output indicator => standby FAILED with actual time and saved field; if neither occurs, only claim 'not seen within this finite window' (local0-120000)",
+    "lineage_note": "cores overlapping the output window are identity-matched to the initial sources so drifted pre-existing cores are transparent"
+  },
+  "fail_rules": {
+    "post_step_checks": [
+      "u,v,a,r finite",
+      "u,v >= 0",
+      "a >= 0 and a <= 1 + 1e-9",
+      "r >= 0 and r <= 1 + 1e-9"
+    ],
+    "action": "save state and STOP (no clipping, no rescue)",
+    "core_acceptance": {
+      "neg_tol": 1e-10,
+      "over_tol": 5.0,
+      "source": "same frozen rule as the standard pipeline"
+    }
+  },
+  "notes": [
+    "both branches share the S06 history (not a uniform background)",
+    "the relaxation term uses the OLD g with the OLD u,v (synchronous Euler); the frozen core produces the GS base, then the g increment is added",
+    "no external time-varying control; target fixed at t0",
+    "prechecks cover numerical-stability necessities only -- not consistency or dynamics validation"
+  ],
+  "initials": {
+    "WAIT": {
+      "path": "results/T050/T050_WAIT_C/snapshots/fields_00620000.npz",
+      "array_sha256": [
+        "ef83f50c27e11d67248fc80877112eec4838ce44cf4c50c6dff229ec32e22c6e",
+        "5a853aeec1592c122e43012ae4a620f574b70b0da1b376134f5ce7c2930ddf52"
+      ],
+      "expected_cores_t0": 14
+    },
+    "QUERY": {
+      "path": "results/T053/inputs/T053_S0_QUERY.npz",
+      "array_sha256": [
+        "0744122d62ae39329dd8d1057e4ec09c5212967cbbeab96e7a95352bef64e8fa",
+        "9b18e65e3299aa6bc54261e3c0182011125cefdd87061293e8e8ad3dd4c16f21"
+      ],
+      "expected_cores_t0": 15
+    }
+  },
+  "sources": {
+    "T053_config": {
+      "path": "configs/T053.json",
+      "sha256": "372a03114d261b6dd6a44563fcea98393b19141673f1ea5a98abf8b1e2332725"
+    },
+    "task": {
+      "path": "coordination/egs/tasks/EGS-T001.md",
+      "sha256": "9c58c06f0b4b17e4aa5260ffc868c10b30073d2584df16f176183178373cae34"
+    },
+    "spec": {
+      "path": "coordination/egs/plans/EGS-TR-v1.0_SPEC.md",
+      "sha256": "37e0d62b2351521571ec7a64238a9e94675767a95d64a9afe641d9f1c09653b0"
+    },
+    "agent0_plan": {
+      "path": "coordination/plans/GS_TRIGGERED_REGENERATOR_AGENT0_v01.md",
+      "sha256": "6d51fc53a531a85d75efd549adfe1e1bfb164eb9e907a16ec63ef904e76d7cbf"
+    },
+    "registry": {
+      "path": "coordination/egs/MODEL_REGISTRY.md",
+      "sha256": "f7b7bd12bf833f83f37194a339b874bcae5b05faa9267b979921c044bb5d7382"
+    },
+    "masks_target": {
+      "path": "results/egs/EGS-T001/inputs/masks_target.npz",
+      "sha256": "f8a113e9925be3e7d7d8b97d06257a6cb194ac5b838e6e5a64d3a7133d1dec64"
+    },
+    "T001_config": {
+      "path": "configs/egs/EGS-T001.json",
+      "sha256": "5a7e3ef55b9b4db14acda4751f3549f137ebf60f6aaf1353d7cf7be2083a0fde"
+    },
+    "T001_task": {
+      "path": "coordination/egs/tasks/EGS-T001.md",
+      "sha256": "9c58c06f0b4b17e4aa5260ffc868c10b30073d2584df16f176183178373cae34"
+    },
+    "T001_wait_diagnostics": {
+      "path": "results/egs/EGS-T001/wait_run/diagnostics.jsonl",
+      "sha256": "293f67563d03a004ef28b76e441a099588d4ee9f8eb05ff78ff83d7d4aeebee0",
+      "note": "SAME-condition long WAIT control (ECS); referenced, never rerun"
+    }
+  },
+  "task": "coordination/egs/tasks/EGS-T002.md",
+  "task_sha256": "8007f58ea96a21587bb3a1894b34e10e265a207d7396a63fa8e9780655b73f00",
+  "stage1": {
+    "T_local": 60000.0,
+    "steps": 240000,
+    "checkpoint_every_tu": 10000,
+    "checkpoint_readback_test": "actually read one checkpoint after the run and verify fields/time/hashes",
+    "early_stop_rule": "budget/interruption => save last valid state and report actual progress; NO automatic continuation to120000 in this task",
+    "no_segment_reinjection": "signal is injected ONLY at t0 (the registered QUERY initial); never re-injected on intermediate/segment restarts",
+    "report_focus": [
+      "first sensing cross-threshold (s >= s0 in D)",
+      "aux over-threshold (a > theta in D)",
+      "first emission (g > 0)",
+      "resource depletion (r first < 1)"
+    ],
+    "interpretation": "no emission by60000 is NOT an automatic candidate failure; trigger is NOT release; anomalies/spontaneous misfires/identity/model-inconsistency recorded as-is"
+  },
+  "wait_reference": {
+    "path": "results/T050/T050_WAIT_C/snapshots/fields_00620000.npz",
+    "array_sha256": [
+      "ef83f50c27e11d67248fc80877112eec4838ce44cf4c50c6dff229ec32e22c6e",
+      "5a853aeec1592c122e43012ae4a620f574b70b0da1b376134f5ce7c2930ddf52"
+    ],
+    "result": "results/egs/EGS-T001/wait_run/",
+    "note": "complete T001 WAIT trajectory (480000 steps, ECS); same-condition control, NOT rerun"
+  }
+}

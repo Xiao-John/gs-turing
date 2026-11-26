@@ -1,0 +1,124 @@
+{
+  "experiment_protocol": "R003_proposal_v1",
+  "status": "PROPOSED_NEEDS_BUDGET",
+  "execution_enabled": false,
+  "request": "R003",
+  "ideas": [
+    "I001",
+    "I011"
+  ],
+  "plan": "coordination/plans/R003_PLAN01.md",
+  "plan_sha256": "831aefbe93fa4c4a814d0d3f30463d07ce71965544bcc0275f75af05e99b21ae",
+  "requested_cumulative_limits": {
+    "wall_seconds": 7200,
+    "main_cell_steps": 1200000000000,
+    "registered_trajectories": 16,
+    "engineering_replay_cell_steps": 3000000000,
+    "new_bytes": 5368709120
+  },
+  "stage_limits": {
+    "wall_seconds": 3600,
+    "engineering_cell_steps": 50000000,
+    "replay_cell_steps": 600000000,
+    "new_bytes": 1073741824
+  },
+  "source_S": {
+    "path": "results/T001/T001_RP_c/snapshots/fields_00020000.npz",
+    "t": 10000,
+    "sha256": "967dda4a975c37819955bca8f52f605af053e03ba60995bbf5b4ae79bec9b159"
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -1.7902097902097902,
+    "ymax": 1.7902097902097902
+  },
+  "W": {
+    "xmin": -0.4,
+    "xmax": 0.4,
+    "ymin": -0.25,
+    "ymax": 0.25
+  },
+  "Q": {
+    "anchor": [
+      0.4,
+      0.65
+    ],
+    "direction": -1
+  },
+  "cases": [
+    {
+      "case_id": "R003A_Q_c",
+      "initial_recipe": "Q",
+      "nx": 768,
+      "ny": 512,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 70000,
+      "steps": 140000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000
+    },
+    {
+      "case_id": "R003A_S_c",
+      "initial_recipe": "S",
+      "nx": 768,
+      "ny": 512,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 70000,
+      "steps": 140000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000
+    },
+    {
+      "case_id": "R003A_SQ_c",
+      "initial_recipe": "SQ",
+      "nx": 768,
+      "ny": 512,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 70000,
+      "steps": 140000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000
+    },
+    {
+      "case_id": "R003A_SpertQ_c",
+      "initial_recipe": "SpertQ",
+      "nx": 768,
+      "ny": 512,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 70000,
+      "steps": 140000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000
+    },
+    {
+      "case_id": "R003A_Q_r",
+      "initial_recipe": "Q",
+      "nx": 960,
+      "ny": 640,
+      "h": 0.005594405594405594,
+      "dt": 0.25,
+      "T": 70000,
+      "steps": 280000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000
+    },
+    {
+      "case_id": "R003A_SQ_r",
+      "initial_recipe": "SQ",
+      "nx": 960,
+      "ny": 640,
+      "h": 0.005594405594405594,
+      "dt": 0.25,
+      "T": 70000,
+      "steps": 280000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000
+    }
+  ],
+  "new_main_cell_steps": 564264960000
+}

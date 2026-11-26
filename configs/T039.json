@@ -1,0 +1,511 @@
+{
+  "experiment_protocol": "R027_RELAX_RESTART_v1",
+  "task_id": "T039",
+  "request": "R027",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T039.md",
+  "task_sha256": "aa47b68e63d7d55f3094fdab5b07c1612d3a55f87d92284dace428d66601991a",
+  "authorization": {
+    "path": "coordination/tasks/T039.md",
+    "sha256": "aa47b68e63d7d55f3094fdab5b07c1612d3a55f87d92284dace428d66601991a",
+    "scope": "exactly two fixed restart trajectories (U/V relaxed sources + the same Q); source age fixed at 100, anchor/line/window/threshold fixed, no scan; T038 U/V Q and WAIT branches and T017 free Q are read-only references"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "grid": {
+    "nx": 768,
+    "ny": 256,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "ymax": 0.8951048951048951,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "ideas": [
+    "I001",
+    "I011",
+    "I012",
+    "I014"
+  ],
+  "parent_evidence": {
+    "T038_config": {
+      "path": "configs/T038.json",
+      "sha256": "0e8a190e810e173ce96be655f6a7c3232edceb397ab23807b103d5e78eecd006"
+    },
+    "T038_task": {
+      "path": "coordination/tasks/T038.md",
+      "sha256": "4e2110895348f5a5ed41146839680572c4b19bfd4fe63a21e00386cc0545b759"
+    },
+    "T038_intake": {
+      "path": "results/T038/intake.json",
+      "sha256": "b8bc1588ff012935baecd68887d5abcfd203c6d3729c29048f27c763b52a69ce"
+    },
+    "T038_analysis": {
+      "path": "results/T038/analysis_T038.json",
+      "sha256": "e75be4217eaeaa459742ee7e7e30ba6d3a7d51163cc6b41d45275d130c796bcf"
+    },
+    "T017_config": {
+      "path": "configs/T017.json",
+      "sha256": "f56cd72cc0d5692598a79ead9f943146ef2accd544b3438548f19ab47879b303"
+    },
+    "T029_config": {
+      "path": "configs/T029.json",
+      "sha256": "e157a66785afa0411498362dc64971b7e3d199533b33fb18e835da67a5d6feea"
+    },
+    "T017_intake": {
+      "path": "results/T017/intake.json",
+      "sha256": "fbf958aa146cf430be9d1bd1c8c61a727a11c7a0f4563b4a5f54f0d1fe4135dc"
+    }
+  },
+  "restart": {
+    "definition": "X0 = S_WAIT(100) + q; the ACTUAL T038 no-Q t=100 double-component field (provenance verified fail-closed) plus the frozen T016 q (both components) added once; background not re-added; no shift/clip/normalize; source absolute time 100, new experiment time zero",
+    "source_absolute_t": 100.0,
+    "sources": {
+      "U": {
+        "path": "results/T038/T038_U_WAIT/background_change/fields_t00000100.npz",
+        "sha256": "dc0f9c04d10aa6845b6e3d9bca98afed6f9f4d6aeadfe84e7c12f73121d51632",
+        "array_sha256": [
+          "13097842fcb10b2a47bd6328fc8840e2c437fcafa8a0fb58c408ac6b72403888",
+          "c87677c6c7906c3e2889de1d4b3b9d3c0418a64c04657499ea06dce5c07fb719"
+        ],
+        "absolute_t": 100.0
+      },
+      "V": {
+        "path": "results/T038/T038_V_WAIT/background_change/fields_t00000100.npz",
+        "sha256": "4cf6f21b486c3afd7979b7236a8a9d0e28c7ed9795736b690701ed57c9df7b53",
+        "array_sha256": [
+          "20bcd232184cb58e4ce5f1731e3da5b28aebe69bfeca05d4fc19022d7fb99f5f",
+          "a5488bd15192f2efca142aca94a3c77c3e89f40b15d134bdb506e907bd4232f5"
+        ],
+        "absolute_t": 100.0
+      }
+    },
+    "background_added_again": false,
+    "no_source_age_change": true,
+    "no_position_change": true,
+    "no_time_extension": true,
+    "no_scan": true
+  },
+  "query": {
+    "path": "results/T016/static_query.npz",
+    "sha256": "1e167c094c181896c688814c4efe2c4cdcd47627c5f856e5c129c511875e2575",
+    "du_sha256": "67fbd2acef2b0a7f7062878e889407713a41d5f0b43892d432aa1295a13846d8",
+    "dv_sha256": "c0340bf1717398a9ddacf9abfbbb4319a19de6060b26c3b8f08292189e9ff853",
+    "anchor": [
+      0.5244755244755245,
+      0.3986013986013986
+    ],
+    "direction": [
+      0,
+      -1
+    ],
+    "fixed_coordinate_transform": "canonical q(y-ay,-(x-ax)), full periodic image sum",
+    "periodic_images": {
+      "x": [
+        -1,
+        0,
+        1
+      ],
+      "y": [
+        -2,
+        -1,
+        0,
+        1,
+        2
+      ]
+    },
+    "design_analysis": "verify/design_t016_geometry.py",
+    "design_analysis_sha256": "a426228ed6f52af859873c7cb24aa942246c0fc59754f39156ab93ba2a131de8",
+    "geometry": "results/T016/geometry.json",
+    "geometry_sha256": "41ba22d8df20a2d79fcadedf16519bab9fa6fb9eefdf7fd2bcd115f30b814f31",
+    "regenerate": false,
+    "normalize": false
+  },
+  "original_source_t": 100,
+  "new_experiment_time_zero": true,
+  "measurement": {
+    "core_offsets": [
+      0.1,
+      0.095,
+      0.105
+    ],
+    "connectivity": 4,
+    "minimum_core_pixels": 5,
+    "identity_distance_max": 0.05,
+    "primary_centroid_offset": 0.1,
+    "containment": "all core pixels",
+    "norm": "h*sqrt(sum(du^2+dv^2)); preserve raw and /NS",
+    "diagnostic_cadence_tu": 100,
+    "output_port": {
+      "axis": "y",
+      "coordinate": -0.6993006993006993,
+      "direction": -1,
+      "aperture_axis": "x",
+      "aperture": [
+        0.35,
+        0.7
+      ],
+      "window": [
+        60000,
+        70000
+      ]
+    },
+    "monitor_ports": [
+      {
+        "axis": "y",
+        "coordinate": -0.6993006993006993
+      },
+      {
+        "axis": "y",
+        "coordinate": 0.6
+      },
+      {
+        "axis": "x",
+        "coordinate": -0.8
+      },
+      {
+        "axis": "x",
+        "coordinate": 0.8
+      }
+    ],
+    "shape_e1_max": 0.25,
+    "shape_patch_half": 65,
+    "shape_reference": "fixed downward periodic full template at actual centroid; no fit or source subtraction",
+    "clean_output": "no non-target core intersects periodic 131-square window; record mixed residual otherwise",
+    "direction_history_tu": 5000,
+    "direction_history_points": 51,
+    "direction_components": [
+      "vx",
+      "vy"
+    ],
+    "downward_direction_component": "vy",
+    "event_bracket_width_max_tu": 0.25,
+    "replay_max_steps": 400,
+    "final_window": [
+      62000,
+      72000
+    ],
+    "final_window_samples": 101,
+    "core_displacement_from_first_final_max": 0.02,
+    "all_newborn_and_source_events_preserved": true,
+    "capture": {
+      "conversion_box": {
+        "xmin": 0.2,
+        "xmax": 0.75,
+        "ymin": -0.3,
+        "ymax": 0.3
+      },
+      "holding_box": {
+        "xmin": -0.6,
+        "xmax": 0.8,
+        "ymin": -0.4,
+        "ymax": 0.4
+      },
+      "identity_end_alone_sufficient": false,
+      "root_tags": "initial source roots and Q; union over all candidate edges; rootless newborn UNKNOWN; every birth/complex core possible-related",
+      "holding_population": "ALL surviving full-field cores, not a chosen related subset",
+      "holding_all_thresholds_A_containment": true,
+      "holding_primary_unique_chain_and_no_count_changes": true,
+      "holding_primary_max_displacement": 0.02,
+      "absence_of_output_alone_sufficient": false,
+      "newborn_output_ignored": false,
+      "uncertain_attribution": "INDETERMINATE; preserve known violations",
+      "conversion_requires_saved_raw_before_after_and_candidate_relations": true
+    },
+    "free_pass": "exactly one unique clean standard downward Q output in fixed aperture/window, no extra propagation or pre-output periodic return",
+    "readout_targets": {
+      "S6": 0,
+      "S8": 1,
+      "S8plus": 1
+    }
+  },
+  "output_observation_line_y": -0.55,
+  "output_observation_line_note": "fixed section y=-0.55; crossing brackets measured post-run from diagnostics at 100-tu precision (same method as T025/T029/T034-T036), not a probe port change",
+  "comparison_read_only": {
+    "T038_U_Q": "results/T038/T038_U_Q/diagnostics.jsonl",
+    "T038_V_Q": "results/T038/T038_V_Q/diagnostics.jsonl",
+    "T038_U_WAIT": "results/T038/T038_U_WAIT/diagnostics.jsonl",
+    "T038_V_WAIT": "results/T038/T038_V_WAIT/diagnostics.jsonl",
+    "T038_analysis": "results/T038/analysis_T038.json",
+    "T017_FREE_Q": "results/T017/T017_FREE_Q/diagnostics.jsonl"
+  },
+  "primary_observation": {
+    "per_group": true,
+    "wait_window": [
+      0,
+      20000
+    ],
+    "wait_criterion": "spontaneous core change/movement or boundary anomaly in [0,20000]",
+    "q_bind_criterion": "initial unique Q binding at anchor",
+    "threshold": 0.1,
+    "split_window": [
+      0,
+      20000
+    ],
+    "split_criterion": "at least two Q-root descendant cores discernible within [0,20000] at 0.100; record bracket and candidate parent edges",
+    "crossing_window": [
+      0,
+      72000
+    ],
+    "crossing_criterion": "real negative crossing of y=-0.55 by original Q or descendants; record full core, direction, identity and all Q descendants; mixed/unclear identity = UNDECIDABLE",
+    "secondary_thresholds": [
+      0.095,
+      0.105
+    ],
+    "seam_check": "report seam field/gradient both sides at t0 and seam jumps from saved full fields during run; mask itself discontinuous at periodic seam",
+    "classification_vocabulary": [
+      "early_split",
+      "cross_without_early_split",
+      "other_explicit_behavior",
+      "undecidable"
+    ],
+    "no_mask_addition": true,
+    "no_split_line_move": true,
+    "no_weight_scan": true,
+    "no_window_extension": true,
+    "no_necessity_claim": true,
+    "no_tail_causality_claim": true
+  },
+  "restart_observation": {
+    "split_window": [
+      0,
+      20000
+    ],
+    "split_criterion": ">=2 discernible Q-root descendant cores within [0,20000] at 0.100 after restart; record first bracket and candidate parent edges",
+    "crossing_window": [
+      0,
+      72000
+    ],
+    "crossing_criterion": "real negative crossing of y=-0.55 by the original Q or descendants; record full core, direction, identity, boundary and template pollution",
+    "control_matching": "T038 same-tag WAIT diagnostics at ABSOLUTE time 100+t_reboot for t_reboot in [0,71900] (720 points); t_reboot=72000 has no matching control (source ends at its t=72000) and must be marked MISSING -- no extrapolation",
+    "category_reference": {
+      "U": "T038_U_Q = cross_without_early_split (crossed [62900,63000], no early split)",
+      "V": "T038_V_Q = early_split ([9800,9900], no crossing)"
+    },
+    "same_category_reading": "same category => only category preservation for these two prescribed comparisons; early coupling not excluded, no component-causality claim",
+    "different_category_reading": "different category => supports that the first-100 source relaxation and Q-relative timing affect this fixed counterfactual's response; source age + added Q jointly change the full initial state and history -- no unique-factor separation claim",
+    "no_absorption_claim": true,
+    "no_stable_equilibrium_claim": true
+  },
+  "save": {
+    "actual_initial_full_field": true,
+    "diagnostic_every_tu": 100,
+    "all_threshold_core_geometry": true,
+    "all_association_candidate_edges": true,
+    "full_field_every_tu": 5000,
+    "full_zero_and_terminal_fields": true,
+    "periodic_and_terminal_expected_count": 16,
+    "final_full_field_every_tu": 100,
+    "final_full_fields": 101,
+    "event_actual_prestate_and_direction_history": true,
+    "event_actual_bracket_before_after_fields": true,
+    "Q_termination_complex_diagnostic_before_after_fields": true,
+    "source_archive_per_actual_case_launch": true
+  },
+  "output_root": "results/T039",
+  "dt": 0.25,
+  "T": 72000.0,
+  "steps": 288000,
+  "diagnostic_every_tu": 100,
+  "snapshot_every_tu": 5000,
+  "execution_policy": {
+    "order": [
+      "T039_U_RELAX_Q",
+      "T039_V_RELAX_Q"
+    ],
+    "one_branch_undecidable_does_not_block_other": true,
+    "max_invocation_wall_seconds": 7200,
+    "engineering_probe_steps_max_total": 800,
+    "no_line_change": true,
+    "no_initial_change": true,
+    "no_threshold_change": true,
+    "no_time_extension": true,
+    "no_extra_cases": true,
+    "no_source_age_change": true,
+    "no_scan": true,
+    "stage_end_requires_report_to_Agent1": true,
+    "automatic_full_case_retry": false,
+    "unstarted_case_status": "NOT_RUN_STAGE_GATE",
+    "scientific_stop_unstarted_status": "NOT_RUN_SCIENTIFIC_STOP",
+    "undecidable_case_status": "NOT_RUN_UNDECIDABLE_SOURCE"
+  },
+  "cases": [
+    {
+      "case_id": "T039_U_RELAX_Q",
+      "source": "RELAX_U",
+      "add_query": true,
+      "initial_recipe": "S_WAIT(100)+q",
+      "partition": "U",
+      "initial_fields": "results/T039/inputs/T039_U_RELAX_Q.npz",
+      "initial_file_sha256": "0ed8da23f841dc5e1e4a9bb52e67c947872f063d89e434c11da38018e9f934fb",
+      "initial_array_sha256": [
+        "5c58c6a580e62d69900af314720b6a76ff3ebf3ecf46979ddb21fb23d0b7c898",
+        "e36462c4b2985b74583bb962cd545ab60ab31e2fbd4eedd1ca7d0fce5da710e8"
+      ],
+      "expected_cores_t0": 7,
+      "restart_source": {
+        "tag": "U",
+        "wait_case_id": "T038_U_WAIT",
+        "source_path": "results/T038/T038_U_WAIT/background_change/fields_t00000100.npz",
+        "source_sha256": "dc0f9c04d10aa6845b6e3d9bca98afed6f9f4d6aeadfe84e7c12f73121d51632",
+        "source_array_sha256": [
+          "13097842fcb10b2a47bd6328fc8840e2c437fcafa8a0fb58c408ac6b72403888",
+          "c87677c6c7906c3e2889de1d4b3b9d3c0418a64c04657499ea06dce5c07fb719"
+        ],
+        "source_absolute_t": 100.0,
+        "background_change_json": "results/T038/T038_U_WAIT/background_change/background_change.json",
+        "background_change_json_sha256": "a9f21cb6cbf22db42d3b063c1e4a9861eecb04ba8d76028e67ad53084555d201",
+        "probe_diagnostics_sha256": "bdea5c4af4814a79a2f2ee80030a243da2c2cdbb1c3fd8e80dc4231d1eaa53f3",
+        "full_diagnostics_sha256": "4363bf9beb41c7c77dde2c523148fc02ed12c46002c27bc39867a7a354489b52",
+        "probe_summary_row_t_final": null,
+        "recorded_n_cores_t100": 6,
+        "recorded_roots_t100": {
+          "0": [
+            "SRC1"
+          ],
+          "1": [
+            "SRC2"
+          ],
+          "2": [
+            "SRC3"
+          ],
+          "3": [
+            "SRC4"
+          ],
+          "4": [
+            "SRC5"
+          ],
+          "5": [
+            "SRC6"
+          ]
+        },
+        "checks": {
+          "note_bracket_is_0_100": true,
+          "archived_equals_probe_final_sha256": true,
+          "probe_vs_full_diagnostics_t0_bit_equal": true,
+          "probe_vs_full_diagnostics_t100_bit_equal": true,
+          "probe_vs_full_initial_fields_bit_equal": true,
+          "recheck_diag_t0_bit_equal": true,
+          "recheck_diag_t100_bit_equal": true,
+          "recheck_initial_bit_equal": true,
+          "field_stats_exactly_equal_full_t100_row": true,
+          "static_cores_match_recorded_row": true,
+          "centroid_max_nearest_distance_le_1e-9": true
+        },
+        "all_checks_pass": true
+      },
+      "dt": 0.25,
+      "T": 72000.0,
+      "steps": 288000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P"
+    },
+    {
+      "case_id": "T039_V_RELAX_Q",
+      "source": "RELAX_V",
+      "add_query": true,
+      "initial_recipe": "S_WAIT(100)+q",
+      "partition": "V",
+      "initial_fields": "results/T039/inputs/T039_V_RELAX_Q.npz",
+      "initial_file_sha256": "a98fdaf3860447502b0e192151a07cce7f335b2825a4c612aef2792fc637b14d",
+      "initial_array_sha256": [
+        "0a3da2697e15d843065b6671a1553b1568b736cbb208f33a83cf28f622def0d1",
+        "0a496920e22255e0a760da570da88315b5b0769f3f593c12a0e07e500b771b31"
+      ],
+      "expected_cores_t0": 9,
+      "restart_source": {
+        "tag": "V",
+        "wait_case_id": "T038_V_WAIT",
+        "source_path": "results/T038/T038_V_WAIT/background_change/fields_t00000100.npz",
+        "source_sha256": "4cf6f21b486c3afd7979b7236a8a9d0e28c7ed9795736b690701ed57c9df7b53",
+        "source_array_sha256": [
+          "20bcd232184cb58e4ce5f1731e3da5b28aebe69bfeca05d4fc19022d7fb99f5f",
+          "a5488bd15192f2efca142aca94a3c77c3e89f40b15d134bdb506e907bd4232f5"
+        ],
+        "source_absolute_t": 100.0,
+        "background_change_json": "results/T038/T038_V_WAIT/background_change/background_change.json",
+        "background_change_json_sha256": "95d7bbb82550725f940e5b001bfb4af66b8db3d7464544872306d59b498e7da5",
+        "probe_diagnostics_sha256": "876e401d4b3c7d8ff05c898de15a4aae130bd2e12f3c07fd5bdba22046bc4a2a",
+        "full_diagnostics_sha256": "68db26fff275acf980a4a7b7bacb8a62c0c2eed04720097f16fc1603cb167c6a",
+        "probe_summary_row_t_final": null,
+        "recorded_n_cores_t100": 8,
+        "recorded_roots_t100": {
+          "0": [
+            "SRC1"
+          ],
+          "1": [
+            "SRC2"
+          ],
+          "2": [
+            "SRC3"
+          ],
+          "3": [
+            "SRC4"
+          ],
+          "4": [
+            "SRC5"
+          ],
+          "5": [
+            "SRC6"
+          ],
+          "6": [
+            "UNKNOWN"
+          ],
+          "7": [
+            "UNKNOWN"
+          ]
+        },
+        "checks": {
+          "note_bracket_is_0_100": true,
+          "archived_equals_probe_final_sha256": true,
+          "probe_vs_full_diagnostics_t0_bit_equal": true,
+          "probe_vs_full_diagnostics_t100_bit_equal": true,
+          "probe_vs_full_initial_fields_bit_equal": true,
+          "recheck_diag_t0_bit_equal": true,
+          "recheck_diag_t100_bit_equal": true,
+          "recheck_initial_bit_equal": true,
+          "field_stats_exactly_equal_full_t100_row": true,
+          "static_cores_match_recorded_row": true,
+          "centroid_max_nearest_distance_le_1e-9": true
+        },
+        "all_checks_pass": true
+      },
+      "dt": 0.25,
+      "T": 72000.0,
+      "steps": 288000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P"
+    }
+  ],
+  "intake_record": "results/T039/intake.json"
+}

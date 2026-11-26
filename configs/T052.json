@@ -1,0 +1,343 @@
+{
+  "experiment_protocol": "R027_QC_JOINT_v1",
+  "task_id": "T052",
+  "request": "R027",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T052.md",
+  "task_sha256": "9515286da514874d83fc8998be58418a50fe24af503701f770722d55574e56d7",
+  "authorization": {
+    "path": "coordination/tasks/T052.md",
+    "sha256": "9515286da514874d83fc8998be58418a50fe24af503701f770722d55574e56d7",
+    "scope": "exactly ONE new branch (Q+C joint field) to t=155000; no injection/reset/field replacement after t0; no new geometry, no other main trajectory, no port/window/position rescue; four histories are cited read-only"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "grid": {
+    "nx": 768,
+    "ny": 512,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -1.7902097902097902,
+    "ymax": 1.7902097902097902,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded",
+    "extension": "ymin_new = ymin_old - 128h; original rows embedded at [128:384]; filler rows = background"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "ideas": [
+    "I001",
+    "I011",
+    "I012",
+    "I014"
+  ],
+  "parent_evidence": {
+    "T049_analysis": {
+      "path": "results/T049/analysis_T049.json",
+      "sha256": "4675c646fece508a515df7774271169701f5348fa14591fdb2b3a8841559959f"
+    },
+    "T047_config": {
+      "path": "configs/T047.json",
+      "sha256": "b43042a3301500102fb13ef1de3635cf379dc7e7d3c65d34e82b5b0d4e119013"
+    },
+    "T050_config": {
+      "path": "configs/T050.json",
+      "sha256": "639f306697ea276f0a855a7dfd505104a16217fa2eef5a382551a2dd8966133c"
+    },
+    "T051_analysis": {
+      "path": "results/T050/analysis_T051.json",
+      "sha256": "06375cabc38b8b22647a9a3195716a6b78698e95bd69a59830c27b2c922ca870"
+    },
+    "T046_analysis": {
+      "path": "results/T046/analysis_T046.json",
+      "sha256": "f24c8c972e7b1dd74bf8eedbf8d4876de2a0235fc30f81b41385e7a9c4a3414f"
+    }
+  },
+  "query": {
+    "path": "results/T016/static_query.npz",
+    "sha256": "1e167c094c181896c688814c4efe2c4cdcd47627c5f856e5c129c511875e2575",
+    "du_sha256": "67fbd2acef2b0a7f7062878e889407713a41d5f0b43892d432aa1295a13846d8",
+    "dv_sha256": "c0340bf1717398a9ddacf9abfbbb4319a19de6060b26c3b8f08292189e9ff853",
+    "anchor": [
+      0.5734265734265734,
+      0.3986013986013986
+    ],
+    "direction": [
+      0,
+      -1
+    ],
+    "fixed_coordinate_transform": "canonical q(y-ay,-(x-ax)), full periodic image sum",
+    "periodic_images": {
+      "x": [
+        -1,
+        0,
+        1
+      ],
+      "y": [
+        -2,
+        -1,
+        0,
+        1,
+        2
+      ]
+    },
+    "design_analysis": "verify/design_t016_geometry.py",
+    "design_analysis_sha256": "a426228ed6f52af859873c7cb24aa942246c0fc59754f39156ab93ba2a131de8",
+    "geometry": "results/T016/geometry.json",
+    "geometry_sha256": "41ba22d8df20a2d79fcadedf16519bab9fa6fb9eefdf7fd2bcd115f30b814f31",
+    "regenerate": false,
+    "normalize": false,
+    "anchor_note": "IDENTITY BINDING ONLY: physical Q of the T047 +7 input history; roots label 'Q_IN' in this branch -- strictly distinct from T051's ['Q']=C carrier bookkeeping; no injection/reset after t0"
+  },
+  "carrier": {
+    "anchor": [
+      2.0363520690623838,
+      -0.797202797202798
+    ],
+    "label": "C",
+    "anchor_note": "carrier identity anchor = T049 measured centroid; roots label 'C'; distinct from physical Q_IN; bound once at t0, never re-injected"
+  },
+  "original_source_t": 0,
+  "new_experiment_time_zero": true,
+  "measurement": {
+    "core_offsets": [
+      0.1,
+      0.095,
+      0.105
+    ],
+    "connectivity": 4,
+    "minimum_core_pixels": 5,
+    "identity_distance_max": 0.05,
+    "primary_centroid_offset": 0.1,
+    "containment": "all core pixels",
+    "norm": "h*sqrt(sum(du^2+dv^2)); preserve raw and /NS",
+    "diagnostic_cadence_tu": 100,
+    "output_port": {
+      "axis": "x",
+      "coordinate": -0.25,
+      "direction": -1,
+      "aperture_axis": "y",
+      "aperture": [
+        -1.0,
+        -0.6
+      ],
+      "window": [
+        0.0,
+        155000.0
+      ],
+      "note": "registered LEFT exit for the carrier stage: complete core must pass leftward; the frozen built-in gate row of the y-era runner is superseded for T050 by the T010-leftward recomputation in analysis (aperture on y, patch_e1 direction=-1, original clean window) -- recorded, never silently mixed"
+    },
+    "monitor_ports": [
+      {
+        "axis": "y",
+        "coordinate": -0.6993006993006993
+      },
+      {
+        "axis": "y",
+        "coordinate": 0.6
+      },
+      {
+        "axis": "x",
+        "coordinate": -0.8
+      },
+      {
+        "axis": "x",
+        "coordinate": 0.8
+      }
+    ],
+    "shape_e1_max": 0.25,
+    "shape_patch_half": 65,
+    "shape_reference": "fixed downward periodic full template at actual centroid; no fit or source subtraction",
+    "clean_output": "no non-target core intersects periodic 131-square window; record mixed residual otherwise",
+    "direction_history_tu": 5000,
+    "direction_history_points": 51,
+    "direction_components": [
+      "vx",
+      "vy"
+    ],
+    "downward_direction_component": "vy",
+    "event_bracket_width_max_tu": 0.25,
+    "replay_max_steps": 400,
+    "final_window": [
+      150000.0,
+      155000.0
+    ],
+    "final_window_samples": 101,
+    "core_displacement_from_first_final_max": 0.02,
+    "all_newborn_and_source_events_preserved": true,
+    "capture": {
+      "conversion_box": {
+        "xmin": 0.2,
+        "xmax": 0.75,
+        "ymin": -0.3,
+        "ymax": 0.3
+      },
+      "holding_box": {
+        "xmin": -0.6,
+        "xmax": 0.8,
+        "ymin": -0.4,
+        "ymax": 0.4
+      },
+      "identity_end_alone_sufficient": false,
+      "root_tags": "initial source roots and Q; union over all candidate edges; rootless newborn UNKNOWN; every birth/complex core possible-related",
+      "holding_population": "ALL surviving full-field cores, not a chosen related subset",
+      "holding_all_thresholds_A_containment": true,
+      "holding_primary_unique_chain_and_no_count_changes": true,
+      "holding_primary_max_displacement": 0.02,
+      "absence_of_output_alone_sufficient": false,
+      "newborn_output_ignored": false,
+      "uncertain_attribution": "INDETERMINATE; preserve known violations",
+      "conversion_requires_saved_raw_before_after_and_candidate_relations": true
+    },
+    "free_pass": "exactly one unique clean standard downward Q output in fixed aperture/window, no extra propagation or pre-output periodic return",
+    "readout_targets": {
+      "S6": 0,
+      "S8": 1,
+      "S8plus": 1
+    }
+  },
+  "qc_observation": {
+    "question": "with the physical Q preset from t0, can the pre-placed carrier C form a traceable leftward output?  The reverse readout pre-allowed by the design; T051's failure is NOT modified",
+    "dual_identity": "physical Q_IN (['Q_IN']) and carrier C (['C']) are bound and propagated as DISTINCT labels; complexes use all candidate parents with ancestor unions; T051's ['Q']=C must never be read as this branch's physical Q",
+    "four_histories": {
+      "WAIT": "T046_JOINT6_WAIT (no Q/no C, to 120000)",
+      "Q_only": "T047_SHIFT7_BD6 (Q yes/C no, to 120000)",
+      "WAIT_C": "T050_WAIT_C via T051 (Q no/C yes, to 155000)",
+      "QC": "T052_QC (this branch)",
+      "auxiliary": "T050_FREE_C (free carrier)",
+      "missing_rule": "the two no-C controls end at 120000; after that they are MISSING -- never treat a last state or a difference as a 155000 control"
+    },
+    "c_exit_gate": "the SAME frozen T050 leftward gate for the C identity (role C): crossing of x=-0.25 at t<=155000 with the complete core in the y aperture [-1.0,-0.6], window clean (original rule), e1<=0.25 on the T010 leftward reference, then >=2 actual saved frames continuing left accumulating >=0.05 without periodic wraparound; C centroid and whole-core crossings reported separately; versus T051's no-crossing this forms at most a LIMITED response-difference clue",
+    "screening_vs_T047_Q_only": {
+      "times": [
+        75000.0,
+        80000.0
+      ],
+      "compare": "actual roots/splits and the unsubtracted two-component field difference over the fixed reference region x in [0.25,0.70], y in [-1.15,-0.65]",
+      "warning_gate": "0.25 NS (difference warning, not a claimed collection set)",
+      "rules": [
+        "if Q's after-state is not yet formed, roots are mixed, or the region difference exceeds the gate, the 'independently written then read' claim is NOT allowed",
+        "three-body joint phenomena are still recorded honestly; C's tail is never subtracted away",
+        "this screening proves neither zero causal influence nor reusable memory"
+      ]
+    },
+    "verdicts": {
+      "clue": "traceable C (or its clear descendants) crosses leftward in the fixed aperture, satisfies the frozen e1/clean, and the next two actual frames keep moving left >=0.05 without wraparound => a limited response-difference clue versus T051; Q pre-state comparability reported separately; Agent 1 then decides whether to fill the missing controls -- no complete state-dependent readout or cascade is announced",
+      "both_negative": "neither side has a qualified output => record this single construction's negative result",
+      "per_actual": "identity unclear / C-Q mixing / numerical anomaly / missing frames / window contamination => fail or undecidable per the actual facts; identity disappearance is NEVER absorption or a clean zero"
+    },
+    "no_rescue": true,
+    "no_injection_or_reset": true,
+    "no_readout_or_cascade_claim_until_controls": true
+  },
+  "comparison_read_only": {
+    "T046_wait": "results/T046/T046_JOINT6_WAIT/diagnostics.jsonl",
+    "T047_bd6": "results/T047/T047_SHIFT7_BD6/diagnostics.jsonl",
+    "T051_wait_c": "results/T050/T050_WAIT_C/diagnostics.jsonl",
+    "T050_free_c": "results/T050/T050_FREE_C/diagnostics.jsonl",
+    "T046_analysis": "results/T046/analysis_T046.json",
+    "T051_analysis": "results/T050/analysis_T051.json",
+    "note": "all read-only; no-C controls end at 120000 (MISSING after); T047/T048/T050/T051 verdicts unchanged"
+  },
+  "save": {
+    "actual_initial_full_field": true,
+    "diagnostic_every_tu": 100,
+    "all_threshold_core_geometry": true,
+    "all_association_candidate_edges": true,
+    "full_field_every_tu": 5000,
+    "full_zero_and_terminal_fields": true,
+    "periodic_and_terminal_expected_count": 16,
+    "final_full_field_every_tu": 100,
+    "final_full_fields": 101,
+    "event_actual_prestate_and_direction_history": true,
+    "event_actual_bracket_before_after_fields": true,
+    "Q_termination_complex_diagnostic_before_after_fields": true,
+    "source_archive_per_actual_case_launch": true
+  },
+  "output_root": "results/T052",
+  "dt": 0.25,
+  "diagnostic_every_tu": 100,
+  "snapshot_every_tu": 5000,
+  "execution_policy": {
+    "order": [
+      "T052_QC"
+    ],
+    "skip_completed_for_ordered_resume": true,
+    "max_invocation_wall_seconds": 3600,
+    "engineering_probe_steps_max_total": 400,
+    "dual_identity_synthetic_required_before_probe": true,
+    "no_line_change": true,
+    "no_initial_change": true,
+    "no_threshold_change": true,
+    "no_time_extension": true,
+    "no_extra_cases": true,
+    "no_injection_or_reset": true,
+    "no_geometry_or_port_change": true,
+    "stage_end_requires_report_to_Agent1": true,
+    "automatic_full_case_retry": false,
+    "unstarted_case_status": "NOT_RUN_STAGE_GATE",
+    "scientific_stop_unstarted_status": "NOT_RUN_SCIENTIFIC_STOP",
+    "undecidable_case_status": "NOT_RUN_UNDECIDABLE_CONSTRUCTION"
+  },
+  "cases": [
+    {
+      "case_id": "T052_QC",
+      "source": "QC_JOINT",
+      "add_query": true,
+      "initial_recipe": "direct T049 BD6_plus_C archive (= T047_SHIFT7_BD6 initial + T049 carrier deviation; chain re-verified bit-for-bit)",
+      "partition": "QC",
+      "initial_fields": "results/T049/carrier/BD6_plus_C.npz",
+      "initial_file_sha256": "da7d6681a7e434ed94e253a5c9b87e3c7dc070b8ccb4993b106baca57ec87f02",
+      "initial_array_sha256": [
+        "02c12197f5808c5f2f02a66eccb961a22353bc84fa76ee08cba61d61fb534c74",
+        "fcd5c8f2f32dc1162132f74b5b90fb0e16b768035ec93180baf4c7ce61fe2756"
+      ],
+      "expected_cores_t0": 14,
+      "sources": {
+        "bd6_plus_c": {
+          "path": "results/T049/carrier/BD6_plus_C.npz",
+          "sha256": "da7d6681a7e434ed94e253a5c9b87e3c7dc070b8ccb4993b106baca57ec87f02"
+        },
+        "carrier_deviation": {
+          "path": "results/T049/carrier/carrier_deviation_rolled.npz",
+          "sha256": "7ed14fd50c14bc428a7a2f0f1c36bf39c94504906788151e7baf6a610d1995fc"
+        },
+        "t047_bd6_base": {
+          "path": "results/T047/T047_SHIFT7_BD6/initial_fields.npz",
+          "sha256": "015eaac5b78faaed6a308831d3892fce7e4855b5368055c11db54cc95630fbf9"
+        }
+      },
+      "dt": 0.25,
+      "T": 155000.0,
+      "steps": 620000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P"
+    }
+  ],
+  "intake_record": "results/T052/intake.json"
+}

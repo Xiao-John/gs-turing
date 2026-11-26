@@ -1,0 +1,248 @@
+{
+  "experiment_protocol": "R019_LIVE_HANDOFF_BP_v1",
+  "task_id": "T021",
+  "request": "R019",
+  "status": "READY_IMPLEMENT_AND_STAGE_B",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T021_STAGE_B.md",
+  "task_sha256": "16a2f657ff35ab5474c3e54368636e714a419853dd1fcb94ace9c97c33e690b9",
+  "authorization": {
+    "path": "coordination/requests/R019.md",
+    "sha256": "2e1911ca36b17ff9d3714269c9dad473ff5eaaa22891886455421ea9cf57e57e",
+    "scope": "maximum three fixed cases; stage A WAIT only released"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "grid": {
+    "nx": 768,
+    "ny": 256,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "ymax": 0.8951048951048951,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "ideas": [
+    "I001",
+    "I011",
+    "I012",
+    "I014"
+  ],
+  "source_Q4": {
+    "path": "results/T010/R007B_B0_AB_c/snapshots/fields_00100000.npz",
+    "sha256": "60a8d572455dbf5a405fe2a428973386da40a92f04b9b0b59696add58ecc91cb"
+  },
+  "source_age_tu": 50000,
+  "new_experiment_time_zero": true,
+  "receiver_shift_columns": -180,
+  "regions": {
+    "VR": {
+      "xmin": -1.8587412587412588,
+      "xmax": -0.6587412587412588,
+      "ymin": -0.35,
+      "ymax": 0.35
+    },
+    "U": {
+      "xmin": -0.6,
+      "xmax": 0.6,
+      "ymin": -0.35,
+      "ymax": 0.35
+    },
+    "HR": {
+      "xmin": -2.0087412587412588,
+      "xmax": -0.6087412587412587,
+      "ymin": -0.45,
+      "ymax": 0.45
+    },
+    "C": {
+      "xmin": -0.25,
+      "xmax": 0.25,
+      "ymin": -0.25,
+      "ymax": 0.25
+    }
+  },
+  "measurement": {
+    "offsets": [
+      0.095,
+      0.1,
+      0.105
+    ],
+    "minimum_core_pixels": 5,
+    "connectivity": 4,
+    "cut_x": -0.5293706293706294,
+    "cut_record_all_y": true,
+    "cut_label_aperture_y": [
+      -0.25,
+      0.25
+    ],
+    "final_window": [
+      150000,
+      160000
+    ],
+    "diagnostic_every_tu": 100,
+    "snapshot_every_tu": 5000,
+    "final_full_fields_every_tu": 100,
+    "receiver_arrays_every_tu": 100,
+    "U_array_window": [
+      40000,
+      65000
+    ],
+    "minimum_preparation_span_tu": 10000,
+    "minimum_preparation_samples": 101,
+    "cumulative_core_displacement_max": 0.02,
+    "pollution_norm_max_over_NS": 0.25,
+    "blocked_wait_VR_distance_max_over_NS": 0.25,
+    "pass_pair_VR_distance_min_strict_over_NS": 0.25,
+    "auxiliary_field_drift_max_over_NS": 0.05,
+    "boundary_core_guard_width": 0.25,
+    "upstream_formation_window": [
+      40000,
+      50000
+    ],
+    "upstream_R4_reference_positions": [
+      {
+        "cx": -0.1320941979691517,
+        "cy": 0.07523440862893935
+      },
+      {
+        "cx": -0.13209419796915164,
+        "cy": -0.07523440862897224
+      },
+      {
+        "cx": 0.13209419796915117,
+        "cy": -0.07523440862897193
+      },
+      {
+        "cx": 0.13209419796915156,
+        "cy": 0.07523440862893974
+      }
+    ],
+    "upstream_R4_position_max": 0.02,
+    "direction_history_tu": 5000,
+    "direction_history_samples": 51,
+    "event_brackets": "actual diagnostic endpoints; no PDE replay",
+    "upstream_formation_region": "C"
+  },
+  "save": {
+    "launch_source_per_actual_case": true,
+    "initial_fields": true,
+    "full_field_event_endpoints": true,
+    "all_candidate_parent_graphs": true,
+    "raw_unsubtracted_regions": true,
+    "checkpoint_every_tu": 5000
+  },
+  "output_root": "results/T021",
+  "cases": [
+    {
+      "case_id": "T021_R_WAIT",
+      "recipe": "E+qR",
+      "upstream_source": null,
+      "initial_fields": "results/T021/inputs/T021_R_WAIT.npz",
+      "initial_file_sha256": "ee11be0bb738c8066f29cf0b53d461fa89c68f867c850cd46250a3ce58c758a7",
+      "initial_array_sha256": [
+        "4844d7c4aa87cae85fad9a64c5a704a038a1919c01de205ce4d882113dc12467",
+        "9636dbb3e3a5ebd8a1178723128518562993a3084005ba30a7750b8674bc55b9"
+      ],
+      "expected_VR_cores": 4,
+      "expected_U_cores": 0,
+      "execution_released": false,
+      "dt": 0.25,
+      "T": 160000,
+      "steps": 640000
+    },
+    {
+      "case_id": "T021_BP_R",
+      "recipe": "BP+qR",
+      "upstream_source": {
+        "path": "results/T009/inputs/R007B_B0_BP_c.npz",
+        "sha256": "e79225acb37ae1feabbf4a53a908666d1cccb49f30603ee4b2aedd4fe89985dd"
+      },
+      "initial_fields": "results/T021/inputs/T021_BP_R.npz",
+      "initial_file_sha256": "44f2b2b2422d1f696bc600eaa227c0eede24d72cad6416c1dd7e344d732bcfb2",
+      "initial_array_sha256": [
+        "c9f98735a8f788d9d81b0cb2e1ed7d4a843140f848de10dbc9bd71cb196abe91",
+        "7cd068f13e97a1a1adc9c1930f693bcf1fefcea4febfee4ad53b3548067b8a35"
+      ],
+      "expected_VR_cores": 8,
+      "expected_U_cores": 0,
+      "execution_released": true,
+      "dt": 0.25,
+      "T": 160000,
+      "steps": 640000
+    },
+    {
+      "case_id": "T021_ABP_R",
+      "recipe": "ABP+qR",
+      "upstream_source": {
+        "path": "results/T009/inputs/R007B_B0_ABP_c.npz",
+        "sha256": "5e1703dd1e1005c74416d7d892bd5d711aab75e657274d9925eb56ba162df870"
+      },
+      "initial_fields": "results/T021/inputs/T021_ABP_R.npz",
+      "initial_file_sha256": "3d5da3ed53f1405a7c5a888790d2866ae712c2f3aade15cb55c87d1eb4e1f702",
+      "initial_array_sha256": [
+        "ea16739aa253be24c15d80851cf0df717fcb23632266060ddf62003da590b8f0",
+        "94d01494885f45b9267f338bd0c7b7293491f1312c48da5e8fef5652566715a1"
+      ],
+      "expected_VR_cores": 4,
+      "expected_U_cores": 6,
+      "execution_released": false,
+      "dt": 0.25,
+      "T": 160000,
+      "steps": 640000
+    }
+  ],
+  "resource_reference": {
+    "nominal_wall_minutes_per_case": 10,
+    "nominal_total_minutes": 30,
+    "engineering_probe_steps_max_total": 0,
+    "stage_A_only_first_case": false,
+    "stage_B_only_BP": true
+  },
+  "report": "coordination/reports/T021_STAGE_B.md",
+  "source_correction": {
+    "path": "coordination/plans/T021_SOURCE_CORRECTION.md",
+    "sha256": "c2d1e5bd86fe3bf45bfb7724893616be8c12a40184ae3ead0b5112d8d9b95e79",
+    "actual_legacy_left_port_x": -0.6
+  },
+  "scientific_task": {
+    "path": "coordination/tasks/T021.md",
+    "sha256": "3cf5d0e2609486683fbf01a9f768b8946403c344fc82a6cb499540ffb97b61b0"
+  },
+  "parent_config": {
+    "path": "configs/T021.json",
+    "sha256": "e7cd45d2b7634f336633a983a32e8e296009c06c1d3c2011af176677716789e0"
+  },
+  "stage_A_acceptance": {
+    "path": "coordination/reports/T021_STAGE_A_AGENT1_REVIEW.md",
+    "sha256": "a101cdd4ab69f94cc159218163118ea7ab7afde17fb9554c4c7598453c4545b5",
+    "checks": "results/T021/agent1_stage_A/checks.json",
+    "checks_sha256": "b935f6e6adea03053872eb5c4d15a60feefa68ed103c3ed3ffaa19ce0591a6d4",
+    "WAIT_record": "results/T021/records/T021_R_WAIT.json",
+    "WAIT_record_sha256": "9c5088e5af668a8f8bfaf8b171d45902eadff0ed81ae6b6fed39a27c09699fc2"
+  }
+}

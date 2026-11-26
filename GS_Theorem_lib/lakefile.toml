@@ -1,0 +1,6 @@
+name = "GSTheoremLib"
+version = "0.1.0"
+defaultTargets = ["GSTheoremLib"]
+
+[[lean_lib]]
+name = "GSTheoremLib"

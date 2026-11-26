@@ -1,0 +1,264 @@
+{
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "ymax": 0.8951048951048951,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "grid": {
+    "nx": 768,
+    "ny": 256,
+    "h": 0.006993006993006993
+  },
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "regions": {
+    "W": {
+      "xmin": -0.4,
+      "xmax": 0.4,
+      "ymin": -0.25,
+      "ymax": 0.25
+    },
+    "V": {
+      "xmin": -0.6,
+      "xmax": 0.6,
+      "ymin": -0.35,
+      "ymax": 0.35
+    }
+  },
+  "task_id": "T014",
+  "request": "R012",
+  "experiment_protocol": "R012_Q4_SEQUENCE_v1",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T014.md",
+  "task_sha256": "700e2d9f433e28b9ca4483b3406e7950252a94df782cece44df04582b78e93ae",
+  "authorization": {
+    "path": "coordination/requests/R012.md",
+    "sha256": "fbdcbdec49d1d96e5bec9a0e298fff6a41200abef6630e7a19967e85dc96444f",
+    "status": "APPROVED"
+  },
+  "ideas": [
+    "I004",
+    "I008",
+    "I011"
+  ],
+  "output_root": "results/T014",
+  "sources": {
+    "Q4": {
+      "path": "results/T010/R007B_B0_AB_c/snapshots/fields_00100000.npz",
+      "sha256": "60a8d572455dbf5a405fe2a428973386da40a92f04b9b0b59696add58ecc91cb"
+    },
+    "B": {
+      "path": "results/T009/inputs/R007B_B0_B_c.npz",
+      "sha256": "15a2c5c33f6600ddac3aa729f94ffe05d0273855a868cbb9cea954e7918e4e3c"
+    },
+    "P": {
+      "path": "results/T009/inputs/R007B_B0_P_c.npz",
+      "sha256": "4cd4fae1ac5211ca957516d73e8b717bff2745eeeb3d2f9d74f4fd0d04f91f45"
+    },
+    "E": {
+      "path": "results/T009/inputs/R007B_B0_E_c.npz",
+      "sha256": "16efb0f0d56f3d33921ea3c84a4d4e018c32051d2990ede2d05a0f8c9a8c3d2c"
+    }
+  },
+  "source_age_tu": 50000,
+  "new_experiment_time_zero": true,
+  "initial_signals": {
+    "B": {
+      "anchor": [
+        0.4,
+        0.0
+      ],
+      "direction": -1,
+      "inside_V_at_zero": true
+    },
+    "P": {
+      "anchor": [
+        1.2,
+        0.0
+      ],
+      "direction": -1
+    }
+  },
+  "cases": [
+    {
+      "case_id": "T014_M0_Q4",
+      "initial_recipe": "Q4",
+      "initial_roles": [],
+      "expected_final_cores": 4,
+      "dt": 0.25,
+      "T": 80000,
+      "steps": 320000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000
+    },
+    {
+      "case_id": "T014_MB_Q4_B",
+      "initial_recipe": "Q4+(B-E)",
+      "initial_roles": [
+        "B"
+      ],
+      "expected_final_cores": 6,
+      "dt": 0.25,
+      "T": 80000,
+      "steps": 320000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000
+    },
+    {
+      "case_id": "T014_MBP_Q4_BP",
+      "initial_recipe": "Q4+(B-E)+(P-E)",
+      "initial_roles": [
+        "B",
+        "P"
+      ],
+      "expected_final_cores": 8,
+      "dt": 0.25,
+      "T": 80000,
+      "steps": 320000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000
+    }
+  ],
+  "measurement": {
+    "core_offsets": [
+      0.1,
+      0.095,
+      0.105
+    ],
+    "connectivity": 4,
+    "minimum_core_pixels": 5,
+    "centroid_weight": "max(u-ub-0.1,0) for primary threshold; corresponding offset for sensitivity segmentation",
+    "containment": "all core pixels; record full-field components at each threshold",
+    "norm": "h*sqrt(sum((u-u_ref)^2+(v-v_ref)^2))",
+    "final_window": [
+      70000,
+      80000
+    ],
+    "final_window_samples": 101,
+    "identity_distance_max": 0.05,
+    "core_displacement_max": 0.02,
+    "outside_W_norm_over_NS_max": 0.25,
+    "outside_V_norm_over_NS_max": 0.25,
+    "paired_W_norm_over_NS_min_strict": 0.25,
+    "paired_V_norm_over_NS_min_strict": 0.25,
+    "V_drift_from_first_final_over_NS_max": 0.05,
+    "shape_e1_max": 0.25,
+    "shape_patch_half": 65,
+    "direction_history_tu": 5000,
+    "direction_history_points": 51,
+    "left_port": -0.6,
+    "right_port": 0.6,
+    "port_y_aperture": [
+      -0.25,
+      0.25
+    ],
+    "replay_max_steps": 400,
+    "event_bracket_width_max_tu": 0.25,
+    "all_events_preserved": true,
+    "mechanism_labels_additive": true,
+    "final_structure_counts": [
+      4,
+      6,
+      8
+    ],
+    "main_region": "V",
+    "V_drift_from_first_over_NS_limit_auxiliary_only": 0.05,
+    "V_drift_not_a_main_structure_gate": true,
+    "primary_centroid_offset": 0.1,
+    "same_role_outward_not_ignored": true
+  },
+  "preparation": {
+    "reference": "T014_MB_Q4_B",
+    "sequence": "T014_MBP_Q4_BP",
+    "target_local_cores": 6,
+    "incoming_role": "P",
+    "incoming_signal_excluded_from_receiver_count": true,
+    "P_first_entry_definition": "any primary-threshold core pixel intersects V, using initial bound identity",
+    "cadence_tu": 100,
+    "minimum_span_tu": 10000,
+    "minimum_samples": 101,
+    "window_selection": "longest consecutive passing suffix ending at last primary P-outside-V sample immediately before first entry",
+    "V_field_difference_over_NS_max": 0.25,
+    "core_match_distance_max": 0.02,
+    "match_rule": "unique candidate bipartite graph, degree one at every receiver core",
+    "P_identity_independent_required": true,
+    "P_core_outside_V_required": true,
+    "receiver_pair_unique_temporal_association_required": true,
+    "first_receiver_sample_need_not_continue_prior_six_core_frame": true,
+    "scope": "sampled finite-time condition only"
+  },
+  "pairings": [
+    {
+      "left": "T014_MBP_Q4_BP",
+      "right": "T014_M0_Q4",
+      "region": "V",
+      "minimum_distance_over_NS_strict": 0.25
+    },
+    {
+      "left": "T014_MBP_Q4_BP",
+      "right": "T014_MB_Q4_B",
+      "region": "V",
+      "minimum_distance_over_NS_strict": 0.25
+    }
+  ],
+  "save": {
+    "initial_full_fields": true,
+    "full_field_every_tu": 5000,
+    "full_final_field_every_tu": 100,
+    "reuse_identical_snapshot_reference": true,
+    "actual_event_pre_and_post_fields": true,
+    "rolling_prestate_tu": 100,
+    "source_archive_per_actual_launch": true,
+    "launch_archival_must_cover_actual_case_entry": true,
+    "periodic_snapshot_at_zero_required": true,
+    "V_arrays_every_tu": 100,
+    "V_arrays_cases": [
+      "T014_MB_Q4_B",
+      "T014_MBP_Q4_BP"
+    ],
+    "V_arrays_minimum_coverage": "MB all times up to MBP first P entry; simplest full 0..80000 for both; save coordinates",
+    "full_field_three_threshold_components_each_diagnostic": true
+  },
+  "execution_policy": {
+    "max_invocation_wall_seconds": 3600,
+    "safety_margin_before_wall_stop": true,
+    "automatic_next_stage": false,
+    "automatic_full_case_retry": false,
+    "no_additional_research_cases": true,
+    "approximate_resources_only": true,
+    "checkpoint_resumable": "must be demonstrated on actual path before claiming; otherwise complete-case batches and honest safety stop",
+    "order": [
+      "T014_M0_Q4",
+      "T014_MB_Q4_B",
+      "T014_MBP_Q4_BP"
+    ],
+    "scientific_stop_allowed": true,
+    "scientific_stop_unstarted_status": "NOT_RUN_SCIENTIFIC_STOP"
+  },
+  "intake_record": "results/T014/intake.json"
+}

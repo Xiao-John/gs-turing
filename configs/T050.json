@@ -1,0 +1,316 @@
+{
+  "experiment_protocol": "R027_CARRIER_STAGE1_v1",
+  "task_id": "T050",
+  "request": "R027",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T050.md",
+  "task_sha256": "0ec127a9e476d85c06e14c179a412740b3404be4c477ff59501e3abc5b49bed0",
+  "authorization": {
+    "path": "coordination/tasks/T050.md",
+    "sha256": "0ec127a9e476d85c06e14c179a412740b3404be4c477ff59501e3abc5b49bed0",
+    "scope": "exactly two branches (FREE carrier first; WAIT+C only after the free branch passes its pre-registered conditions) to t=155000; no other branch, no geometry scan, no carrier position/port change, no mid-run injection/replacement, no Q reset, no change to T047/T048 verdicts"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "grid": {
+    "nx": 768,
+    "ny": 512,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -1.7902097902097902,
+    "ymax": 1.7902097902097902,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded",
+    "extension": "ymin_new = ymin_old - 128h; original rows embedded at [128:384]; filler rows = background"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "ideas": [
+    "I001",
+    "I011",
+    "I012",
+    "I014"
+  ],
+  "parent_evidence": {
+    "T042_config": {
+      "path": "configs/T042.json",
+      "sha256": "c5009527e41a4654223ba464e4f3b669f3faf4d6cd0031c9c4ee412b982b6be0"
+    },
+    "T043_config": {
+      "path": "configs/T043.json",
+      "sha256": "8bae305cf79fdc0dd801c2db50e0ce91d6f62b17fcedd076db0b1959ca22e720"
+    },
+    "T049_analysis": {
+      "path": "results/T049/analysis_T049.json",
+      "sha256": "4675c646fece508a515df7774271169701f5348fa14591fdb2b3a8841559959f"
+    },
+    "T049_task": {
+      "path": "coordination/tasks/T049.md",
+      "sha256": "bd1ace62ec2d5ed958aa3f0da96a5a17e5324e39e9482abeccf1947255b77cdd"
+    },
+    "T046_wait": {
+      "path": "results/T046/T046_JOINT6_WAIT/initial_fields.npz",
+      "sha256": "f7f4dc4378050b655f48ef6ee2f170890ab03cc2d0ffa650a844a63ffb58e104"
+    }
+  },
+  "query": {
+    "anchor": [
+      2.0363520690623838,
+      -0.797202797202798
+    ],
+    "direction": "left",
+    "anchor_note": "IDENTITY BINDING ONLY: the anchor is the T049-measured carrier centroid so the frozen roots/transition machinery binds THE CARRIER (role letter Q is frozen bookkeeping for the carrier lineage in this stage); NO physical Q field exists in T050, no Q is injected/reset, and this tag must never be read as a physical query here or in later comparisons"
+  },
+  "original_source_t": 0,
+  "new_experiment_time_zero": true,
+  "original_source_note": "T050 has no original T016-era source time; the carrier descends from the T009 B_c deviation and both branches start fresh at t=0 (record key kept for the frozen launch-source record)",
+  "measurement": {
+    "core_offsets": [
+      0.1,
+      0.095,
+      0.105
+    ],
+    "connectivity": 4,
+    "minimum_core_pixels": 5,
+    "identity_distance_max": 0.05,
+    "primary_centroid_offset": 0.1,
+    "containment": "all core pixels",
+    "norm": "h*sqrt(sum(du^2+dv^2)); preserve raw and /NS",
+    "diagnostic_cadence_tu": 100,
+    "output_port": {
+      "axis": "x",
+      "coordinate": -0.25,
+      "direction": -1,
+      "aperture_axis": "y",
+      "aperture": [
+        -1.0,
+        -0.6
+      ],
+      "window": [
+        0.0,
+        155000.0
+      ],
+      "note": "registered LEFT exit for the carrier stage: complete core must pass leftward; the frozen built-in gate row of the y-era runner is superseded for T050 by the T010-leftward recomputation in analysis (aperture on y, patch_e1 direction=-1, original clean window) -- recorded, never silently mixed"
+    },
+    "monitor_ports": [
+      {
+        "axis": "y",
+        "coordinate": -0.6993006993006993
+      },
+      {
+        "axis": "y",
+        "coordinate": 0.6
+      },
+      {
+        "axis": "x",
+        "coordinate": -0.8
+      },
+      {
+        "axis": "x",
+        "coordinate": 0.8
+      }
+    ],
+    "shape_e1_max": 0.25,
+    "shape_patch_half": 65,
+    "shape_reference": "fixed downward periodic full template at actual centroid; no fit or source subtraction",
+    "clean_output": "no non-target core intersects periodic 131-square window; record mixed residual otherwise",
+    "direction_history_tu": 5000,
+    "direction_history_points": 51,
+    "direction_components": [
+      "vx",
+      "vy"
+    ],
+    "downward_direction_component": "vy",
+    "event_bracket_width_max_tu": 0.25,
+    "replay_max_steps": 400,
+    "final_window": [
+      150000.0,
+      155000.0
+    ],
+    "final_window_samples": 101,
+    "core_displacement_from_first_final_max": 0.02,
+    "all_newborn_and_source_events_preserved": true,
+    "capture": {
+      "conversion_box": {
+        "xmin": 0.2,
+        "xmax": 0.75,
+        "ymin": -0.3,
+        "ymax": 0.3
+      },
+      "holding_box": {
+        "xmin": -0.6,
+        "xmax": 0.8,
+        "ymin": -0.4,
+        "ymax": 0.4
+      },
+      "identity_end_alone_sufficient": false,
+      "root_tags": "initial source roots and Q; union over all candidate edges; rootless newborn UNKNOWN; every birth/complex core possible-related",
+      "holding_population": "ALL surviving full-field cores, not a chosen related subset",
+      "holding_all_thresholds_A_containment": true,
+      "holding_primary_unique_chain_and_no_count_changes": true,
+      "holding_primary_max_displacement": 0.02,
+      "absence_of_output_alone_sufficient": false,
+      "newborn_output_ignored": false,
+      "uncertain_attribution": "INDETERMINATE; preserve known violations",
+      "conversion_requires_saved_raw_before_after_and_candidate_relations": true
+    },
+    "free_pass": "exactly one unique clean standard downward Q output in fixed aperture/window, no extra propagation or pre-output periodic return",
+    "readout_targets": {
+      "S6": 0,
+      "S8": 1,
+      "S8plus": 1
+    }
+  },
+  "carrier_observation": {
+    "question": "can the pre-placed carrier C really propagate leftward in the extended domain, and how do its propagation and the device's own evolution behave with the no-Q wait structure present?  Stage-1 precondition for later Q+C -- NOT a readout success verdict",
+    "free_pass_conditions": [
+      "initial unique C",
+      "traceable over the whole [0,155000] observation: no periodic wraparound, no unexplained complex identity changes (carrier-lineage complexes must have their frozen transition endpoint files)",
+      "leftward crossing of x=-0.25 at t<=155000 with the complete core inside the y aperture [-1.0,-0.6], window clean (original clean rule: any other core incl. newborns is an intruder) and e1<=0.25 on the T010 LEFTWARD standard reference (fixed 131x131, patch_e1 direction=-1, no fit, no source subtraction)",
+      "after the crossing: at two actual saved time points with continuous identity the carrier keeps moving left, accumulating >=0.05 physical units, without touching the periodic boundary"
+    ],
+    "undecidable_rule": "insufficient sampling or unclear identity => UNDECIDABLE",
+    "fail_rule": "clearly unmet condition => FAIL; no time extension or gate change rescues a free-branch failure",
+    "wait_c_conditions": "record fully whether the same exit and sustained-motion conditions hold, whether C associates with sources, source states and UNKNOWN; compare with the existing T046 WAIT same-period fields/diagnostics (existing control ends at 120000; later marked MISSING); no preset pass",
+    "no_rescue": true,
+    "no_readout_or_cascade_claims": true,
+    "c_disappearance_not_absorption": true,
+    "stage_gate": "WAIT+C runs only after the free branch passes; otherwise it is recorded NOT_RUN and the stage stops (Agent 1 decides any continuation)"
+  },
+  "comparison_read_only": {
+    "T046_JOINT_WAIT": "results/T046/T046_JOINT_WAIT/diagnostics.jsonl",
+    "T049_analysis": "results/T049/analysis_T049.json",
+    "T049_carrier": "results/T049/carrier/carrier_deviation_rolled.npz",
+    "note": "existing controls are read-only; T046 WAIT ends at 120000 (beyond = MISSING); T047/T048 verdicts unchanged"
+  },
+  "save": {
+    "actual_initial_full_field": true,
+    "diagnostic_every_tu": 100,
+    "all_threshold_core_geometry": true,
+    "all_association_candidate_edges": true,
+    "full_field_every_tu": 5000,
+    "full_zero_and_terminal_fields": true,
+    "periodic_and_terminal_expected_count": 16,
+    "final_full_field_every_tu": 100,
+    "final_full_fields": 101,
+    "event_actual_prestate_and_direction_history": true,
+    "event_actual_bracket_before_after_fields": true,
+    "Q_termination_complex_diagnostic_before_after_fields": true,
+    "source_archive_per_actual_case_launch": true
+  },
+  "output_root": "results/T050",
+  "dt": 0.25,
+  "diagnostic_every_tu": 100,
+  "snapshot_every_tu": 5000,
+  "execution_policy": {
+    "order": [
+      "T050_FREE_C",
+      "T050_WAIT_C"
+    ],
+    "free_gate_before_wait_c": true,
+    "skip_completed_for_ordered_resume": true,
+    "max_invocation_wall_seconds": 3600,
+    "engineering_probe_steps_max_total": 800,
+    "no_line_change": true,
+    "no_initial_change": true,
+    "no_threshold_change": true,
+    "no_time_extension": true,
+    "no_extra_cases": true,
+    "no_carrier_position_or_port_change": true,
+    "no_midrun_injection_or_replacement": true,
+    "no_q_reset": true,
+    "stage_end_requires_report_to_Agent1": true,
+    "automatic_full_case_retry": false,
+    "unstarted_case_status": "NOT_RUN_STAGE_GATE",
+    "scientific_stop_unstarted_status": "NOT_RUN_SCIENTIFIC_STOP",
+    "undecidable_case_status": "NOT_RUN_UNDECIDABLE_CONSTRUCTION"
+  },
+  "cases": [
+    {
+      "case_id": "T050_FREE_C",
+      "source": "CARRIER_STAGE1",
+      "add_query": true,
+      "initial_recipe": "E + carrier_deviation_rolled (uniform T042 background + T049 C deviation; background once)",
+      "partition": "FREE",
+      "initial_fields": "results/T050/inputs/T050_FREE_C.npz",
+      "initial_file_sha256": "28e9a98b5815d400616816de4059ea026a8c749f0759736fe2a335a2081cb92f",
+      "initial_array_sha256": [
+        "c7f510c0cbf7b372a1cee26e7082b607193ae23038a54fb796cbd7f8ecfbfb8b",
+        "657fc4e545f7dc390eb132891539d226758a6ba15f7f63297e1d6415d3580e80"
+      ],
+      "expected_cores_t0": 1,
+      "sources": {
+        "carrier_deviation": {
+          "path": "results/T049/carrier/carrier_deviation_rolled.npz",
+          "sha256": "7ed14fd50c14bc428a7a2f0f1c36bf39c94504906788151e7baf6a610d1995fc"
+        }
+      },
+      "dt": 0.25,
+      "T": 155000.0,
+      "steps": 620000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P"
+    },
+    {
+      "case_id": "T050_WAIT_C",
+      "source": "CARRIER_STAGE1",
+      "add_query": true,
+      "initial_recipe": "direct T049 WAIT_plus_C archive (= T046_JOINT6_WAIT initial + T049 C deviation; chain re-verified bit-for-bit)",
+      "partition": "WAITC",
+      "initial_fields": "results/T049/carrier/WAIT_plus_C.npz",
+      "initial_file_sha256": "d355f186516a591682a0875d1f077ccbb3261693852f41b9faf92a6007687a19",
+      "initial_array_sha256": [
+        "9bcb26c32aba9e2ef7ced7d2456049feb06a915757a5d818fc6b24a0e2ded694",
+        "208a70ac530e4df93bf36c8ad83e2245790050234ac1b447e56fbb2e1390221e"
+      ],
+      "expected_cores_t0": 13,
+      "sources": {
+        "wait_plus_c_archive": {
+          "path": "results/T049/carrier/WAIT_plus_C.npz",
+          "sha256": "d355f186516a591682a0875d1f077ccbb3261693852f41b9faf92a6007687a19"
+        },
+        "carrier_deviation": {
+          "path": "results/T049/carrier/carrier_deviation_rolled.npz",
+          "sha256": "7ed14fd50c14bc428a7a2f0f1c36bf39c94504906788151e7baf6a610d1995fc"
+        },
+        "t046_wait_base": {
+          "path": "results/T046/T046_JOINT6_WAIT/initial_fields.npz",
+          "sha256": "f7f4dc4378050b655f48ef6ee2f170890ab03cc2d0ffa650a844a63ffb58e104"
+        }
+      },
+      "dt": 0.25,
+      "T": 155000.0,
+      "steps": 620000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P"
+    }
+  ],
+  "intake_record": "results/T050/intake.json"
+}

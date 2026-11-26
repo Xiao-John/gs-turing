@@ -1,0 +1,169 @@
+{
+  "experiment_protocol": "T001_v1",
+  "stage": "S1_HOLD",
+  "status": "READY_STAGE",
+  "request": "R001",
+  "task": "coordination/tasks/T001.md",
+  "task_sha256": "050d307eb713c3ed0bdde1001ee41e2df647d4d161c209454c00b1af77a3923e",
+  "base_config": "configs/T001.json",
+  "base_config_sha256": "fdfb6d85e400119c26e9128cb2c59d4f5ecf944c1d6b342b1f68f9a214f273bd",
+  "budget_split": "coordination/plans/BUDGET_SPLIT.md",
+  "budget_split_sha256": "87fd088ac3d38b7573ad908be0a5b197d6b58fabed2877888fca01fc6184d8cb",
+  "authorization": {
+    "basis": "R001 APPROVED (human 0, 2026-10-13) + human 0's 2026-10-13 budget-split rule",
+    "stage_question": "does the four-lobe residue hold for the finite window needed by one probe, and is it sensitive to the registered fixed asymmetric perturbation?",
+    "why_first": "it is the necessary precondition for the probe and chain branches; a failure closes the storage layout",
+    "scope": "engineering correction + stage cost gate + these four registered trajectories only",
+    "later_stages": "probe 5-8 and chain 9-10 are NOT authorized; they need their own stage authorization after this report"
+  },
+  "cumulative_budget": {
+    "wall_seconds": 3600,
+    "note": "the 60-minute cap is cumulative over the round; the stage is compared against the remaining balance, never a fresh 60 minutes",
+    "extra_cell_steps": 2000000000,
+    "max_new_bytes": 5368709120
+  },
+  "stage_cases": [
+    "T001_E_c",
+    "T001_R_c",
+    "T001_Rpert_c",
+    "T001_Rpert_r"
+  ],
+  "cases": [
+    {
+      "case_id": "T001_E_c",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/E_c.npz",
+      "initial_recipe": "E",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 70000,
+      "steps": 140000,
+      "every": 200,
+      "snapshot_every": 2000,
+      "keep_frames": false,
+      "requires": [],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    },
+    {
+      "case_id": "T001_R_c",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/R_c.npz",
+      "initial_recipe": "R",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 70000,
+      "steps": 140000,
+      "every": 200,
+      "snapshot_every": 2000,
+      "keep_frames": false,
+      "requires": [],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    },
+    {
+      "case_id": "T001_Rpert_c",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/Rpert_c.npz",
+      "initial_recipe": "Rpert",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 70000,
+      "steps": 140000,
+      "every": 200,
+      "snapshot_every": 2000,
+      "keep_frames": false,
+      "requires": [],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    },
+    {
+      "case_id": "T001_Rpert_r",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/Rpert_r.npz",
+      "initial_recipe": "Rpert",
+      "nx": 1152,
+      "ny": 384,
+      "h": 0.004662004662004662,
+      "dt": 0.2222222222222222,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 70000,
+      "steps": 315000,
+      "every": 450,
+      "snapshot_every": 4500,
+      "keep_frames": false,
+      "requires": [],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    }
+  ]
+}

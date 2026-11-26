@@ -1,0 +1,84 @@
+{
+  "$schema": "experiment record contract v1 (generic simulation record)",
+  "required": [
+    "case_id",
+    "worker",
+    "status",
+    "method",
+    "n",
+    "h",
+    "dt",
+    "Du",
+    "Dv",
+    "f",
+    "k",
+    "t_final",
+    "steps",
+    "resource",
+    "final_metrics",
+    "wall_seconds",
+    "core_hash"
+  ],
+  "types": {
+    "case_id": "str",
+    "worker": "str",
+    "status": "str",
+    "method": "str",
+    "n": "int",
+    "h": "float",
+    "dt": "float",
+    "Du": "float",
+    "Dv": "float",
+    "f": "float",
+    "k": "float",
+    "t_final": "float",
+    "steps": "int",
+    "wall_seconds": "float",
+    "core_hash": "str",
+    "resource": "dict",
+    "final_metrics": "dict",
+    "parent_id": "str|null",
+    "note": "str",
+    "anomalies": "list",
+    "tags": "list",
+    "fixed_cells": "int",
+    "seed": "int",
+    "spectral_lap": "bool",
+    "dealias": "bool",
+    "solver_version": "str",
+    "npz_path": "str",
+    "L": "float",
+    "nx": "int",
+    "ny": "int",
+    "Lx": "float",
+    "Ly": "float",
+    "backend": "str",
+    "protocol": "str"
+  },
+  "enums": {
+    "status": [
+      "completed",
+      "failed"
+    ],
+    "method": [
+      "euler",
+      "imex"
+    ]
+  },
+  "final_metrics_required": [
+    "Mv",
+    "vmax",
+    "Rg",
+    "components"
+  ],
+  "final_metrics_aliases": {
+    "components_thr005": "components"
+  },
+  "notes": [
+    "resource must carry a describe() dict: {kind, value, params}",
+    "t_final is MODEL time and steps is the iteration count; both are recorded because one cannot be derived from the other when dt or the solver changes",
+    "a run whose status is failed must carry at least one anomaly string, so a silent failure cannot enter the index",
+    "shape fields (Rg, centroid, cx, cy) may be null iff there is no structure to measure (vmax==0 or active_area_cells==0); Mv and vmax must always be present",
+    "components is the shape decomposition of the structure, so it follows the shape-field nullability rule"
+  ]
+}

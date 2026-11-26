@@ -1,0 +1,226 @@
+{
+  "experiment_protocol": "R020_BP_DT0125_v1",
+  "task_id": "T022",
+  "request": "R020",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T022.md",
+  "task_sha256": "789ed95160817c4b46e909ee5f5f8fa90c0ffa57235839e744795b319748f9b5",
+  "authorization": {
+    "path": "coordination/requests/R020.md",
+    "sha256": "bd326fa139938c9e508695e227c79d0ab2e72d23afe238d4adca60e9d6becc25",
+    "scope": "one additional BP branch with dt halved to 0.125; no other case, no scan"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "grid": {
+    "nx": 768,
+    "ny": 256,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "ymax": 0.8951048951048951,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "ideas": [
+    "I001",
+    "I011",
+    "I012",
+    "I014"
+  ],
+  "source_Q4": {
+    "path": "results/T010/R007B_B0_AB_c/snapshots/fields_00100000.npz",
+    "sha256": "60a8d572455dbf5a405fe2a428973386da40a92f04b9b0b59696add58ecc91cb"
+  },
+  "source_age_tu": 50000,
+  "new_experiment_time_zero": true,
+  "receiver_shift_columns": -180,
+  "dt_original": 0.25,
+  "dt": 0.125,
+  "regions": {
+    "VR": {
+      "xmin": -1.8587412587412588,
+      "xmax": -0.6587412587412588,
+      "ymin": -0.35,
+      "ymax": 0.35
+    },
+    "U": {
+      "xmin": -0.6,
+      "xmax": 0.6,
+      "ymin": -0.35,
+      "ymax": 0.35
+    },
+    "HR": {
+      "xmin": -2.0087412587412588,
+      "xmax": -0.6087412587412587,
+      "ymin": -0.45,
+      "ymax": 0.45
+    },
+    "C": {
+      "xmin": -0.25,
+      "xmax": 0.25,
+      "ymin": -0.25,
+      "ymax": 0.25
+    }
+  },
+  "measurement": {
+    "offsets": [
+      0.095,
+      0.1,
+      0.105
+    ],
+    "minimum_core_pixels": 5,
+    "connectivity": 4,
+    "cut_x": -0.5293706293706294,
+    "cut_record_all_y": true,
+    "cut_label_aperture_y": [
+      -0.25,
+      0.25
+    ],
+    "final_window": [
+      150000,
+      160000
+    ],
+    "diagnostic_every_tu": 100,
+    "snapshot_every_tu": 5000,
+    "final_full_fields_every_tu": 100,
+    "receiver_arrays_every_tu": 100,
+    "U_array_window": [
+      40000,
+      65000
+    ],
+    "minimum_preparation_span_tu": 10000,
+    "minimum_preparation_samples": 101,
+    "cumulative_core_displacement_max": 0.02,
+    "pollution_norm_max_over_NS": 0.25,
+    "consistency_VR_distance_max_over_NS": 0.25,
+    "pass_pair_VR_distance_min_strict_over_NS": 0.25,
+    "auxiliary_field_drift_max_over_NS": 0.05,
+    "boundary_core_guard_width": 0.25,
+    "upstream_formation_window": [
+      40000,
+      50000
+    ],
+    "upstream_R4_reference_positions": [
+      {
+        "cx": -0.1320941979691517,
+        "cy": 0.07523440862893935
+      },
+      {
+        "cx": -0.13209419796915164,
+        "cy": -0.07523440862897224
+      },
+      {
+        "cx": 0.13209419796915117,
+        "cy": -0.07523440862897193
+      },
+      {
+        "cx": 0.13209419796915156,
+        "cy": 0.07523440862893974
+      }
+    ],
+    "upstream_R4_position_max": 0.02,
+    "direction_history_tu": 5000,
+    "direction_history_samples": 51,
+    "event_brackets": "actual diagnostic endpoints; no PDE replay",
+    "upstream_formation_region": "C"
+  },
+  "save": {
+    "launch_source_per_actual_case": true,
+    "initial_fields": true,
+    "full_field_event_endpoints": true,
+    "all_candidate_parent_graphs": true,
+    "raw_unsubtracted_regions": true,
+    "checkpoint_every_tu": 5000
+  },
+  "output_root": "results/T022",
+  "cases": [
+    {
+      "case_id": "T022_BP_R_DT0125",
+      "recipe": "BP+qR",
+      "upstream_source": {
+        "path": "results/T009/inputs/R007B_B0_BP_c.npz",
+        "sha256": "e79225acb37ae1feabbf4a53a908666d1cccb49f30603ee4b2aedd4fe89985dd"
+      },
+      "initial_fields": "results/T021/inputs/T021_BP_R.npz",
+      "initial_file_sha256": "44f2b2b2422d1f696bc600eaa227c0eede24d72cad6416c1dd7e344d732bcfb2",
+      "initial_array_sha256": [
+        "c9f98735a8f788d9d81b0cb2e1ed7d4a843140f848de10dbc9bd71cb196abe91",
+        "7cd068f13e97a1a1adc9c1930f693bcf1fefcea4febfee4ad53b3548067b8a35"
+      ],
+      "expected_VR_cores": 8,
+      "expected_U_cores": 0,
+      "execution_released": true,
+      "dt": 0.125,
+      "T": 160000,
+      "steps": 1280000,
+      "diagnostic_every_steps": 800,
+      "snapshot_every_steps": 40000
+    }
+  ],
+  "baseline_BP": {
+    "config": {
+      "path": "configs/T021_BP.json",
+      "sha256": "ab2ee0b7bb62b1be4e1f12c1c3bde3d553e6b334ad3e963e841c21ada68d6621"
+    },
+    "record": {
+      "path": "results/T021/records/T021_BP_R.json",
+      "sha256": "3af460bdc82ce916cde519979faaffc2ec148e43e9198402e3bfeb523a472d94"
+    },
+    "run_dir": "results/T021/T021_BP_R",
+    "diagnostics_sha256": "f1df8423cca5e8721bf63f38015a1d8392586d900abc153f37f1a0d468625e9e",
+    "launch_manifest": {
+      "path": "results/T021/archives/T021_BP_R_20261027T115606/manifest.json",
+      "sha256": "f30d310925c1b52b26019dee5a3e11ea94e852a8d3cc4f200cc75c2b5dc02522"
+    },
+    "initial_fields_written": {
+      "path": "results/T021/T021_BP_R/initial_fields.npz",
+      "sha256": "e7c0e65188e4aeda069a0608586667afa974d0462da556d6c5f1af9ee7ee7b76"
+    },
+    "solver_sources": {
+      "core/solver.c": "023243296c9d08c62f2aaa7b6f3054a4d229f076bc0e54f3dbf2189745cabaa2",
+      "core/solver.py": "744094d21e3347ad51a3bc1f2f4dd9a135efd41d2643dc7eca5d999982c59238",
+      "core/gs.py": "a619f1fd599f20ff4c42dd7f454a3304d6c0a5c3cd8f5a0a1679a5f2b7c2e99c"
+    },
+    "note": "the archived launch used the pre-track_id measurement module; the live patched module (36f381fc...) is the documented Agent 1 fix and is intentionally different — only the SOLVER update must be identical except dt"
+  },
+  "measurement_patch": {
+    "path": "experiment/t021_science.py",
+    "sha256": "36f381fc19145caf706897e4f3edff0904e36e4fab47b57596c2bbf3bb001013"
+  },
+  "parent_config": {
+    "path": "configs/T021.json",
+    "sha256": "e7cd45d2b7634f336633a983a32e8e296009c06c1d3c2011af176677716789e0"
+  },
+  "resource_reference": {
+    "nominal_wall_minutes": 22,
+    "engineering_probe_steps_max_total": 0,
+    "note": "about twice the original BP main steps; estimate only"
+  },
+  "report": "coordination/reports/T022_AGENT2.md"
+}

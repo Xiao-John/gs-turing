@@ -1,0 +1,63 @@
+{
+  "_comment": [
+    "Example: how a structured supply landscape is declared.",
+    "The resource field u_res is the ONLY driver this solver accepts. Gradients go",
+    "on u_res, never on f: changing f changes both the supply rate and the v",
+    "wash-out, so it is not a supply field.",
+    "This file is a template, not a result. Replace the case ids and parameters."
+  ],
+  "cases": [
+    {
+      "case_id": "example_uniform_supply",
+      "worker": "example",
+      "init": "blobs",
+      "blobs": [{"cy": 96, "cx": 96, "radius": 6, "u": 0.5, "v": 0.25}],
+      "n": 192,
+      "h": 1.0,
+      "dt": 1.0,
+      "f": 0.055,
+      "k": 0.066,
+      "method": "euler",
+      "resource": {"kind": "uniform", "value": 1.0},
+      "every": 500,
+      "T": 5000,
+      "keep_frames": false,
+      "note": "baseline: plain Gray-Scott, u_res = 1"
+    },
+    {
+      "case_id": "example_sine_supply",
+      "worker": "example",
+      "init": "blobs",
+      "blobs": [{"cy": 96, "cx": 96, "radius": 6, "u": 0.5, "v": 0.25}],
+      "n": 192,
+      "h": 1.0,
+      "dt": 1.0,
+      "f": 0.055,
+      "k": 0.066,
+      "method": "euler",
+      "resource": {"kind": "sine_gradient", "A": 0.05, "wavelength": 192, "base": 1.0},
+      "every": 500,
+      "T": 5000,
+      "keep_frames": false,
+      "note": "the same seed under a periodic supply modulation"
+    },
+    {
+      "case_id": "example_moving_band",
+      "worker": "example",
+      "init": "blobs",
+      "blobs": [{"cy": 96, "cx": 96, "radius": 6, "u": 0.5, "v": 0.25}],
+      "n": 192,
+      "h": 1.0,
+      "dt": 0.5,
+      "f": 0.055,
+      "k": 0.066,
+      "method": "imex",
+      "resource": {"kind": "periodic_moving_band", "xs0": 0, "vband": 0.02,
+                   "w": 12, "A": 0.3, "base": 1.0},
+      "every": 500,
+      "T": 5000,
+      "keep_frames": true,
+      "note": "a supply band travelling at constant speed; the field is sampled at the time each step uses"
+    }
+  ]
+}

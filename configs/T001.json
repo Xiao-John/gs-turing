@@ -1,0 +1,397 @@
+{
+  "experiment_protocol": "T001_v1",
+  "request": "R001",
+  "task": "coordination/tasks/T001.md",
+  "task_sha256": "050d307eb713c3ed0bdde1001ee41e2df647d4d161c209454c00b1af77a3923e",
+  "implementation_required": true,
+  "status": "READY_ENGINEERING_FIRST",
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "xmax": 2.6853146853146854,
+    "ymax": 0.8951048951048951,
+    "boundary": "periodic"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "sources": {
+    "residue": {
+      "path": "Researched/02/runs/H1_A1B1P0_coarse/snapshots/fields_00080000.npz",
+      "sha256": "501c3a3a3d2651ebc4894af5ac51db84c111a1f9313a19a7f61390be4361a000",
+      "source_t": 80000
+    },
+    "signal": {
+      "path": "Researched/01/GS_Standard_Signal_v01.npz",
+      "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+    }
+  },
+  "budget": {
+    "max_trajectories": 10,
+    "wall_seconds": 3600,
+    "extra_cell_steps": 2000000000,
+    "max_new_bytes": 5368709120,
+    "min_free_bytes": 8589934592,
+    "parallelism": 1,
+    "automatic_retry": false,
+    "external_compute": false,
+    "main_cell_steps": 657899520000
+  },
+  "cases": [
+    {
+      "case_id": "T001_E_c",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/E_c.npz",
+      "initial_recipe": "E",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 70000,
+      "steps": 140000,
+      "every": 200,
+      "snapshot_every": 2000,
+      "keep_frames": false,
+      "requires": [],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    },
+    {
+      "case_id": "T001_R_c",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/R_c.npz",
+      "initial_recipe": "R",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 70000,
+      "steps": 140000,
+      "every": 200,
+      "snapshot_every": 2000,
+      "keep_frames": false,
+      "requires": [],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    },
+    {
+      "case_id": "T001_Rpert_c",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/Rpert_c.npz",
+      "initial_recipe": "Rpert",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 70000,
+      "steps": 140000,
+      "every": 200,
+      "snapshot_every": 2000,
+      "keep_frames": false,
+      "requires": [],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    },
+    {
+      "case_id": "T001_Rpert_r",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/Rpert_r.npz",
+      "initial_recipe": "Rpert",
+      "nx": 1152,
+      "ny": 384,
+      "h": 0.004662004662004662,
+      "dt": 0.2222222222222222,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 70000,
+      "steps": 315000,
+      "every": 450,
+      "snapshot_every": 4500,
+      "keep_frames": false,
+      "requires": [],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    },
+    {
+      "case_id": "T001_EP_c",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/EP_c.npz",
+      "initial_recipe": "EP",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 70000,
+      "steps": 140000,
+      "every": 200,
+      "snapshot_every": 2000,
+      "keep_frames": false,
+      "requires": [
+        "hold"
+      ],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    },
+    {
+      "case_id": "T001_RP_c",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/RP_c.npz",
+      "initial_recipe": "RP",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 70000,
+      "steps": 140000,
+      "every": 200,
+      "snapshot_every": 2000,
+      "keep_frames": false,
+      "requires": [
+        "hold"
+      ],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    },
+    {
+      "case_id": "T001_EP_r",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/EP_r.npz",
+      "initial_recipe": "EP",
+      "nx": 1152,
+      "ny": 384,
+      "h": 0.004662004662004662,
+      "dt": 0.2222222222222222,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 70000,
+      "steps": 315000,
+      "every": 450,
+      "snapshot_every": 4500,
+      "keep_frames": false,
+      "requires": [
+        "hold",
+        "probe_coarse_complete"
+      ],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    },
+    {
+      "case_id": "T001_RP_r",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/RP_r.npz",
+      "initial_recipe": "RP",
+      "nx": 1152,
+      "ny": 384,
+      "h": 0.004662004662004662,
+      "dt": 0.2222222222222222,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 70000,
+      "steps": 315000,
+      "every": 450,
+      "snapshot_every": 4500,
+      "keep_frames": false,
+      "requires": [
+        "hold",
+        "probe_coarse_complete"
+      ],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    },
+    {
+      "case_id": "T001_chain_EP_c",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/chain_EP_c.npz",
+      "initial_recipe": "chain_EP",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 130000,
+      "steps": 260000,
+      "every": 200,
+      "snapshot_every": 2000,
+      "keep_frames": false,
+      "requires": [
+        "conditional_output"
+      ],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    },
+    {
+      "case_id": "T001_chain_ABP_c",
+      "worker": "T001",
+      "init": "npz",
+      "parent_npz": "results/T001/inputs/chain_ABP_c.npz",
+      "initial_recipe": "chain_ABP",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "method": "euler",
+      "spectral_lap": false,
+      "dealias": false,
+      "resource": {
+        "kind": "uniform",
+        "value": 1.0
+      },
+      "T": 130000,
+      "steps": 260000,
+      "every": 200,
+      "snapshot_every": 2000,
+      "keep_frames": false,
+      "requires": [
+        "conditional_output"
+      ],
+      "tags": [
+        "R001",
+        "T001",
+        "autonomous"
+      ],
+      "note": "Frozen task coordination/tasks/T001.md; requires rectangular protocol support, no silent fallback"
+    }
+  ]
+}

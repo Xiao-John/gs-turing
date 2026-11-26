@@ -1,0 +1,267 @@
+{
+  "experiment_protocol": "R026_RCV_SCREEN_v1",
+  "task_id": "T027",
+  "request": "R026",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T027.md",
+  "task_sha256": "9091c435b8341058f1a81a8bebb09593b9293201baf0866c497b9d8034c62669",
+  "authorization": {
+    "path": "coordination/tasks/T027.md",
+    "sha256": "9091c435b8341058f1a81a8bebb09593b9293201baf0866c497b9d8034c62669",
+    "scope": "exactly four fixed T026 composed initials (BG/S6W controls first, then FREE/S6); no new geometry, no window extension, no extra trajectories"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "grid": {
+    "nx": 768,
+    "ny": 256,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "ymax": 0.8951048951048951,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "ideas": ["I001", "I011", "I012", "I014"],
+  "parent_evidence": {
+    "T026_static": {
+      "path": "results/T026/static_T026.json",
+      "sha256": "dbac9d0e1a2f9031669bde5aa20bd3943bafb9b694ecf2533d99487d2c9e8883"
+    },
+    "T026_task": {
+      "path": "coordination/tasks/T026.md",
+      "sha256": "77044fa2d526cd479a9fd2924da8a7e07e6ebf543ae8c3dc31f809269ab8b8c0"
+    },
+    "T017_config": {
+      "path": "configs/T017.json",
+      "sha256": "f56cd72cc0d5692598a79ead9f943146ef2accd544b3438548f19ab47879b303"
+    },
+    "T010_config": {
+      "path": "configs/T010.json",
+      "sha256": "c6208239ed2ce3a17b69e21a188e1d34ad34680556730ea13110ea4f753472b1"
+    },
+    "T010_AB_npz": {
+      "path": "results/T009/inputs/R007B_B0_AB_c.npz",
+      "sha256": "e9dbf63b059c9210e1af6690945b2e4adee66cbee09d0bfbebfef2028811dbbb"
+    }
+  },
+  "composition": {
+    "translation_px": [80, -79],
+    "translation_phys": [0.5594405594405595, -0.5524475524475524],
+    "rule": "T010 A/B deviation via integer np.roll onto T017 branch; no crop/replace",
+    "frozen_line_y": -0.55
+  },
+  "geometry": {
+    "C_new": [0.30944055944055915, 0.8094405594405591, -0.8024475524475525, -0.3024475524475525],
+    "W_new": [0.15944055944055913, 0.9594405594405592, -0.8024475524475525, -0.3024475524475525],
+    "four_core_zone_abs": [0.38461538461538447, 0.734265734265734, -0.6713286713286712, -0.43356643356643354],
+    "exit_section_y": -0.8024475524475525,
+    "AB_t0_centroid": {
+      "A": [0.15797535797535778, -0.5524475524475525],
+      "B": [0.9609057609057605, -0.5524475524475525]
+    },
+    "AB_t0_bbox": {
+      "A": [0.06993006993007, 0.24475524475524457, -0.6573426573426573, -0.44755244755244755],
+      "B": [0.8741258741258742, 1.0489510489510487, -0.6573426573426573, -0.44755244755244755]
+    }
+  },
+  "query": {
+    "anchor": [0.5244755244755245, 0.3986013986013986],
+    "direction": [0, -1],
+    "note": "T017 frozen query anchor; composed fields leave the T017 base untranslated"
+  },
+  "source_age_tu": 50000,
+  "new_experiment_time_zero": true,
+  "dt": 0.25,
+  "T": 130000,
+  "steps": 520000,
+  "diagnostic_every_tu": 100,
+  "snapshot_every_tu": 5000,
+  "measurement": {
+    "core_offsets": [0.1, 0.095, 0.105],
+    "primary_centroid_offset": 0.1,
+    "minimum_core_pixels": 5,
+    "connectivity": 4,
+    "identity_distance_max": 0.05,
+    "diagnostic_cadence_tu": 100,
+    "direction_history_tu": 5000,
+    "direction_history_points": 51,
+    "event_bracket_width_max_tu": 0.25,
+    "final_window": [120000, 130000],
+    "final_window_samples": 101,
+    "shape_e1_max": 0.25,
+    "shape_patch_half": 65,
+    "pollution_norm_max_over_NS": 0.25,
+    "exit_section_y": -0.8024475524475525,
+    "region_W": [0.15944055944055913, 0.9594405594405592, -0.8024475524475525, -0.3024475524475525],
+    "region_C": [0.30944055944055915, 0.8094405594405591, -0.8024475524475525, -0.3024475524475525],
+    "output_port": {
+      "axis": "y",
+      "coordinate": -0.8024475524475525,
+      "direction": -1,
+      "name": "exit_bottom",
+      "aperture_axis": "x",
+      "aperture": [0.15944055944055913, 0.9594405594405592],
+      "window": [0, 130000]
+    },
+    "monitor_ports": [
+      {"axis": "y", "coordinate": -0.8024475524475525},
+      {"axis": "y", "coordinate": -0.3024475524475525},
+      {"axis": "x", "coordinate": 0.15944055944055913},
+      {"axis": "x", "coordinate": 0.9594405594405592},
+      {"axis": "y", "coordinate": -0.43356643356643354},
+      {"axis": "y", "coordinate": -0.6713286713286712}
+    ],
+    "control_formation": {
+      "window_tu": [40000, 50000],
+      "expected_cores_in_C": 4,
+      "note": "T010 expectation; formation time need not equal [18000,18100]"
+    },
+    "classification_vocabulary": [
+      "Q_passthrough",
+      "Q_steering",
+      "Q_converted_in_zone",
+      "newborn_mobile",
+      "blocked",
+      "unobserved_or_identity_unclear",
+      "mixed_indeterminate"
+    ],
+    "candidate_requires": "both Q branches distinguishable mobile post-states under the same fixed spatial contract AND actual Q effect vs corresponding no-Q control; not a timing-gate claim"
+  },
+  "save": {
+    "actual_initial_full_field": true,
+    "diagnostic_every_tu": 100,
+    "all_threshold_core_geometry": true,
+    "all_association_candidate_edges": true,
+    "full_field_every_tu": 5000,
+    "full_zero_and_terminal_fields": true,
+    "final_full_field_every_tu": 100,
+    "final_full_fields": 101,
+    "event_actual_prestate_and_direction_history": true,
+    "event_actual_bracket_before_after_fields": true,
+    "Q_termination_complex_diagnostic_before_after_fields": true,
+    "source_archive_per_actual_case_launch": true,
+    "periodic_tail_record_not_crop": true
+  },
+  "execution_policy": {
+    "order": ["T026_BG_RCV", "T026_S6W_RCV", "T026_FREE_RCV", "T026_S6_RCV"],
+    "controls_first": true,
+    "stop_loss_if_controls_fail_formation": true,
+    "with_Q_may_run_if_it_explains_control_failure": true,
+    "max_invocation_wall_seconds": 3600,
+    "stage_end_requires_report_to_Agent1": true,
+    "automatic_next_stage": false,
+    "automatic_full_case_retry": false,
+    "approximate_resources_only": true,
+    "no_additional_research_cases": true,
+    "no_geometry_scan": true,
+    "no_window_extension": true,
+    "unstarted_case_status": "NOT_RUN_STAGE_GATE",
+    "scientific_stop_unstarted_status": "NOT_RUN_SCIENTIFIC_STOP",
+    "checkpoint_resumable": "only after actual-path verification; ordinary snapshots are not claimed resumable"
+  },
+  "cases": [
+    {
+      "case_id": "T026_BG_RCV",
+      "role_branch": "control_noQ_background_receiver",
+      "has_query": false,
+      "initial_fields": "results/T026/inputs/T026_BG_RCV.npz",
+      "initial_file_sha256": "5cb054f8633a4ef1f7123c8b904a10e8bbd0c2ce446cf6fa97bc9c24b52c8531",
+      "initial_array_sha256": [
+        "a22467e59d0d034cd44c94895b46c69f3f9d1585c9921d922c592724cf0c536d",
+        "a7e827ebee46262fc29a9d36937fe5ca3b600b781c0254b0c9aa496b505f3899"
+      ],
+      "recipe": "background + rolled T010 A/B deviation",
+      "dt": 0.25,
+      "T": 130000,
+      "steps": 520000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "control"
+    },
+    {
+      "case_id": "T026_S6W_RCV",
+      "role_branch": "control_noQ_S6_wait_receiver",
+      "has_query": false,
+      "initial_fields": "results/T026/inputs/T026_S6W_RCV.npz",
+      "initial_file_sha256": "af4cc0d462e9f2286135779ba6020a477ead61f2525953463ce4166d5f0da8a6",
+      "initial_array_sha256": [
+        "183cc4476cebf4a951adb9da6f31426fa67e31701c26b434ef849ccaf39e8a90",
+        "0aa8dbc563bc011d5f4f2cb56323ac7666ce35f6211411857003131cc973b892"
+      ],
+      "recipe": "T017 S6_WAIT + rolled T010 A/B deviation",
+      "dt": 0.25,
+      "T": 130000,
+      "steps": 520000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "control"
+    },
+    {
+      "case_id": "T026_FREE_RCV",
+      "role_branch": "query_FREE_receiver",
+      "has_query": true,
+      "initial_fields": "results/T026/inputs/T026_FREE_RCV.npz",
+      "initial_file_sha256": "d311a61b8bbcbba5ce7257750ab9937deca8d8e82bc75c26bfddf35b7b74c1be",
+      "initial_array_sha256": [
+        "0837532eac5c324f8c8a10f1d678c469c47064976c415169a0a7917e155fcffd",
+        "3c4c4ba5ef381e6064a5d7a952fed5fbc04cad7c990f8d6ab5dd0935ada0c3cf"
+      ],
+      "recipe": "T017 FREE_Q + rolled T010 A/B deviation",
+      "dt": 0.25,
+      "T": 130000,
+      "steps": 520000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "with_Q"
+    },
+    {
+      "case_id": "T026_S6_RCV",
+      "role_branch": "query_S6_receiver",
+      "has_query": true,
+      "initial_fields": "results/T026/inputs/T026_S6_RCV.npz",
+      "initial_file_sha256": "d331cc22efd66cf6c27edca8bb9b55f084ff704537201f1cf56228a6da7238b8",
+      "initial_array_sha256": [
+        "9072c74a86c94b06e5b93754ca7ae9484e217a76e2e7bd31c0ac49c2eac4db4c",
+        "72c37a4d16c8a91e64a2855e060db621e607735af95d19be406f382787d241cc"
+      ],
+      "recipe": "T017 S6_Q + rolled T010 A/B deviation",
+      "dt": 0.25,
+      "T": 130000,
+      "steps": 520000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "with_Q"
+    }
+  ],
+  "intake_record": "results/T027/intake.json"
+}

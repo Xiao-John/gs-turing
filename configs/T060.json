@@ -1,0 +1,421 @@
+{
+  "experiment_protocol": "R028_AFTERSTATE_CONTINUATION_v1",
+  "task_id": "T060",
+  "request": "R028",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T060.md",
+  "task_sha256": "14800d8a9a0a7c3ee9c008060b5a5f75c63f382d583fbfa0ce4c23b17ee86064",
+  "authorization": {
+    "path": "coordination/tasks/T060.md",
+    "sha256": "14800d8a9a0a7c3ee9c008060b5a5f75c63f382d583fbfa0ce4c23b17ee86064",
+    "scope": "finite continuation of BOTH T058 A after-states, local t=0..20000, WAIT first, NO new injection, no window/layout change, no cascade/recursive claim; branches skipped on identity failure; completion -> report to Agent 1"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "grid": {
+    "nx": 768,
+    "ny": 512,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -1.7902097902097902,
+    "ymax": 1.7902097902097902,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded",
+    "extension": "ymin_new = ymin_old - 128h; original rows embedded at [128:384]; filler rows = background"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "ideas": [
+    "I017",
+    "I012",
+    "I014"
+  ],
+  "parent_evidence": {
+    "T042_config": {
+      "path": "configs/T042.json",
+      "sha256": "c5009527e41a4654223ba464e4f3b669f3faf4d6cd0031c9c4ee412b982b6be0"
+    },
+    "T047_D_diff": {
+      "path": "results/T047/inputs/D_diff.npz",
+      "sha256": "78c3dc98d9d848f7ace4335c87b0933804f67fffc0203d4a3a2549b4cfad5331"
+    },
+    "T051_analysis": {
+      "path": "results/T050/analysis_T051.json",
+      "sha256": "06375cabc38b8b22647a9a3195716a6b78698e95bd69a59830c27b2c922ca870"
+    },
+    "T052_analysis": {
+      "path": "results/T052/analysis_T052.json",
+      "sha256": "36446826e55cf5fba020a436275d3848c1ece324906774796b3889af347ab9c4"
+    },
+    "R028_initial_spectrum": {
+      "path": "coordination/spectra/R028_INITIAL_SPECTRUM.md",
+      "sha256": "0dc08140d22df7ebb38d8236f955d2d9f6fd2657659b18b3f5297166521a1bf3"
+    },
+    "T053_config": {
+      "path": "configs/T053.json",
+      "sha256": "372a03114d261b6dd6a44563fcea98393b19141673f1ea5a98abf8b1e2332725"
+    },
+    "T058_analysis": {
+      "path": "results/T058/analysis_T058.json",
+      "sha256": "500bce8a0896ac87ddd6ddf2ae1df3d75d001305ab219b4f9e4f3845a9485c60"
+    }
+  },
+  "query": {
+    "anchor": [
+      0.5734265734265734,
+      0.3986013986013986
+    ],
+    "direction": "down",
+    "anchor_note": "Q_NEW identity binding only: the original Q anchor shifted +7 columns in x (y unchanged), the unified successor query's new root; distinct from the OLD C (T051 ['Q']) and the OLD Q_IN (T052) -- all restart mappings are recorded, never conflated"
+  },
+  "original_source_t": 0,
+  "new_experiment_time_zero": true,
+  "original_source_note": "phase-1 states restart from archived t=155000 snapshots (external restart); new local clock starts at0 -- record key kept for the frozen launch-source record",
+  "measurement": {
+    "core_offsets": [
+      0.1,
+      0.095,
+      0.105
+    ],
+    "connectivity": 4,
+    "minimum_core_pixels": 5,
+    "identity_distance_max": 0.05,
+    "primary_centroid_offset": 0.1,
+    "containment": "all core pixels",
+    "norm": "h*sqrt(sum(du^2+dv^2)); preserve raw and /NS",
+    "diagnostic_cadence_tu": 100,
+    "output_port": {
+      "axis": "y",
+      "coordinate": -0.55,
+      "direction": -1,
+      "aperture_axis": "x",
+      "aperture": [
+        -2.6853146853146854,
+        2.6853146853146854
+      ],
+      "window": [
+        0.0,
+        72000.0
+      ],
+      "note": "DESCRIPTIVE section port only: y=-0.55 crossings record adjacent raw fields and directions; T053 does NOT judge pass/fail on crossing, template pass is not required, and non-crossing is never called 'no output' (the registered gate rows are kept as facts)"
+    },
+    "monitor_ports": [],
+    "shape_e1_max": 0.25,
+    "shape_patch_half": 65,
+    "shape_reference": "fixed downward periodic full template at actual centroid; no fit or source subtraction",
+    "clean_output": "no non-target core intersects periodic 131-square window; record mixed residual otherwise",
+    "direction_history_tu": 5000,
+    "direction_history_points": 51,
+    "direction_components": [
+      "vx",
+      "vy"
+    ],
+    "downward_direction_component": "vy",
+    "event_bracket_width_max_tu": 0.25,
+    "replay_max_steps": 400,
+    "final_window": [
+      71000.0,
+      72000.0
+    ],
+    "final_window_samples": 11,
+    "core_displacement_from_first_final_max": 0.02,
+    "all_newborn_and_source_events_preserved": true,
+    "capture": {
+      "conversion_box": {
+        "xmin": 0.2,
+        "xmax": 0.75,
+        "ymin": -0.3,
+        "ymax": 0.3
+      },
+      "holding_box": {
+        "xmin": -0.6,
+        "xmax": 0.8,
+        "ymin": -0.4,
+        "ymax": 0.4
+      },
+      "identity_end_alone_sufficient": false,
+      "root_tags": "initial source roots and Q; union over all candidate edges; rootless newborn UNKNOWN; every birth/complex core possible-related",
+      "holding_population": "ALL surviving full-field cores, not a chosen related subset",
+      "holding_all_thresholds_A_containment": true,
+      "holding_primary_unique_chain_and_no_count_changes": true,
+      "holding_primary_max_displacement": 0.02,
+      "absence_of_output_alone_sufficient": false,
+      "newborn_output_ignored": false,
+      "uncertain_attribution": "INDETERMINATE; preserve known violations",
+      "conversion_requires_saved_raw_before_after_and_candidate_relations": true
+    },
+    "free_pass": "exactly one unique clean standard downward Q output in fixed aperture/window, no extra propagation or pre-output periodic return",
+    "readout_targets": {
+      "S6": 0,
+      "S8": 1,
+      "S8plus": 1
+    }
+  },
+  "identity_anchors": [
+    {
+      "label": "Q_NEW",
+      "anchor": [
+        0.5734265734265734,
+        0.3986013986013986
+      ],
+      "required": true,
+      "note": "the only bound role in phase 1 (S0 branches); phase-2 S1 may add the old Q_IN anchor -- multi-anchor machinery is already covered by the real-path validations"
+    }
+  ],
+  "successor_query": {
+    "states": {
+      "S0": {
+        "path": "results/T050/T050_WAIT_C/snapshots/fields_00620000.npz",
+        "sha256": "911183cf563aab4f0dc078a85aa0dca6162f503732215394572439e13c0b9785",
+        "t": 155000.0,
+        "provenance": "S06 (T051 after-state; ['Q'] is the OLD C)"
+      },
+      "S1": {
+        "path": "results/T052/T052_QC/snapshots/fields_00620000.npz",
+        "sha256": "36839a09aa844de281da5de834a79ea4c5081a72697dcdb467c957f571bf754c",
+        "t": 155000.0,
+        "provenance": "S07 (T052 after-state; old Q_IN + old C)"
+      }
+    },
+    "D": "roll_x(U - W, +7) added once to each full field; no crop/register/normalize/injection/reset; external restart/query injection at original t=155000 -- never posed as the natural continuous history",
+    "identities": "new root Q_NEW (anchor +7h) tracked with all candidate parents and ancestor unions; OLD identities get recorded restart mappings from the native t=155000 diagnostics (label+centroid); restart renumbering is NOT uninterrupted ancestry; T051 ['Q']=old C never conflated with Q_IN or Q_NEW",
+    "phase1_release": [
+      "T053_S0_WAIT",
+      "T053_S0_QUERY"
+    ],
+    "phase1_order": "idle first, then query; stage ends -> report to Agent 1; S1 NOT auto-run",
+    "section": "fixed y=-0.55 DESCRIPTIVE: new-Q centroid/whole-core crossings and directions recorded; non-crossing is never 'no output'; template pass not required",
+    "comparison_rule": "S0 vs S1 only after BOTH queries and BOTH idles actually complete; never inferred from S0 alone",
+    "transition_entry_rule": "per completed branch: initial/orig-time + new-input/new-time + observed-events-or-not + successor-full-field-path/time + provenance-and-untested; movement does not decide success",
+    "no_rescue": true,
+    "no_s1_pde_this_phase": true,
+    "old_conclusions_unchanged": true
+  },
+  "comparison_read_only": {
+    "T051_wait_c": "results/T050/T050_WAIT_C/diagnostics.jsonl",
+    "T052_qc": "results/T052/T052_QC/diagnostics.jsonl",
+    "T042_S6_Q": "results/T042/T042_S6_Q/initial_fields.npz",
+    "T042_S6_WAIT": "results/T042/T042_S6_WAIT/initial_fields.npz",
+    "T047_D_diff": "results/T047/inputs/D_diff.npz",
+    "note": "read-only; old failures/verdicts unchanged; later queries and recursive compatibility remain unmeasured"
+  },
+  "save": {
+    "actual_initial_full_field": true,
+    "diagnostic_every_tu": 100,
+    "all_threshold_core_geometry": true,
+    "all_association_candidate_edges": true,
+    "full_field_every_tu": 5000,
+    "full_zero_and_terminal_fields": true,
+    "periodic_and_terminal_expected_count": 16,
+    "final_full_field_every_tu": 100,
+    "final_full_fields": 101,
+    "event_actual_prestate_and_direction_history": true,
+    "event_actual_bracket_before_after_fields": true,
+    "Q_termination_complex_diagnostic_before_after_fields": true,
+    "source_archive_per_actual_case_launch": true
+  },
+  "output_root": "results/T060",
+  "dt": 0.25,
+  "diagnostic_every_tu": 100,
+  "snapshot_every_tu": 5000,
+  "execution_policy": {
+    "order": [
+      "T060_A_WAIT_CONT",
+      "T060_A_QUERY_CONT"
+    ],
+    "skip_completed_for_ordered_resume": true,
+    "max_invocation_wall_seconds": 3600,
+    "engineering_probe_steps_max_total": 400,
+    "identity_synthetic_required_before_probe": true,
+    "s1_static_only_no_pde": true,
+    "no_line_change": true,
+    "no_initial_change": true,
+    "no_threshold_change": true,
+    "no_time_extension": true,
+    "no_extra_cases": true,
+    "no_injection_or_reset_after_t0": true,
+    "no_position_or_threshold_rescue": true,
+    "stage_end_requires_report_to_Agent1": true,
+    "automatic_full_case_retry": false,
+    "unstarted_case_status": "NOT_RUN_STAGE_GATE",
+    "scientific_stop_unstarted_status": "NOT_RUN_SCIENTIFIC_STOP",
+    "undecidable_case_status": "NOT_RUN_UNDECIDABLE_CONSTRUCTION",
+    "no_new_injection": true,
+    "no_window_or_layout_change": true,
+    "no_cascade_or_recursive_claim": true,
+    "branch_skip_on_identity_failure": true
+  },
+  "cases": [
+    {
+      "case_id": "T060_A_WAIT_CONT",
+      "source": "R028_AfterSTATE_CONTINUATION",
+      "add_query": false,
+      "partition": "WAIT_CONT",
+      "initial_recipe": "T058 terminal snapshot referenced in place (external restart, NO injection)",
+      "initial_fields": "results/T058/T058_A_WAIT/snapshots/fields_00288000.npz",
+      "initial_file_sha256": "cc0918ac6128cbd49bc778b1f1de572ec3228898890c3a988f07092ab10eb1d1",
+      "initial_array_sha256": [
+        "b1daab49a4c7bfea6714b021e7410c52b6d5e90a631bd5fe8a21982cfb0f95e3",
+        "4f5329450d5d7daba88b0b24a90ad0ce4973cc976b0a4dcf9a86989e853bd369"
+      ],
+      "expected_cores_t0": 16,
+      "identity_anchors": [
+        {
+          "label": "Q_OLD",
+          "anchor": [
+            0.4823890479907231,
+            -1.0114981337085158
+          ],
+          "required": true,
+          "query_only": false,
+          "note": "Q_OLD child (source label 6); dual same-label anchors bind one child each (separation 0.1551)"
+        },
+        {
+          "label": "Q_OLD",
+          "anchor": [
+            0.5006039500865697,
+            -1.1654897833742275
+          ],
+          "required": true,
+          "query_only": false,
+          "note": "Q_OLD child (source label 2)"
+        }
+      ],
+      "sources": {
+        "state": {
+          "path": "results/T058/T058_A_WAIT/snapshots/fields_00288000.npz",
+          "sha256": "cc0918ac6128cbd49bc778b1f1de572ec3228898890c3a988f07092ab10eb1d1"
+        }
+      },
+      "dt": 0.25,
+      "T": 20000.0,
+      "steps": 80000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P",
+      "time_labels": {
+        "t058_splice_absolute_t": 299000.0,
+        "formula": "155000 + T053 local72000 + T058 local72000 =299000",
+        "this_task_local_t": 0.0,
+        "endpoint_absolute_t": 319000.0,
+        "note": "T060 local0..20000 -> absolute299000..319000; TWO historical external injections/restarts (S06 first D, T058 second D on A) are preserved; this round is external restart with NO new injection -- never an uninterrupted autonomous chain"
+      }
+    },
+    {
+      "case_id": "T060_A_QUERY_CONT",
+      "source": "R028_AfterSTATE_CONTINUATION",
+      "add_query": false,
+      "partition": "QUERY_CONT",
+      "initial_recipe": "T058 terminal snapshot referenced in place (external restart, NO injection)",
+      "initial_fields": "results/T058/T058_A_QUERY/snapshots/fields_00288000.npz",
+      "initial_file_sha256": "52e2057381b577e652497dbde624b11b25102a47c36a9a060635be017a04d64e",
+      "initial_array_sha256": [
+        "52cde98749a9a399b12e567f7c94754da6cb73faae3c84f910555fd45df286e3",
+        "bb6bd16f13444e03caea15a5ca09a5ac9b52cd70b1adf8f38d689588e738d3c4"
+      ],
+      "expected_cores_t0": 17,
+      "identity_anchors": [
+        {
+          "label": "Q_OLD",
+          "anchor": [
+            0.4814700461081334,
+            -1.0147816077215936
+          ],
+          "required": true,
+          "query_only": false,
+          "note": "Q_OLD child (source label 6); dual same-label anchors bind one child each (separation 0.1530)"
+        },
+        {
+          "label": "Q_OLD",
+          "anchor": [
+            0.5006035835874455,
+            -1.1665379381688803
+          ],
+          "required": true,
+          "query_only": false,
+          "note": "Q_OLD child (source label 2)"
+        },
+        {
+          "label": "Q_NEW2",
+          "anchor": [
+            0.5314545781614711,
+            -0.7555133662735818
+          ],
+          "required": true,
+          "query_only": false,
+          "note": "existing Q_NEW2 (source label 11); present only in the QUERY terminal"
+        }
+      ],
+      "sources": {
+        "state": {
+          "path": "results/T058/T058_A_QUERY/snapshots/fields_00288000.npz",
+          "sha256": "52e2057381b577e652497dbde624b11b25102a47c36a9a060635be017a04d64e"
+        }
+      },
+      "dt": 0.25,
+      "T": 20000.0,
+      "steps": 80000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P",
+      "time_labels": {
+        "t058_splice_absolute_t": 299000.0,
+        "formula": "155000 + T053 local72000 + T058 local72000 =299000",
+        "this_task_local_t": 0.0,
+        "endpoint_absolute_t": 319000.0,
+        "note": "T060 local0..20000 -> absolute299000..319000; TWO historical external injections/restarts (S06 first D, T058 second D on A) are preserved; this round is external restart with NO new injection -- never an uninterrupted autonomous chain"
+      }
+    }
+  ],
+  "intake_record": "results/T060/intake_verification.json",
+  "continuation": {
+    "state_wait": {
+      "path": "results/T058/T058_A_WAIT/snapshots/fields_00288000.npz",
+      "sha256": "cc0918ac6128cbd49bc778b1f1de572ec3228898890c3a988f07092ab10eb1d1",
+      "provenance": "T058 A_WAIT terminal (S06 + idle 72000 + T058 idle72000, NO query root; Q_OLD split in-window)"
+    },
+    "state_query": {
+      "path": "results/T058/T058_A_QUERY/snapshots/fields_00288000.npz",
+      "sha256": "52e2057381b577e652497dbde624b11b25102a47c36a9a060635be017a04d64e",
+      "provenance": "T058 A_QUERY terminal (S06 + first D + T058 second D; Q_OLD x2 + Q_NEW2)"
+    },
+    "no_injection": true,
+    "T_local": 20000.0,
+    "time_labels": {
+      "t058_splice_absolute_t": 299000.0,
+      "formula": "155000 + T053 local72000 + T058 local72000 =299000",
+      "this_task_local_t": 0.0,
+      "endpoint_absolute_t": 319000.0,
+      "note": "T060 local0..20000 -> absolute299000..319000; TWO historical external injections/restarts (S06 first D, T058 second D on A) are preserved; this round is external restart with NO new injection -- never an uninterrupted autonomous chain"
+    },
+    "identity_rule": "per-branch identity_anchors (Q_OLD dual same-label children on BOTH branches; Q_NEW2 additionally on QUERY) bound uniquely at the source centroids; old C/background roots matched from each branch's own last diagnostic; all candidate parents + ancestor unions; no label-order guessing; non-unique -> undecidable, branch not run; mixing -> record onset and descendants and stop unique attribution for that event",
+    "observation_rule": "per branch: old/new root counts and lineage, trajectories, split/merge/vanish/boundary-or-wrap, source-state changes, fixed original-section events; initially on one side of y=-0.55 is NOT a crossing; non-crossing is NOT 'no output'; per-interval distances between relevant roots recorded; threshold-core non-contact does NOT exclude continuous-field interaction",
+    "comparison_rule": "WAIT-continuation vs QUERY-continuation same-age field difference is MIXED-EFFECT description only; no old-verdict changes, no layout/window adjustments, no cascade or recursive-compatibility claims",
+    "old_conclusions_unchanged": true
+  }
+}

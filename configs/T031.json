@@ -1,0 +1,310 @@
+{
+  "experiment_protocol": "R027_Q_XP7_v1",
+  "task_id": "T031",
+  "request": "R027",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T031.md",
+  "task_sha256": "7ca05c5648b5c4445f3201a9ac61c67c50dc1ca0d2ea6e864f3ae948393f5742",
+  "authorization": {
+    "path": "coordination/tasks/T031.md",
+    "sha256": "7ca05c5648b5c4445f3201a9ac61c67c50dc1ca0d2ea6e864f3ae948393f5742",
+    "scope": "exactly two fixed trajectories (FREE_Q_XP7, S8_Q_XP7); single shift +7 columns; no scan, no window extension"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "grid": {
+    "nx": 768,
+    "ny": 256,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "ymax": 0.8951048951048951,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "ideas": [
+    "I001",
+    "I011",
+    "I012",
+    "I014"
+  ],
+  "parent_evidence": {
+    "T017_config": {
+      "path": "configs/T017.json",
+      "sha256": "f56cd72cc0d5692598a79ead9f943146ef2accd544b3438548f19ab47879b303"
+    },
+    "T029_config": {
+      "path": "configs/T029.json",
+      "sha256": "e157a66785afa0411498362dc64971b7e3d199533b33fb18e835da67a5d6feea"
+    },
+    "T031_static": {
+      "path": "results/T031/static_T031.json",
+      "sha256": "6d1373bf624e7d8803e1aa210d0689a501c0952cb32bba8ecf9926892537b854"
+    },
+    "S8_source": {
+      "path": "results/T014/T014_MBP_Q4_BP/final_fields/fields_final_00320000.npz",
+      "sha256": "aa1387081a4981abbb08207e670c82dad186d1d7bbae21242363377439dcd3bd"
+    },
+    "query": {
+      "path": "results/T016/static_query.npz",
+      "sha256": "1e167c094c181896c688814c4efe2c4cdcd47627c5f856e5c129c511875e2575"
+    }
+  },
+  "query": {
+    "path": "results/T016/static_query.npz",
+    "sha256": "1e167c094c181896c688814c4efe2c4cdcd47627c5f856e5c129c511875e2575",
+    "du_sha256": "67fbd2acef2b0a7f7062878e889407713a41d5f0b43892d432aa1295a13846d8",
+    "dv_sha256": "c0340bf1717398a9ddacf9abfbbb4319a19de6060b26c3b8f08292189e9ff853",
+    "anchor": [
+      0.5244755244755245,
+      0.3986013986013986
+    ],
+    "direction": [
+      0,
+      -1
+    ],
+    "fixed_coordinate_transform": "canonical q(y-ay,-(x-ax)), full periodic image sum",
+    "periodic_images": {
+      "x": [
+        -1,
+        0,
+        1
+      ],
+      "y": [
+        -2,
+        -1,
+        0,
+        1,
+        2
+      ]
+    },
+    "design_analysis": "verify/design_t016_geometry.py",
+    "design_analysis_sha256": "a426228ed6f52af859873c7cb24aa942246c0fc59754f39156ab93ba2a131de8",
+    "geometry": "results/T016/geometry.json",
+    "geometry_sha256": "41ba22d8df20a2d79fcadedf16519bab9fa6fb9eefdf7fd2bcd115f30b814f31",
+    "regenerate": false,
+    "normalize": false
+  },
+  "query_shift_columns": 7,
+  "query_shift_phys": 0.04895104895104895,
+  "shifted_anchor": [
+    0.5734265734265734,
+    0.3986013986013986
+  ],
+  "original_source_t": 80000,
+  "new_experiment_time_zero": true,
+  "measurement": {
+    "core_offsets": [
+      0.1,
+      0.095,
+      0.105
+    ],
+    "connectivity": 4,
+    "minimum_core_pixels": 5,
+    "identity_distance_max": 0.05,
+    "primary_centroid_offset": 0.1,
+    "containment": "all core pixels",
+    "norm": "h*sqrt(sum(du^2+dv^2)); preserve raw and /NS",
+    "diagnostic_cadence_tu": 100,
+    "output_port": {
+      "axis": "y",
+      "coordinate": -0.6993006993006993,
+      "direction": -1,
+      "aperture_axis": "x",
+      "aperture": [
+        0.35,
+        0.7
+      ],
+      "window": [
+        60000,
+        70000
+      ]
+    },
+    "monitor_ports": [
+      {
+        "axis": "y",
+        "coordinate": -0.6993006993006993
+      },
+      {
+        "axis": "y",
+        "coordinate": 0.6
+      },
+      {
+        "axis": "x",
+        "coordinate": -0.8
+      },
+      {
+        "axis": "x",
+        "coordinate": 0.8
+      }
+    ],
+    "shape_e1_max": 0.25,
+    "shape_patch_half": 65,
+    "shape_reference": "fixed downward periodic full template at actual centroid; no fit or source subtraction",
+    "clean_output": "no non-target core intersects periodic 131-square window; record mixed residual otherwise",
+    "direction_history_tu": 5000,
+    "direction_history_points": 51,
+    "direction_components": [
+      "vx",
+      "vy"
+    ],
+    "downward_direction_component": "vy",
+    "event_bracket_width_max_tu": 0.25,
+    "replay_max_steps": 400,
+    "final_window": [
+      62000,
+      72000
+    ],
+    "final_window_samples": 101,
+    "core_displacement_from_first_final_max": 0.02,
+    "all_newborn_and_source_events_preserved": true,
+    "capture": {
+      "conversion_box": {
+        "xmin": 0.2,
+        "xmax": 0.75,
+        "ymin": -0.3,
+        "ymax": 0.3
+      },
+      "holding_box": {
+        "xmin": -0.6,
+        "xmax": 0.8,
+        "ymin": -0.4,
+        "ymax": 0.4
+      },
+      "identity_end_alone_sufficient": false,
+      "root_tags": "initial source roots and Q; union over all candidate edges; rootless newborn UNKNOWN; every birth/complex core possible-related",
+      "holding_population": "ALL surviving full-field cores, not a chosen related subset",
+      "holding_all_thresholds_A_containment": true,
+      "holding_primary_unique_chain_and_no_count_changes": true,
+      "holding_primary_max_displacement": 0.02,
+      "absence_of_output_alone_sufficient": false,
+      "newborn_output_ignored": false,
+      "uncertain_attribution": "INDETERMINATE; preserve known violations",
+      "conversion_requires_saved_raw_before_after_and_candidate_relations": true
+    },
+    "free_pass": "exactly one unique clean standard downward Q output in fixed aperture/window, no extra propagation or pre-output periodic return",
+    "readout_targets": {
+      "S6": 0,
+      "S8": 1,
+      "S8plus": 1
+    }
+  },
+  "output_observation_line_y": -0.55,
+  "comparison_read_only": {
+    "T029_S8_WAIT": "results/T029/T029_S8_WAIT",
+    "T029_S8_Q": "results/T029/T029_S8_Q",
+    "T017_FREE_Q": "results/T017/T017_FREE_Q",
+    "T017_S6_Q": "results/T017/T017_S6_Q"
+  },
+  "save": {
+    "actual_initial_full_field": true,
+    "diagnostic_every_tu": 100,
+    "all_threshold_core_geometry": true,
+    "all_association_candidate_edges": true,
+    "full_field_every_tu": 5000,
+    "full_zero_and_terminal_fields": true,
+    "periodic_and_terminal_expected_count": 16,
+    "final_full_field_every_tu": 100,
+    "final_full_fields": 101,
+    "event_actual_prestate_and_direction_history": true,
+    "event_actual_bracket_before_after_fields": true,
+    "Q_termination_complex_diagnostic_before_after_fields": true,
+    "source_archive_per_actual_case_launch": true
+  },
+  "output_root": "results/T031",
+  "dt": 0.25,
+  "T": 72000,
+  "steps": 288000,
+  "diagnostic_every_tu": 100,
+  "snapshot_every_tu": 5000,
+  "execution_policy": {
+    "order": [
+      "T031_FREE_Q_XP7",
+      "T031_S8_Q_XP7"
+    ],
+    "free_first": true,
+    "run_S8_even_if_FREE_fails_comparability": true,
+    "no_controlled_pass_if_FREE_fails": true,
+    "max_invocation_wall_seconds": 3600,
+    "engineering_probe_steps_max_total": 2000,
+    "no_shift_scan": true,
+    "no_line_change": true,
+    "no_threshold_change": true,
+    "no_time_extension": true,
+    "no_extra_cases": true,
+    "stage_end_requires_report_to_Agent1": true,
+    "automatic_full_case_retry": false,
+    "unstarted_case_status": "NOT_RUN_STAGE_GATE",
+    "scientific_stop_unstarted_status": "NOT_RUN_SCIENTIFIC_STOP"
+  },
+  "cases": [
+    {
+      "case_id": "T031_FREE_Q_XP7",
+      "source": "FREE",
+      "add_query": true,
+      "query_shift_columns": 7,
+      "initial_recipe": "E+roll_x(qQ,+7)",
+      "initial_fields": "results/T031/inputs/T031_FREE_Q_XP7.npz",
+      "initial_file_sha256": "1e5f4a1e3a5ce2d980021b3361d6e3f22681b0a014e6df88afe590d6e9628e4b",
+      "initial_array_sha256": [
+        "1f6e8c5bf1b0f9afd613f24487f6afd859ce51ad9e810fcaac781c894b348d6d",
+        "62405bb60924d93922339ce946eb61bbbfad2cb8046b98138f815acbbfa15ebd"
+      ],
+      "expected_cores_t0": 1,
+      "dt": 0.25,
+      "T": 72000,
+      "steps": 288000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "XP7"
+    },
+    {
+      "case_id": "T031_S8_Q_XP7",
+      "source": "S8",
+      "add_query": true,
+      "query_shift_columns": 7,
+      "initial_recipe": "S8+roll_x(qQ,+7)",
+      "initial_fields": "results/T031/inputs/T031_S8_Q_XP7.npz",
+      "initial_file_sha256": "017c38a0e4c79f3b9604e6b230dd8ff85b20319f23a28167bacac34347cd89bf",
+      "initial_array_sha256": [
+        "2706b60b40e2b4340bcea87a9bc41b610e12f48eac068ecdbf557f35ad530ebf",
+        "7a27f3ced2cb94b90c226956b6230facf60d1287dfa1daba5315d7114c32cb02"
+      ],
+      "expected_cores_t0": 9,
+      "dt": 0.25,
+      "T": 72000,
+      "steps": 288000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "XP7"
+    }
+  ],
+  "intake_record": "results/T031/intake.json"
+}

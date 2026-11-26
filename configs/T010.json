@@ -1,0 +1,664 @@
+{
+  "experiment_protocol": "R008_B0_v1",
+  "request": "R008",
+  "task_id": "T010",
+  "stage": "R007-B0",
+  "ideas": [
+    "I001",
+    "I011",
+    "I012",
+    "I014",
+    "I016"
+  ],
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T010.md",
+  "task_sha256": "9caacf34e4430dadb8a715df01190dafe3e705ca435a00fc34c5ba977a6285ed",
+  "authorization": {
+    "source": "coordination/requests/R008_AMENDMENT01.md",
+    "source_sha256": "129ce562f997ed24122bc021901d5adcfe11a64be655e22269ebd674b513d937",
+    "recorded_by": "Agent 0",
+    "date": "2026-10-16",
+    "status": "APPROVED",
+    "human_basis": "人类中断核账澄清，批准研究优先与Agent1本地执行自由裁量",
+    "original_approval": {
+      "path": "coordination/requests/R007_B0_APPROVAL.md",
+      "sha256": "2a3b92a8584c6be99f6ad54c8f2a1bf188da7121f81bd7908b4daf4a99d5fea6"
+    },
+    "scope": "Same six coarse scientific cases; resource figures are planning references under R008_AMENDMENT01, not independent hard caps."
+  },
+  "criteria_sources": [
+    {
+      "path": "coordination/plans/T008_EXPERIMENT_PROPOSAL.md",
+      "sha256": "4a7237902c368cd3ff67f3e47e76934051f00c34f239d64ddaf4d382ba002fac"
+    },
+    {
+      "path": "coordination/reviews/T008.md",
+      "sha256": "610183e23c9075b0ddf9adfaa5fc4c8b777aa140a08426d217add708709393b9"
+    },
+    {
+      "path": "results/T008/evidence_review.json",
+      "sha256": "1fb2f67ceefcd720f955e88ea7dea6d59e5e35b24272b599bf4aaf965d023896"
+    }
+  ],
+  "budget_baseline": {
+    "path": "results/T009/stage/baseline.json",
+    "sha256": "56fb67776a574ead57de5198824d64c69bccf5649c984c0e32e93d509125afcd",
+    "immutable": true,
+    "rebase_allowed": false
+  },
+  "cumulative_budget": "results/T001/budget.json",
+  "stage_limits": {
+    "wall_seconds": 3600,
+    "main_cell_steps": 306708480000,
+    "replay_cell_steps": 300000000,
+    "engineering_cell_steps": 100000000,
+    "event_replay_cell_steps": 200000000,
+    "new_bytes": 1073741824,
+    "max_new_research_ids": 6
+  },
+  "cumulative_limits": {
+    "wall_seconds": 6756.709707873047,
+    "main_cell_steps": 862371840000,
+    "replay_cell_steps": 6051473280,
+    "engineering_cell_steps": 3911584000,
+    "event_replay_cell_steps": 408355328,
+    "new_bytes": 4282412088,
+    "registered_trajectories": 16
+  },
+  "wall_cumulative_limit_decimal_seconds": "6756.709707873047",
+  "prospective_exception": {
+    "applies_only_to": "R007-B0 six whitelist coarse cases and their approved minimal engineering",
+    "historical_replay_limit": 3000000000,
+    "historical_replay_actual": 5751473280,
+    "historical_overrun": 2751473280,
+    "retroactive_compliance": false,
+    "T004_remains_paused": true,
+    "reset_or_rebase_allowed": false
+  },
+  "ledger": {
+    "results_root": "results",
+    "ledger": "results/ledger.json",
+    "cases": "results/cases.jsonl",
+    "reservations": "results/ledger_reservations.json",
+    "existing_runs_at_freeze": 10,
+    "effective_process_limit": 16,
+    "max_new_research_ids": 6,
+    "private_accounting_allowed": false,
+    "new_case_whitelist": [
+      "R007B_B0_E_c",
+      "R007B_B0_P_c",
+      "R007B_B0_B_c",
+      "R007B_B0_AB_c",
+      "R007B_B0_BP_c",
+      "R007B_B0_ABP_c"
+    ]
+  },
+  "output_root": "results/T010",
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "ymax": 0.8951048951048951,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "initial_signals": {
+    "A": {
+      "anchor": [
+        -0.4,
+        0.0
+      ],
+      "direction": 1
+    },
+    "B": {
+      "anchor": [
+        0.4,
+        0.0
+      ],
+      "direction": -1
+    },
+    "P": {
+      "anchor": [
+        1.2,
+        0.0
+      ],
+      "direction": -1
+    }
+  },
+  "input_preparation": {
+    "mode": "reuse_existing_frozen_NPZ",
+    "manifest": "results/T009/inputs/manifest.json",
+    "manifest_sha256": "84667ed054e1005ef51cac36a66c25af243b9289971f427487042b622115a224",
+    "frozen_record": "results/T009/stage/inputs_frozen.json",
+    "regenerate": false
+  },
+  "C": {
+    "xmin": -0.25,
+    "xmax": 0.25,
+    "ymin": -0.25,
+    "ymax": 0.25
+  },
+  "W": {
+    "xmin": -0.4,
+    "xmax": 0.4,
+    "ymin": -0.25,
+    "ymax": 0.25
+  },
+  "criteria": {
+    "core_threshold_above_ub": 0.1,
+    "minimum_core_area": 0.00024451073402122355,
+    "connectivity": 4,
+    "centroid_weight": "max(u-ub-0.1,0)",
+    "containment": "all core pixels",
+    "norm": "h*sqrt(sum(du**2+dv**2))",
+    "store_raw_and_over_NS": true,
+    "association_distance_max": 0.05,
+    "identity": "unique one-to-one overlap/distance candidate graph; terminate at merge/split; anchor-bind B and P at t0",
+    "background_norm_over_NS_max": 0.25,
+    "boundary_guard": 0.25,
+    "preflight_guard_max_deviation": 1e-06,
+    "runtime_matched_E_guard_max_difference": 1e-06,
+    "runtime_guard_compare_at_same_t": true,
+    "formation_window": [
+      40000,
+      45000
+    ],
+    "wait_window": [
+      45000,
+      50000
+    ],
+    "formation_wait_sample_count": 101,
+    "R4_reference_positions": [
+      {
+        "cx": -0.1320941979691517,
+        "cy": 0.07523440862893935
+      },
+      {
+        "cx": -0.13209419796915164,
+        "cy": -0.07523440862897224
+      },
+      {
+        "cx": 0.13209419796915117,
+        "cy": -0.07523440862897193
+      },
+      {
+        "cx": 0.13209419796915156,
+        "cy": 0.07523440862893974
+      }
+    ],
+    "reference_position_max_distance": 0.02,
+    "AB_C_core_count": 4,
+    "AB_C_straddling_allowed": false,
+    "ABP_P_intersects_C_during_formation_wait": false,
+    "ABP_vs_AB_pair_at_same_absolute_t": true,
+    "ABP_vs_AB_C_norm_over_NS_max": 0.25,
+    "ABP_vs_AB_core_position_max_distance": 0.02,
+    "left_port": {
+      "x": -0.6,
+      "ymin": -0.25,
+      "ymax": 0.25,
+      "direction": -1
+    },
+    "unexpected_right_port": {
+      "x": 0.6,
+      "ymin": -0.25,
+      "ymax": 0.25,
+      "direction": 1
+    },
+    "B_event_window": [
+      55000,
+      70000
+    ],
+    "P_event_window": [
+      100000,
+      125000
+    ],
+    "record_all_inbound_outbound_out_of_window_and_repeated_events": true,
+    "shape_function": "Researched/02/analysis.py::patch_e1",
+    "shape_patch_half": 65,
+    "shape_patch_size": 131,
+    "shape_patch_h": 0.006993006993006993,
+    "shape_e1_max": 0.25,
+    "shape_orientation_fixed": true,
+    "fit_amplitude_rotation_scale": false,
+    "direction_function": "experiment/t001.py::fit_direction and direction_matches",
+    "direction_history_tu": 5000,
+    "direction_cadence_tu": 100,
+    "direction_required_points": 51,
+    "event_bracket_tu_max": 100,
+    "event_replay_max_steps_per_full_bracket": 200,
+    "actual_bracket_prestate_required": true,
+    "bracket_entirely_within_event_window": true,
+    "BP_vs_single_arrival_difference_max_tu": 500,
+    "arrival_difference_rule": "maximum absolute difference over paired event brackets",
+    "BP_vs_single_lateral_difference_max": 0.02,
+    "final_window": [
+      120000,
+      130000
+    ],
+    "final_window_sample_count": 101,
+    "outer_remainder_over_NS_max": 0.25,
+    "inner_remainder_over_NS_max": 2,
+    "outside_W_extra_core_allowed": false,
+    "straddling_W_core_allowed": false,
+    "AB_final_inner_core_count": 4,
+    "ABP_final_inner_core_count_max": 6,
+    "other_cases_final_extra_local_core_count": 0,
+    "subtraction": "analysis only; qualified uniquely tracked legitimate B/P fixed templates; preserve raw fields/norms and all other cores",
+    "margin": 1.5,
+    "minimum_free_disk_safety_bytes": 2147483648,
+    "coarse_success_label": "COARSE_SCREEN_PASS",
+    "coarse_failure_label": "COARSE_SCREEN_FAIL",
+    "unresolved_label": "INDETERMINATE",
+    "fine_numerical_status": "NOT_VERIFIED_FINE",
+    "fine_comparison_required_for_this_stage": false
+  },
+  "expected_behavior": {
+    "E": {
+      "formation": false,
+      "early_B": 0,
+      "late_P": 0,
+      "extra_moving_outputs": 0,
+      "final": "background"
+    },
+    "P": {
+      "formation": false,
+      "early_B": 0,
+      "late_P": 1,
+      "extra_moving_outputs": 0,
+      "final": "same qualified P"
+    },
+    "B": {
+      "formation": false,
+      "early_B": 1,
+      "late_P": 0,
+      "extra_moving_outputs": 0,
+      "final": "same qualified B retained in full field"
+    },
+    "AB": {
+      "formation": true,
+      "early_B": 0,
+      "late_P": 0,
+      "extra_moving_outputs": 0,
+      "final": "exactly four W cores"
+    },
+    "BP": {
+      "formation": false,
+      "early_B": 1,
+      "late_P": 1,
+      "extra_moving_outputs": 0,
+      "final": "same qualified B and P retained in full field"
+    },
+    "ABP": {
+      "formation": true,
+      "early_B": 0,
+      "late_P": 0,
+      "extra_moving_outputs": 0,
+      "final": "at most six W cores; all other output/remainder gates still required"
+    }
+  },
+  "execution_policy": {
+    "single_process": true,
+    "automatic_retry_full_case": false,
+    "automatic_next_stage": false,
+    "automatic_resume": false,
+    "simple_controlled_protocol": "experiment.runner dispatch to experiment.t010",
+    "use_old_t009_frontier_or_cost": false,
+    "same_original_budget_baseline": true,
+    "isolated_tests_never_write_formal_account": true,
+    "critical_science_paths_verified_before_main": true,
+    "phase_limits_persist_across_calls": false,
+    "per_operation_upper_bound_reservation_allowed": false,
+    "actual_failures_are_charged": true,
+    "require_arbitrary_corruption_or_general_resume_framework": false,
+    "routine_fixes_continue_inside_scope": true,
+    "report_format": "brief science-centred; no mandatory10chapters",
+    "max_invocation_wall_seconds": 5400,
+    "resource_policy": "R008_AMENDMENT01: approximate run cost only; no historical/category hard gates; at most six registered full cases, no automatic full-case retry"
+  },
+  "save": {
+    "diagnostic_every_tu": 100,
+    "snapshot_every_tu": 5000,
+    "full_snapshots_per_complete_case": 27,
+    "C_pair_arrays_cases": [
+      "AB",
+      "ABP"
+    ],
+    "C_pair_array_window": [
+      40000,
+      50000
+    ],
+    "C_pair_array_every_tu": 100,
+    "event_pre_and_post_full_fields": true,
+    "rolling_actual_prestate_every_tu": 100,
+    "rolling_prestate_with_identity_and_direction_history": true,
+    "checkpoint_every_tu": 5000,
+    "checkpoint_on_safe_stop": true,
+    "full_checkpoint_fields": "T009 section 6",
+    "preserve_raw_full_field_and_unsubtracted_metrics": true,
+    "source_archive_per_actual_launch": true,
+    "immutable_full_field_references_allowed": true,
+    "pending_event_prestate_must_remain_available": true,
+    "qualified_output_patches_window": [
+      120000,
+      130000
+    ],
+    "qualified_output_patch_every_tu": 100,
+    "qualified_output_patch_components": [
+      "u",
+      "v"
+    ],
+    "qualified_output_patch_size": 131,
+    "online_remainder_raw_metrics": true,
+    "checkpoint_resumable": false,
+    "checkpoint_policy": "Use immutable same-time full-field references plus current diagnostic/identity/event/provenance/budget state; safety save on stop. No universal recovery implementation."
+  },
+  "cases": [
+    {
+      "case_id": "R007B_B0_E_c",
+      "initial_recipe": "E",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 130000,
+      "steps": 260000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000,
+      "worker": "T010",
+      "method": "euler",
+      "dtype": "float64",
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "resource": {
+        "kind": "uniform",
+        "value": 1
+      },
+      "spectral_lap": false,
+      "dealias": false,
+      "keep_frames": false,
+      "parent_npz": "results/T009/inputs/R007B_B0_E_c.npz",
+      "initial_signals": [],
+      "requires_available_control_ids": [],
+      "parent_npz_sha256": "16efb0f0d56f3d33921ea3c84a4d4e018c32051d2990ede2d05a0f8c9a8c3d2c",
+      "initial_u_sha256": "66cad4695a862a2c199969e73094979e2ba97b92f5438a587c8e3b9ae4a0ef88",
+      "initial_v_sha256": "97a504d7e018bcaeb28ec69846349f2323a960be0976d37532d28c514612557f"
+    },
+    {
+      "case_id": "R007B_B0_P_c",
+      "initial_recipe": "P",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 130000,
+      "steps": 260000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000,
+      "worker": "T010",
+      "method": "euler",
+      "dtype": "float64",
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "resource": {
+        "kind": "uniform",
+        "value": 1
+      },
+      "spectral_lap": false,
+      "dealias": false,
+      "keep_frames": false,
+      "parent_npz": "results/T009/inputs/R007B_B0_P_c.npz",
+      "initial_signals": [
+        "P"
+      ],
+      "requires_available_control_ids": [
+        "R007B_B0_E_c"
+      ],
+      "parent_npz_sha256": "4cd4fae1ac5211ca957516d73e8b717bff2745eeeb3d2f9d74f4fd0d04f91f45",
+      "initial_u_sha256": "358b6c9f8388715b71b12a45a41ecd08dcb6195c5f623965f9366347ffa8701b",
+      "initial_v_sha256": "c1dd0a30d0722e8e8d27ba6834bdda7a7e924f025899421fcf5e194dbc78cebd"
+    },
+    {
+      "case_id": "R007B_B0_B_c",
+      "initial_recipe": "B",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 130000,
+      "steps": 260000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000,
+      "worker": "T010",
+      "method": "euler",
+      "dtype": "float64",
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "resource": {
+        "kind": "uniform",
+        "value": 1
+      },
+      "spectral_lap": false,
+      "dealias": false,
+      "keep_frames": false,
+      "parent_npz": "results/T009/inputs/R007B_B0_B_c.npz",
+      "initial_signals": [
+        "B"
+      ],
+      "requires_available_control_ids": [
+        "R007B_B0_E_c"
+      ],
+      "parent_npz_sha256": "15a2c5c33f6600ddac3aa729f94ffe05d0273855a868cbb9cea954e7918e4e3c",
+      "initial_u_sha256": "9f8b7ac3bdf6addef2f1a21a1360cb440f470eeefb7e816abff7ff6fea12e9df",
+      "initial_v_sha256": "b82ff19154da4b15476dcd10f7bdc464dfd56a4516382d4807cb3107fdacb886"
+    },
+    {
+      "case_id": "R007B_B0_AB_c",
+      "initial_recipe": "AB",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 130000,
+      "steps": 260000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000,
+      "worker": "T010",
+      "method": "euler",
+      "dtype": "float64",
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "resource": {
+        "kind": "uniform",
+        "value": 1
+      },
+      "spectral_lap": false,
+      "dealias": false,
+      "keep_frames": false,
+      "parent_npz": "results/T009/inputs/R007B_B0_AB_c.npz",
+      "initial_signals": [
+        "A",
+        "B"
+      ],
+      "requires_available_control_ids": [
+        "R007B_B0_E_c",
+        "R007B_B0_B_c"
+      ],
+      "parent_npz_sha256": "e9dbf63b059c9210e1af6690945b2e4adee66cbee09d0bfbebfef2028811dbbb",
+      "initial_u_sha256": "68ef7383c81db90affd5815982d83ddd20e5bd75ad9690493fb658016ba3c0e4",
+      "initial_v_sha256": "014ff460414948413c0c2155a35253186d857bf22fd94f6b905672867f40e0ab"
+    },
+    {
+      "case_id": "R007B_B0_BP_c",
+      "initial_recipe": "BP",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 130000,
+      "steps": 260000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000,
+      "worker": "T010",
+      "method": "euler",
+      "dtype": "float64",
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "resource": {
+        "kind": "uniform",
+        "value": 1
+      },
+      "spectral_lap": false,
+      "dealias": false,
+      "keep_frames": false,
+      "parent_npz": "results/T009/inputs/R007B_B0_BP_c.npz",
+      "initial_signals": [
+        "B",
+        "P"
+      ],
+      "requires_available_control_ids": [
+        "R007B_B0_E_c",
+        "R007B_B0_P_c",
+        "R007B_B0_B_c"
+      ],
+      "parent_npz_sha256": "e79225acb37ae1feabbf4a53a908666d1cccb49f30603ee4b2aedd4fe89985dd",
+      "initial_u_sha256": "88a9356bc769e1396caeee04840dad4eceb4b35e84e02dc8a546bf5da0cc29a2",
+      "initial_v_sha256": "6a2a82c14d0f49f6d7754580d6bec81003cea11cf5aa1eac1479af04b7afc0f6"
+    },
+    {
+      "case_id": "R007B_B0_ABP_c",
+      "initial_recipe": "ABP",
+      "nx": 768,
+      "ny": 256,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 130000,
+      "steps": 260000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000,
+      "worker": "T010",
+      "method": "euler",
+      "dtype": "float64",
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "resource": {
+        "kind": "uniform",
+        "value": 1
+      },
+      "spectral_lap": false,
+      "dealias": false,
+      "keep_frames": false,
+      "parent_npz": "results/T009/inputs/R007B_B0_ABP_c.npz",
+      "initial_signals": [
+        "A",
+        "B",
+        "P"
+      ],
+      "requires_available_control_ids": [
+        "R007B_B0_E_c",
+        "R007B_B0_P_c",
+        "R007B_B0_B_c",
+        "R007B_B0_AB_c",
+        "R007B_B0_BP_c"
+      ],
+      "parent_npz_sha256": "5e1703dd1e1005c74416d7d892bd5d711aab75e657274d9925eb56ba162df870",
+      "initial_u_sha256": "af37ccbb680a16687839bb40168be0b900ac171cd7baa0ea06ca7717e279c9a5",
+      "initial_v_sha256": "7bf3ccbb3e20e9813910bf5c323aa4124c0455b5dfc0bb9ccf7d63f18bf2f8d1"
+    }
+  ],
+  "execution_order": [
+    "R007B_B0_E_c",
+    "R007B_B0_P_c",
+    "R007B_B0_B_c",
+    "R007B_B0_AB_c",
+    "R007B_B0_BP_c",
+    "R007B_B0_ABP_c"
+  ],
+  "new_main_cell_steps": 306708480000,
+  "expected_event_replay_cell_steps": 157286400,
+  "raw_regular_snapshot_bytes_lower_bound": 509607936,
+  "conditional_inventory": {
+    "path": "results/T008/proposal_cost_inventory.json",
+    "sha256": "f152a42dc71d3164a581eaa311a1cd8c42443d14aff36504e5687977d47f4fde",
+    "planned_total": 36,
+    "authorized_here": 6,
+    "other_30_status": "NOT_RUN_STAGE_UNAUTHORIZED"
+  },
+  "report": "coordination/reports/T010.md",
+  "initial_gate_state": {
+    "critical_paths": "NOT_VERIFIED",
+    "complete_cost": "NOT_VERIFIED",
+    "scientific_verdict": "NOT_RUN"
+  },
+  "required_gate_evidence": {
+    "engineering": "results/T010/preflight/critical_paths.json",
+    "inputs": "results/T010/preflight/input_verification.json",
+    "runtime_updates_frozen_config": false
+  },
+  "science_parent": {
+    "path": "configs/T009.json",
+    "sha256": "ab31376cffed170d7ea0c65ba5cd45ac04e22a3412b373ec8b9a24428b0240ff",
+    "scope": "Scientific fields and initial inputs only; old execution/frontier/cost implementation remains disabled."
+  },
+  "intake_record": {
+    "path": "results/T010/intake.json",
+    "sha256": "72b60b6fc9d972af260bab297a8f540f3675e1c2a6095b30e56cb45e192de4d2",
+    "new_budget_baseline": false
+  },
+  "historical_tail_provision": {
+    "wall_seconds": 60,
+    "new_bytes": 67108864,
+    "kind": "held_conservative_tail_provision",
+    "basis": "Unmetered tail after earlier backcharge: bounded final isolation fixture with a few ~0.8MB temporary budget copies/small ledgers, and subsequent administrative/audit files. Historical deleted operations retain the earlier declared estimate; no fresh reconstruction. Not a claim of exact measured cost.",
+    "handling": "Deduct once from operational headroom while held; if booked once as estimated expense, do not also hold the same amount. Do not release silently. New uncovered significant work requires revising forecast inside unchanged total caps."
+  },
+  "extra128_step_probe_cap": null,
+  "probe_policy": {
+    "extra_step_cap_removed_by": "R008",
+    "constrained_by_original_engineering_and_combined_limits": false,
+    "previous_probe_steps_remain_charged": 128,
+    "previous_engineering_cell_steps": 25165824,
+    "new_probe_field": "nonuniform already-frozen signal-containing input",
+    "measure_scientific_diagnostic_save_analysis_overhead": true,
+    "no_separate_engineering_permission_request": true,
+    "max_steps_per_probe": 2000,
+    "max_probe_invocations_for_remaining_integration": 3
+  },
+  "execution_revision": "2026-10-16 R008_AMENDMENT01: retire account-based veto, bind amended authorization, 90-minute invocation stop; unchanged scientific fields."
+}

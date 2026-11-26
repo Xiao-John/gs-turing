@@ -1,0 +1,312 @@
+{
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "ymax": 0.8951048951048951,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "grid": {
+    "nx": 768,
+    "ny": 256,
+    "h": 0.006993006993006993
+  },
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "regions": {
+    "W": {
+      "xmin": -0.4,
+      "xmax": 0.4,
+      "ymin": -0.25,
+      "ymax": 0.25
+    },
+    "V": {
+      "xmin": -0.6,
+      "xmax": 0.6,
+      "ymin": -0.35,
+      "ymax": 0.35
+    }
+  },
+  "task_id": "T015",
+  "request": "R013",
+  "experiment_protocol": "R013_P_YSHIFT1_v1",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T015.md",
+  "task_sha256": "d68dcd1b853d6438a746bd9e4ceb28b6b80639bc9cb605b997350d01a50e6c4b",
+  "authorization": {
+    "path": "coordination/requests/R013.md",
+    "sha256": "a2b3453d2796ab90df4cbf3e1909343c9318861fa0af15c184a952e3caef8499",
+    "status": "APPROVED"
+  },
+  "ideas": [
+    "I004",
+    "I008",
+    "I011"
+  ],
+  "output_root": "results/T015",
+  "sources": {
+    "Q4": {
+      "path": "results/T010/R007B_B0_AB_c/snapshots/fields_00100000.npz",
+      "sha256": "60a8d572455dbf5a405fe2a428973386da40a92f04b9b0b59696add58ecc91cb"
+    },
+    "B": {
+      "path": "results/T009/inputs/R007B_B0_B_c.npz",
+      "sha256": "15a2c5c33f6600ddac3aa729f94ffe05d0273855a868cbb9cea954e7918e4e3c"
+    },
+    "P": {
+      "path": "results/T009/inputs/R007B_B0_P_c.npz",
+      "sha256": "4cd4fae1ac5211ca957516d73e8b717bff2745eeeb3d2f9d74f4fd0d04f91f45"
+    },
+    "E": {
+      "path": "results/T009/inputs/R007B_B0_E_c.npz",
+      "sha256": "16efb0f0d56f3d33921ea3c84a4d4e018c32051d2990ede2d05a0f8c9a8c3d2c"
+    }
+  },
+  "source_age_tu": 50000,
+  "new_experiment_time_zero": true,
+  "initial_signals": {
+    "B": {
+      "anchor": [
+        0.4,
+        0.0
+      ],
+      "direction": -1,
+      "inside_V_at_zero": true
+    },
+    "P": {
+      "anchor": [
+        1.2,
+        0.006993006993006993
+      ],
+      "direction": -1
+    }
+  },
+  "cases": [
+    {
+      "case_id": "T015_MBP_P_yplus1",
+      "initial_recipe": "(Q4+(B-E))+roll(P-E,1,axis=0)",
+      "initial_roles": [
+        "B",
+        "P"
+      ],
+      "expected_final_cores": 8,
+      "dt": 0.25,
+      "T": 80000,
+      "steps": 320000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000
+    }
+  ],
+  "measurement": {
+    "core_offsets": [
+      0.1,
+      0.095,
+      0.105
+    ],
+    "connectivity": 4,
+    "minimum_core_pixels": 5,
+    "centroid_weight": "max(u-ub-0.1,0) for primary threshold; corresponding offset for sensitivity segmentation",
+    "containment": "all core pixels; record full-field components at each threshold",
+    "norm": "h*sqrt(sum((u-u_ref)^2+(v-v_ref)^2))",
+    "final_window": [
+      70000,
+      80000
+    ],
+    "final_window_samples": 101,
+    "identity_distance_max": 0.05,
+    "core_displacement_max": 0.02,
+    "outside_W_norm_over_NS_max": 0.25,
+    "outside_V_norm_over_NS_max": 0.25,
+    "paired_W_norm_over_NS_min_strict": 0.25,
+    "paired_V_norm_over_NS_min_strict": 0.25,
+    "V_drift_from_first_final_over_NS_max": 0.05,
+    "shape_e1_max": 0.25,
+    "shape_patch_half": 65,
+    "direction_history_tu": 5000,
+    "direction_history_points": 51,
+    "left_port": -0.6,
+    "right_port": 0.6,
+    "port_y_aperture": [
+      -0.25,
+      0.25
+    ],
+    "replay_max_steps": 400,
+    "event_bracket_width_max_tu": 0.25,
+    "all_events_preserved": true,
+    "mechanism_labels_additive": true,
+    "final_structure_counts": [
+      8
+    ],
+    "main_region": "V",
+    "V_drift_from_first_over_NS_limit_auxiliary_only": 0.05,
+    "V_drift_not_a_main_structure_gate": true,
+    "primary_centroid_offset": 0.1,
+    "same_role_outward_not_ignored": true
+  },
+  "preparation": {
+    "reference": "T014_MB_Q4_B",
+    "sequence": "T015_MBP_P_yplus1",
+    "target_local_cores": 6,
+    "incoming_role": "P",
+    "incoming_signal_excluded_from_receiver_count": true,
+    "P_first_entry_definition": "any primary-threshold core pixel intersects V, using initial bound identity",
+    "cadence_tu": 100,
+    "minimum_span_tu": 10000,
+    "minimum_samples": 101,
+    "window_selection": "longest consecutive passing suffix ending at last primary P-outside-V sample immediately before first entry",
+    "V_field_difference_over_NS_max": 0.25,
+    "core_match_distance_max": 0.02,
+    "match_rule": "unique candidate bipartite graph, degree one at every receiver core",
+    "P_identity_independent_required": true,
+    "P_core_outside_V_required": true,
+    "receiver_pair_unique_temporal_association_required": true,
+    "first_receiver_sample_need_not_continue_prior_six_core_frame": true,
+    "scope": "sampled finite-time condition only"
+  },
+  "pairings": [
+    {
+      "left": "T015_MBP_P_yplus1",
+      "right": "T014_M0_Q4",
+      "region": "V",
+      "minimum_distance_over_NS_strict": 0.25
+    },
+    {
+      "left": "T015_MBP_P_yplus1",
+      "right": "T014_MB_Q4_B",
+      "region": "V",
+      "minimum_distance_over_NS_strict": 0.25
+    }
+  ],
+  "save": {
+    "initial_full_fields": true,
+    "full_field_every_tu": 5000,
+    "full_final_field_every_tu": 100,
+    "reuse_identical_snapshot_reference": true,
+    "actual_event_pre_and_post_fields": true,
+    "rolling_prestate_tu": 100,
+    "source_archive_per_actual_launch": true,
+    "launch_archival_must_cover_actual_case_entry": true,
+    "periodic_snapshot_at_zero_required": true,
+    "V_arrays_every_tu": 100,
+    "V_arrays_cases": [
+      "T015_MBP_P_yplus1"
+    ],
+    "V_arrays_minimum_coverage": "new case every100 through80000; baseline MB V arrays reused; coordinates required",
+    "full_field_three_threshold_components_each_diagnostic": true
+  },
+  "execution_policy": {
+    "max_invocation_wall_seconds": 3600,
+    "safety_margin_before_wall_stop": true,
+    "automatic_next_stage": false,
+    "automatic_full_case_retry": false,
+    "no_additional_research_cases": true,
+    "approximate_resources_only": true,
+    "checkpoint_resumable": "must be demonstrated on actual path before claiming; otherwise complete-case batches and honest safety stop",
+    "order": [
+      "T015_MBP_P_yplus1"
+    ],
+    "scientific_stop_allowed": true,
+    "scientific_stop_unstarted_status": "NOT_RUN_SCIENTIFIC_STOP"
+  },
+  "intake_record": "results/T015/intake.json",
+  "perturbation": {
+    "operation": "np.roll(component_P-component_E,1,axis=0)",
+    "array_y_axis": 0,
+    "array_x_axis": 1,
+    "positive_y_grid_shift": 1,
+    "physical_y_shift": 0.006993006993006993,
+    "apply_to": [
+      "u_deviation",
+      "v_deviation"
+    ],
+    "receiver_and_B_shifted": false,
+    "initial_full_epsilon_over_NS": 0.24438362874846994,
+    "initial_V_difference_over_NS": 8.094820013938805e-09
+  },
+  "baseline": {
+    "config": "configs/T014.json",
+    "config_sha256": "ec3a211be9210b9ef9ebcedfd6bcbbcb921344e9b991ad75209c141ef5cefda3",
+    "task": "coordination/tasks/T014.md",
+    "task_sha256": "700e2d9f433e28b9ca4483b3406e7950252a94df782cece44df04582b78e93ae",
+    "cases": {
+      "T014_M0_Q4": {
+        "record": "results/T014/records/T014_M0_Q4.json",
+        "record_sha256": "d2b9c10a0ab45d6df484c83d711fa14158ffa0c3d0eca9ee72db6afe680e320e",
+        "diagnostics": "results/T014/T014_M0_Q4/diagnostics.jsonl",
+        "diagnostics_sha256": "e13f1fa8b73bb34d7d16c6e0510c08a0957ca0c6b6049269eeb158ad008ca07a",
+        "launch_manifest": "results/T014/archives/T014_M0_Q4_20261018T120124/manifest.json",
+        "launch_manifest_sha256": "45ac525b3868413fff0acf1a98c7c622c06462d15c596dfeb43d260634d91a31",
+        "initial_fields": "results/T014/T014_M0_Q4/initial_fields.npz",
+        "initial_fields_sha256": "12ae5de0912584472c5ccabfeea30c97ac5c2e55961a00573885bf2aab47d6ff",
+        "run_dir": "results/T014/T014_M0_Q4"
+      },
+      "T014_MB_Q4_B": {
+        "record": "results/T014/records/T014_MB_Q4_B.json",
+        "record_sha256": "3c9cf3182b927dac8847b948af887d5cf9192cef14b8a40c61a31c71222ef185",
+        "diagnostics": "results/T014/T014_MB_Q4_B/diagnostics.jsonl",
+        "diagnostics_sha256": "f0993a319f5f19d2d50a81b8211464d279c68fa20ae5f36fbbcd522371289f14",
+        "launch_manifest": "results/T014/archives/T014_MB_Q4_B_20261018T120551/manifest.json",
+        "launch_manifest_sha256": "0e217e4db0e665e2db1ebde91991b3fca5d48aeeef42b2c3df88387006926c6c",
+        "initial_fields": "results/T014/T014_MB_Q4_B/initial_fields.npz",
+        "initial_fields_sha256": "b713710d183ac2a26940f80787b90bca7ca5712344ee1360bf0065e2b07c2479",
+        "run_dir": "results/T014/T014_MB_Q4_B"
+      },
+      "T014_MBP_Q4_BP": {
+        "record": "results/T014/records/T014_MBP_Q4_BP.json",
+        "record_sha256": "f5e426746d83bbd7f34d9be09d52112011277fd55d60784b9f33ee7ac7b2d41b",
+        "diagnostics": "results/T014/T014_MBP_Q4_BP/diagnostics.jsonl",
+        "diagnostics_sha256": "b4b27f73341509cacf61150b0c5549ad7ea5eaf5f463289f4d4963d28be7990d",
+        "launch_manifest": "results/T014/archives/T014_MBP_Q4_BP_20261018T121019/manifest.json",
+        "launch_manifest_sha256": "401bb21341229ad819ced7d5bda43d95e492fc9cfa52d3dee136ab1b84a7c738",
+        "initial_fields": "results/T014/T014_MBP_Q4_BP/initial_fields.npz",
+        "initial_fields_sha256": "9fc9ac9c0d9f8e8b562f5792a42c103cf200f665ee8a5a01e013443d0e204e71",
+        "run_dir": "results/T014/T014_MBP_Q4_BP"
+      }
+    },
+    "nominal_sequence": "T014_MBP_Q4_BP",
+    "physical_model_unchanged": true
+  },
+  "response_comparison": {
+    "times": [
+      0,
+      20000,
+      50000,
+      70000,
+      80000
+    ],
+    "regions": [
+      "all",
+      "W",
+      "V"
+    ],
+    "fixed_original_coordinates": true,
+    "no_fitted_translation_rotation": true,
+    "norms": "raw two-component h*sqrt(sum(du^2+dv^2))/NS",
+    "compare_core_counts_at_all_three_thresholds": true,
+    "report_unique_matching_or_unmatched": true,
+    "single_trajectory_ratio_not_a_bound": true
+  }
+}

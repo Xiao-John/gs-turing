@@ -1,0 +1,256 @@
+{
+  "experiment_protocol": "R003A_v1",
+  "request": "R003-A",
+  "ideas": [
+    "I001",
+    "I011"
+  ],
+  "status": "READY_ENGINEERING_FIRST",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T004.md",
+  "task_sha256": "c7f4fbec8f1f6954949f5f1cef6f94bf3b69a44bb88c4e2d39fd694440e25f8a",
+  "authorization": {
+    "source": "coordination/requests/NEXT.md",
+    "section": "最新执行授权：R003-A六项行为隔离检验",
+    "source_sha256": "d0b30bc8daf830fbc1e9cc4bb5610ddd539ea3b29e8eff8b1c674b7dc55e6054",
+    "recorded_by": "Agent 0",
+    "human_basis": "确认扩展。",
+    "date": "2026-10-14"
+  },
+  "parent_proposal": "configs/R003_PLAN01.json",
+  "parent_proposal_sha256": "e765221c350c29c2b8265eb1bd83e889e0a03706bb9c0f26478ecf8b1fdfc894",
+  "cumulative_limits": {
+    "wall_seconds": 7200,
+    "main_cell_steps": 1200000000000,
+    "registered_trajectories": 16,
+    "engineering_replay_cell_steps": 3000000000,
+    "new_bytes": 5368709120
+  },
+  "stage_limits": {
+    "wall_seconds": 3600,
+    "engineering_cell_steps": 50000000,
+    "replay_cell_steps": 600000000,
+    "new_bytes": 1073741824
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -1.7902097902097902,
+    "ymax": 1.7902097902097902
+  },
+  "W": {
+    "xmin": -0.4,
+    "xmax": 0.4,
+    "ymin": -0.25,
+    "ymax": 0.25
+  },
+  "Q": {
+    "anchor": [
+      0.4,
+      0.65
+    ],
+    "direction": -1
+  },
+  "source_S": {
+    "path": "results/T001/T001_RP_c/snapshots/fields_00020000.npz",
+    "t": 10000,
+    "sha256": "967dda4a975c37819955bca8f52f605af053e03ba60995bbf5b4ae79bec9b159"
+  },
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "Euler",
+    "dtype": "float64"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "criteria": {
+    "core_threshold_above_ub": 0.1,
+    "minimum_area": 0.00024451073402122355,
+    "connectivity": 4,
+    "outer_remainder_over_NS_max": 0.25,
+    "inner_deviation_over_NS_max": 2,
+    "inner_max_cores": 6,
+    "shape_e1_max": 0.25,
+    "direction_history_tu": 5000,
+    "port_x": -0.6,
+    "port_y_window": [
+      0.5,
+      0.8
+    ],
+    "event_window": [
+      55000,
+      70000
+    ],
+    "arrival_difference_max_tu": 500,
+    "lateral_difference_max_lu": 0.02,
+    "boundary_guard": 0.25,
+    "preflight_boundary_max_deviation": 1e-06,
+    "margin": 1.5
+  },
+  "cases": [
+    {
+      "case_id": "R003A_Q_c",
+      "initial_recipe": "Q",
+      "nx": 768,
+      "ny": 512,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 70000,
+      "steps": 140000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000,
+      "worker": "T004",
+      "method": "euler",
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "resource": {
+        "kind": "uniform",
+        "value": 1
+      },
+      "dealias": false,
+      "keep_frames": false,
+      "parent_npz": "results/T004/inputs/R003A_Q_c.npz"
+    },
+    {
+      "case_id": "R003A_S_c",
+      "initial_recipe": "S",
+      "nx": 768,
+      "ny": 512,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 70000,
+      "steps": 140000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000,
+      "worker": "T004",
+      "method": "euler",
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "resource": {
+        "kind": "uniform",
+        "value": 1
+      },
+      "dealias": false,
+      "keep_frames": false,
+      "parent_npz": "results/T004/inputs/R003A_S_c.npz"
+    },
+    {
+      "case_id": "R003A_SQ_c",
+      "initial_recipe": "SQ",
+      "nx": 768,
+      "ny": 512,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 70000,
+      "steps": 140000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000,
+      "worker": "T004",
+      "method": "euler",
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "resource": {
+        "kind": "uniform",
+        "value": 1
+      },
+      "dealias": false,
+      "keep_frames": false,
+      "parent_npz": "results/T004/inputs/R003A_SQ_c.npz"
+    },
+    {
+      "case_id": "R003A_SpertQ_c",
+      "initial_recipe": "SpertQ",
+      "nx": 768,
+      "ny": 512,
+      "h": 0.006993006993006993,
+      "dt": 0.5,
+      "T": 70000,
+      "steps": 140000,
+      "diagnostic_every_steps": 200,
+      "snapshot_every_steps": 10000,
+      "worker": "T004",
+      "method": "euler",
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "resource": {
+        "kind": "uniform",
+        "value": 1
+      },
+      "dealias": false,
+      "keep_frames": false,
+      "parent_npz": "results/T004/inputs/R003A_SpertQ_c.npz"
+    },
+    {
+      "case_id": "R003A_Q_r",
+      "initial_recipe": "Q",
+      "nx": 960,
+      "ny": 640,
+      "h": 0.005594405594405594,
+      "dt": 0.25,
+      "T": 70000,
+      "steps": 280000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "worker": "T004",
+      "method": "euler",
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "resource": {
+        "kind": "uniform",
+        "value": 1
+      },
+      "dealias": false,
+      "keep_frames": false,
+      "parent_npz": "results/T004/inputs/R003A_Q_r.npz"
+    },
+    {
+      "case_id": "R003A_SQ_r",
+      "initial_recipe": "SQ",
+      "nx": 960,
+      "ny": 640,
+      "h": 0.005594405594405594,
+      "dt": 0.25,
+      "T": 70000,
+      "steps": 280000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "worker": "T004",
+      "method": "euler",
+      "f": 0.06,
+      "k": 0.0609,
+      "Du": 2e-05,
+      "Dv": 1e-05,
+      "resource": {
+        "kind": "uniform",
+        "value": 1
+      },
+      "dealias": false,
+      "keep_frames": false,
+      "parent_npz": "results/T004/inputs/R003A_SQ_r.npz"
+    }
+  ],
+  "new_main_cell_steps": 564264960000,
+  "cumulative_budget": "results/T001/budget.json"
+}

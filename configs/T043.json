@@ -1,0 +1,949 @@
+{
+  "experiment_protocol": "R027_JOINT_FIELD_v1",
+  "task_id": "T043",
+  "request": "R027",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T043.md",
+  "task_sha256": "b26f5c4bee97cdad13b25dd0181fa5c6c52d519eaffb183dcee5c3b04263c3db",
+  "authorization": {
+    "path": "coordination/tasks/T043.md",
+    "sha256": "b26f5c4bee97cdad13b25dd0181fa5c6c52d519eaffb183dcee5c3b04263c3db",
+    "scope": "exactly two fixed joint-field trajectories (JOINT_WAIT, JOINT_Q) to t=120000 on the T042 extension with the single prescribed (+13,-152) downstream S8 deviation; WAIT runs first; no displacement/parameter scan, no appended structure, no window extension"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "grid": {
+    "nx": 768,
+    "ny": 512,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -1.7902097902097902,
+    "ymax": 1.7902097902097902,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded",
+    "extension": "ymin_new = ymin_old - 128h; original rows embedded at [128:384]; filler rows = background"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "ideas": [
+    "I001",
+    "I011",
+    "I012",
+    "I014"
+  ],
+  "parent_evidence": {
+    "T042_config": {
+      "path": "configs/T042.json",
+      "sha256": "c5009527e41a4654223ba464e4f3b669f3faf4d6cd0031c9c4ee412b982b6be0"
+    },
+    "T042_task": {
+      "path": "coordination/tasks/T042.md",
+      "sha256": "3f21b4338d41650c0e3adee72685e6dd49c3ddc2d9305ad5608763131ddfa3bc"
+    },
+    "T042_intake": {
+      "path": "results/T042/intake.json",
+      "sha256": "1fabbf99d5f6159849901c556a69d037883c8c17df3af47680f6b04e1c765158"
+    },
+    "T041_analysis": {
+      "path": "results/T041/persistence_T041.json",
+      "sha256": "17b6aba718df4fe634aadc82be8f5817db090423fe92c4c4c2d05751d9e0b523"
+    },
+    "T042_extension_analysis": {
+      "path": "results/T042/extension_analysis_T042.json",
+      "sha256": "35d48d64ebfdff4a873fe66a1705406a049745127ffe1bd246dfeae68106282c"
+    }
+  },
+  "joint_construction": {
+    "definition": "base = actual T042_S6_Q / T042_S6_WAIT t0; dev8 = actual T042_S8_WAIT t0 - (ub,vb) (complete two-component deviation, full periodic tail); shifted = periodic integer translation (+13 columns, -152 rows); JOINT = base + shifted; background counted once; no clip/scale/reconstruct; Q preset once in the base, no later injection/driving/restart/",
+    "shift_rows": -152,
+    "shift_cols": 13,
+    "sources": {
+      "base_Q": {
+        "path": "results/T042/T042_S6_Q/initial_fields.npz",
+        "sha256": "c915ee27f0d52974d2e6260af7a6953ff62389d0167a1d91f7b7c39638d21647",
+        "array_sha256": [
+          "6a972f015fc6e2a96058532c63fb5e63df30fe6344c24cf317e5afaa5ee45850",
+          "6723431828041d84366e25f5f1212f5987b078094d1025e7c26b63cf0c5171b9"
+        ]
+      },
+      "base_W": {
+        "path": "results/T042/T042_S6_WAIT/initial_fields.npz",
+        "sha256": "4e760f4f9be66b168b77691381b639e454df2e7aaca69aab22600601ab331220",
+        "array_sha256": [
+          "6a3f698100cc144f81daafc1337dadb972b35b2391a434a39826ba13eec7b350",
+          "f6941f028756176734cc62ab0e520672ee890a86d5ea66d99dd6913c2978f604"
+        ]
+      },
+      "dev8_src": {
+        "path": "results/T042/T042_S8_WAIT/initial_fields.npz",
+        "sha256": "e552631033199cb568cdc66ecf9627d6b803274b737d9ec686856cc0ce354c82",
+        "array_sha256": [
+          "a13db093a5df2d703cd36806f1ef182f103075e6ade549a4fd7e0a1525e5edb4",
+          "7ad3ddf841bba3fd1628c2ce8097f61f166b535a589aa0c828781bbd5e33e751"
+        ]
+      }
+    },
+    "deviation": {
+      "definition": "dev8 = S8_WAIT t0 - (ub,vb); shifted = periodic integer translation by (+13 columns, -152 rows) via np.roll(shift=(-152, 13)); full periodic tail kept, no truncation/scaling",
+      "dev8_stats": {
+        "u_min": -0.06730665669859215,
+        "u_max": 0.40302056756393656,
+        "v_min": -0.2649637991173261,
+        "v_max": 0.06890472065513026,
+        "array_sha256": [
+          "b712a5ee22b9528c07b65c2a825a0e32fa987646e5e4d6a1f58e0a5e04228f81",
+          "891bd4118eabad7105b182e25274b71b278ace457180c9abe7e11a3a00b3de0f"
+        ]
+      },
+      "shifted_stats": {
+        "u_min": -0.06730665669859215,
+        "u_max": 0.40302056756393656,
+        "v_min": -0.2649637991173261,
+        "v_max": 0.06890472065513026,
+        "array_sha256": [
+          "c8be685ba6ed0ebfac028b23bd08547f2d4b55be074e1642e26e5cf7e43f73b9",
+          "1c4379ddaa22113e622705887d8f6c5bf113de8f7529199a236f3b3226917a22"
+        ]
+      },
+      "full_field_nonbackground_tail": {
+        "du_max": 0.40302056756393656,
+        "dv_max": 0.2649637991173261,
+        "norm_over_NS": 212.868201617931,
+        "note": "the added deviation's full-field background-subtracted norm; its complete periodic tail is kept by construction"
+      }
+    },
+    "neighborhood": {
+      "definition": "union of the translated S8_WAIT t0 threshold-core (0.095/0.100/0.105) bboxes each expanded by 0.2 physical units; periodic shortest-image evaluation",
+      "expansion": 0.2,
+      "rects": [
+        {
+          "threshold": 0.095,
+          "bbox_shifted": [
+            -0.08391608391608418,
+            0.006993006993007089,
+            -1.1818181818181817,
+            -1.097902097902098
+          ],
+          "bbox_expanded": [
+            -0.2839160839160842,
+            0.2069930069930071,
+            -1.3818181818181816,
+            -0.897902097902098
+          ],
+          "cells": 142,
+          "centroid": [
+            -0.03850350179258808,
+            -1.1381927505602567
+          ]
+        },
+        {
+          "threshold": 0.095,
+          "bbox_shifted": [
+            -0.08391608391608418,
+            0.006993006993007089,
+            -1.027972027972028,
+            -0.9440559440559441
+          ],
+          "bbox_expanded": [
+            -0.2839160839160842,
+            0.2069930069930071,
+            -1.2279720279720279,
+            -0.744055944055944
+          ],
+          "cells": 142,
+          "centroid": [
+            -0.03850349754863916,
+            -0.9876813756074493
+          ]
+        },
+        {
+          "threshold": 0.095,
+          "bbox_shifted": [
+            0.18181818181818166,
+            0.26573426573426584,
+            -1.1818181818181817,
+            -1.097902097902098
+          ],
+          "bbox_expanded": [
+            -0.018181818181818354,
+            0.46573426573426585,
+            -1.3818181818181816,
+            -0.897902097902098
+          ],
+          "cells": 144,
+          "centroid": [
+            0.22509944816974506,
+            -1.1402997537479003
+          ]
+        },
+        {
+          "threshold": 0.095,
+          "bbox_shifted": [
+            0.18181818181818166,
+            0.26573426573426584,
+            -1.027972027972028,
+            -0.9440559440559441
+          ],
+          "bbox_expanded": [
+            -0.018181818181818354,
+            0.46573426573426585,
+            -1.2279720279720279,
+            -0.744055944055944
+          ],
+          "cells": 144,
+          "centroid": [
+            0.2250994649376152,
+            -0.9855743920871965
+          ]
+        },
+        {
+          "threshold": 0.095,
+          "bbox_shifted": [
+            0.3356643356643354,
+            0.4195804195804196,
+            -1.1888111888111887,
+            -1.097902097902098
+          ],
+          "bbox_expanded": [
+            0.1356643356643354,
+            0.6195804195804195,
+            -1.3888111888111887,
+            -0.897902097902098
+          ],
+          "cells": 152,
+          "centroid": [
+            0.3784994358161847,
+            -1.1426569931492454
+          ]
+        },
+        {
+          "threshold": 0.095,
+          "bbox_shifted": [
+            0.3356643356643354,
+            0.4195804195804196,
+            -1.027972027972028,
+            -0.9370629370629371
+          ],
+          "bbox_expanded": [
+            0.1356643356643354,
+            0.6195804195804195,
+            -1.2279720279720279,
+            -0.7370629370629371
+          ],
+          "cells": 152,
+          "centroid": [
+            0.3784994527698218,
+            -0.9832171151985879
+          ]
+        },
+        {
+          "threshold": 0.095,
+          "bbox_shifted": [
+            0.4895104895104896,
+            0.5734265734265733,
+            -1.1818181818181817,
+            -1.097902097902098
+          ],
+          "bbox_expanded": [
+            0.2895104895104896,
+            0.7734265734265733,
+            -1.3818181818181816,
+            -0.897902097902098
+          ],
+          "cells": 145,
+          "centroid": [
+            0.5318529069446163,
+            -1.1402951255181164
+          ]
+        },
+        {
+          "threshold": 0.095,
+          "bbox_shifted": [
+            0.4895104895104896,
+            0.5734265734265733,
+            -1.027972027972028,
+            -0.9440559440559441
+          ],
+          "bbox_expanded": [
+            0.2895104895104896,
+            0.7734265734265733,
+            -1.2279720279720279,
+            -0.744055944055944
+          ],
+          "cells": 145,
+          "centroid": [
+            0.5318529209445986,
+            -0.9855789942373636
+          ]
+        },
+        {
+          "threshold": 0.1,
+          "bbox_shifted": [
+            -0.08391608391608418,
+            0.006993006993007089,
+            -1.1818181818181817,
+            -1.097902097902098
+          ],
+          "bbox_expanded": [
+            -0.2839160839160842,
+            0.2069930069930071,
+            -1.3818181818181816,
+            -0.897902097902098
+          ],
+          "cells": 142,
+          "centroid": [
+            -0.038504988270398464,
+            -1.1381929982629058
+          ]
+        },
+        {
+          "threshold": 0.1,
+          "bbox_shifted": [
+            -0.08391608391608418,
+            0.006993006993007089,
+            -1.027972027972028,
+            -0.9440559440559441
+          ],
+          "bbox_expanded": [
+            -0.2839160839160842,
+            0.2069930069930071,
+            -1.2279720279720279,
+            -0.744055944055944
+          ],
+          "cells": 142,
+          "centroid": [
+            -0.03850498387609957,
+            -0.9876811279152025
+          ]
+        },
+        {
+          "threshold": 0.1,
+          "bbox_shifted": [
+            0.18181818181818166,
+            0.26573426573426584,
+            -1.1818181818181817,
+            -1.097902097902098
+          ],
+          "bbox_expanded": [
+            -0.018181818181818354,
+            0.46573426573426585,
+            -1.3818181818181816,
+            -0.897902097902098
+          ],
+          "cells": 141,
+          "centroid": [
+            0.22511561707013739,
+            -1.1403094414647985
+          ]
+        },
+        {
+          "threshold": 0.1,
+          "bbox_shifted": [
+            0.18181818181818166,
+            0.26573426573426584,
+            -1.027972027972028,
+            -0.9440559440559441
+          ],
+          "bbox_expanded": [
+            -0.018181818181818354,
+            0.46573426573426585,
+            -1.2279720279720279,
+            -0.744055944055944
+          ],
+          "cells": 141,
+          "centroid": [
+            0.22511563405953836,
+            -0.9855647045952443
+          ]
+        },
+        {
+          "threshold": 0.1,
+          "bbox_shifted": [
+            0.3356643356643354,
+            0.4195804195804196,
+            -1.1888111888111887,
+            -1.097902097902098
+          ],
+          "bbox_expanded": [
+            0.1356643356643354,
+            0.6195804195804195,
+            -1.3888111888111887,
+            -0.897902097902098
+          ],
+          "cells": 147,
+          "centroid": [
+            0.37850400818759566,
+            -1.142652232671
+          ]
+        },
+        {
+          "threshold": 0.1,
+          "bbox_shifted": [
+            0.3356643356643354,
+            0.4195804195804196,
+            -1.027972027972028,
+            -0.9370629370629371
+          ],
+          "bbox_expanded": [
+            0.1356643356643354,
+            0.6195804195804195,
+            -1.2279720279720279,
+            -0.7370629370629371
+          ],
+          "cells": 147,
+          "centroid": [
+            0.37850402547538725,
+            -0.9832218751032002
+          ]
+        },
+        {
+          "threshold": 0.1,
+          "bbox_shifted": [
+            0.4895104895104896,
+            0.5734265734265733,
+            -1.1818181818181817,
+            -1.097902097902098
+          ],
+          "bbox_expanded": [
+            0.2895104895104896,
+            0.7734265734265733,
+            -1.3818181818181816,
+            -0.897902097902098
+          ],
+          "cells": 141,
+          "centroid": [
+            0.5318596338344839,
+            -1.1403063696293412
+          ]
+        },
+        {
+          "threshold": 0.1,
+          "bbox_shifted": [
+            0.4895104895104896,
+            0.5734265734265733,
+            -1.027972027972028,
+            -0.9440559440559441
+          ],
+          "bbox_expanded": [
+            0.2895104895104896,
+            0.7734265734265733,
+            -1.2279720279720279,
+            -0.744055944055944
+          ],
+          "cells": 141,
+          "centroid": [
+            0.5318596476254674,
+            -0.9855677502140651
+          ]
+        },
+        {
+          "threshold": 0.105,
+          "bbox_shifted": [
+            -0.08391608391608418,
+            0.006993006993007089,
+            -1.1818181818181817,
+            -1.097902097902098
+          ],
+          "bbox_expanded": [
+            -0.2839160839160842,
+            0.2069930069930071,
+            -1.3818181818181816,
+            -0.897902097902098
+          ],
+          "cells": 142,
+          "centroid": [
+            -0.038506583927460765,
+            -1.1381932641588917
+          ]
+        },
+        {
+          "threshold": 0.105,
+          "bbox_shifted": [
+            -0.08391608391608418,
+            0.006993006993007089,
+            -1.027972027972028,
+            -0.9440559440559441
+          ],
+          "bbox_expanded": [
+            -0.2839160839160842,
+            0.2069930069930071,
+            -1.2279720279720279,
+            -0.744055944055944
+          ],
+          "cells": 142,
+          "centroid": [
+            -0.03850657937176792,
+            -0.9876808620303847
+          ]
+        },
+        {
+          "threshold": 0.105,
+          "bbox_shifted": [
+            0.18181818181818166,
+            0.26573426573426584,
+            -1.1818181818181817,
+            -1.097902097902098
+          ],
+          "bbox_expanded": [
+            -0.018181818181818354,
+            0.46573426573426585,
+            -1.3818181818181816,
+            -0.897902097902098
+          ],
+          "cells": 141,
+          "centroid": [
+            0.2251312466270134,
+            -1.140325163140207
+          ]
+        },
+        {
+          "threshold": 0.105,
+          "bbox_shifted": [
+            0.18181818181818166,
+            0.26573426573426584,
+            -1.027972027972028,
+            -0.9440559440559441
+          ],
+          "bbox_expanded": [
+            -0.018181818181818354,
+            0.46573426573426585,
+            -1.2279720279720279,
+            -0.744055944055944
+          ],
+          "cells": 141,
+          "centroid": [
+            0.22513126420979418,
+            -0.9855489836272769
+          ]
+        },
+        {
+          "threshold": 0.105,
+          "bbox_shifted": [
+            0.3356643356643354,
+            0.4195804195804196,
+            -1.1888111888111887,
+            -1.097902097902098
+          ],
+          "bbox_expanded": [
+            0.1356643356643354,
+            0.6195804195804195,
+            -1.3888111888111887,
+            -0.897902097902098
+          ],
+          "cells": 146,
+          "centroid": [
+            0.37850981133590983,
+            -1.1426483230414624
+          ]
+        },
+        {
+          "threshold": 0.105,
+          "bbox_shifted": [
+            0.3356643356643354,
+            0.4195804195804196,
+            -1.027972027972028,
+            -0.9370629370629371
+          ],
+          "bbox_expanded": [
+            0.1356643356643354,
+            0.6195804195804195,
+            -1.2279720279720279,
+            -0.7370629370629371
+          ],
+          "cells": 146,
+          "centroid": [
+            0.37850982872402794,
+            -0.9832257842948796
+          ]
+        },
+        {
+          "threshold": 0.105,
+          "bbox_shifted": [
+            0.4895104895104896,
+            0.5734265734265733,
+            -1.1818181818181817,
+            -1.097902097902098
+          ],
+          "bbox_expanded": [
+            0.2895104895104896,
+            0.7734265734265733,
+            -1.3818181818181816,
+            -0.897902097902098
+          ],
+          "cells": 139,
+          "centroid": [
+            0.531856452912963,
+            -1.1403039487847932
+          ]
+        },
+        {
+          "threshold": 0.105,
+          "bbox_shifted": [
+            0.4895104895104896,
+            0.5734265734265733,
+            -1.027972027972028,
+            -0.9440559440559441
+          ],
+          "bbox_expanded": [
+            0.2895104895104896,
+            0.7734265734265733,
+            -1.2279720279720279,
+            -0.744055944055944
+          ],
+          "cells": 139,
+          "centroid": [
+            0.5318564667758646,
+            -0.9855701712264308
+          ]
+        }
+      ],
+      "n_rects": 24,
+      "envelope": [
+        -0.2839160839160842,
+        0.7734265734265733,
+        -1.3888111888111887,
+        -0.7370629370629371
+      ],
+      "frozen_before_runs": true
+    },
+    "output_line_y": -1.35,
+    "final_time": 120000.0,
+    "selection_rationale": "T041 70000 Q centroid ~ (0.618,-0.665) vs T029 anchor (0.524,0.399): (+13h,-152h) places the S8 geometry roughly below the later Q trajectory -- a single-point hypothesis from existing trajectories, not a prediction or proven reception",
+    "no_other_displacement_or_parameter": true,
+    "no_appended_structure": true
+  },
+  "query": {
+    "path": "results/T016/static_query.npz",
+    "sha256": "1e167c094c181896c688814c4efe2c4cdcd47627c5f856e5c129c511875e2575",
+    "du_sha256": "67fbd2acef2b0a7f7062878e889407713a41d5f0b43892d432aa1295a13846d8",
+    "dv_sha256": "c0340bf1717398a9ddacf9abfbbb4319a19de6060b26c3b8f08292189e9ff853",
+    "anchor": [
+      0.5244755244755245,
+      0.3986013986013986
+    ],
+    "direction": [
+      0,
+      -1
+    ],
+    "fixed_coordinate_transform": "canonical q(y-ay,-(x-ax)), full periodic image sum",
+    "periodic_images": {
+      "x": [
+        -1,
+        0,
+        1
+      ],
+      "y": [
+        -2,
+        -1,
+        0,
+        1,
+        2
+      ]
+    },
+    "design_analysis": "verify/design_t016_geometry.py",
+    "design_analysis_sha256": "a426228ed6f52af859873c7cb24aa942246c0fc59754f39156ab93ba2a131de8",
+    "geometry": "results/T016/geometry.json",
+    "geometry_sha256": "41ba22d8df20a2d79fcadedf16519bab9fa6fb9eefdf7fd2bcd115f30b814f31",
+    "regenerate": false,
+    "normalize": false
+  },
+  "original_source_t": 80000,
+  "new_experiment_time_zero": true,
+  "measurement": {
+    "core_offsets": [
+      0.1,
+      0.095,
+      0.105
+    ],
+    "connectivity": 4,
+    "minimum_core_pixels": 5,
+    "identity_distance_max": 0.05,
+    "primary_centroid_offset": 0.1,
+    "containment": "all core pixels",
+    "norm": "h*sqrt(sum(du^2+dv^2)); preserve raw and /NS",
+    "diagnostic_cadence_tu": 100,
+    "output_port": {
+      "axis": "y",
+      "coordinate": -1.35,
+      "direction": -1,
+      "aperture_axis": "x",
+      "aperture": [
+        0.35,
+        0.7
+      ],
+      "window": [
+        0.0,
+        120000.0
+      ]
+    },
+    "monitor_ports": [
+      {
+        "axis": "y",
+        "coordinate": -0.6993006993006993
+      },
+      {
+        "axis": "y",
+        "coordinate": 0.6
+      },
+      {
+        "axis": "x",
+        "coordinate": -0.8
+      },
+      {
+        "axis": "x",
+        "coordinate": 0.8
+      }
+    ],
+    "shape_e1_max": 0.25,
+    "shape_patch_half": 65,
+    "shape_reference": "fixed downward periodic full template at actual centroid; no fit or source subtraction",
+    "clean_output": "no non-target core intersects periodic 131-square window; record mixed residual otherwise",
+    "direction_history_tu": 5000,
+    "direction_history_points": 51,
+    "direction_components": [
+      "vx",
+      "vy"
+    ],
+    "downward_direction_component": "vy",
+    "event_bracket_width_max_tu": 0.25,
+    "replay_max_steps": 400,
+    "final_window": [
+      110000.0,
+      120000.0
+    ],
+    "final_window_samples": 101,
+    "core_displacement_from_first_final_max": 0.02,
+    "all_newborn_and_source_events_preserved": true,
+    "capture": {
+      "conversion_box": {
+        "xmin": 0.2,
+        "xmax": 0.75,
+        "ymin": -0.3,
+        "ymax": 0.3
+      },
+      "holding_box": {
+        "xmin": -0.6,
+        "xmax": 0.8,
+        "ymin": -0.4,
+        "ymax": 0.4
+      },
+      "identity_end_alone_sufficient": false,
+      "root_tags": "initial source roots and Q; union over all candidate edges; rootless newborn UNKNOWN; every birth/complex core possible-related",
+      "holding_population": "ALL surviving full-field cores, not a chosen related subset",
+      "holding_all_thresholds_A_containment": true,
+      "holding_primary_unique_chain_and_no_count_changes": true,
+      "holding_primary_max_displacement": 0.02,
+      "absence_of_output_alone_sufficient": false,
+      "newborn_output_ignored": false,
+      "uncertain_attribution": "INDETERMINATE; preserve known violations",
+      "conversion_requires_saved_raw_before_after_and_candidate_relations": true
+    },
+    "free_pass": "exactly one unique clean standard downward Q output in fixed aperture/window, no extra propagation or pre-output periodic return",
+    "readout_targets": {
+      "S6": 0,
+      "S8": 1,
+      "S8plus": 1
+    }
+  },
+  "output_observation_line_y": -1.35,
+  "output_observation_line_note": "fixed forward downstream reference line y=-1.35 on the extended domain; crossing brackets measured post-run from 100-tu diagnostics (centroid and whole core reported separately); the output port is pinned to this line so crossing-adjacent actual fields are persisted by the frozen event mechanism; gate verdicts are recorded facts, not the task's crossing criterion",
+  "comparison_read_only": {
+    "T042_S6_Q": "results/T042/T042_S6_Q/diagnostics.jsonl",
+    "T042_S6_WAIT": "results/T042/T042_S6_WAIT/diagnostics.jsonl",
+    "T042_S8_WAIT": "results/T042/T042_S8_WAIT/diagnostics.jsonl",
+    "T042_extension_analysis": "results/T042/extension_analysis_T042.json"
+  },
+  "primary_observation": {
+    "per_group": true,
+    "wait_window": [
+      0,
+      20000
+    ],
+    "wait_criterion": "spontaneous core change/movement or boundary anomaly in [0,20000]",
+    "q_bind_criterion": "initial unique Q binding at anchor",
+    "threshold": 0.1,
+    "split_window": [
+      0,
+      20000
+    ],
+    "split_criterion": "at least two Q-root descendant cores discernible within [0,20000] at 0.100; record bracket and candidate parent edges",
+    "crossing_window": [
+      0,
+      72000
+    ],
+    "crossing_criterion": "real negative crossing of y=-0.55 by original Q or descendants; record full core, direction, identity and all Q descendants; mixed/unclear identity = UNDECIDABLE",
+    "secondary_thresholds": [
+      0.095,
+      0.105
+    ],
+    "seam_check": "report seam field/gradient both sides at t0 and seam jumps from saved full fields during run; mask itself discontinuous at periodic seam",
+    "classification_vocabulary": [
+      "early_split",
+      "cross_without_early_split",
+      "other_explicit_behavior",
+      "undecidable"
+    ],
+    "no_mask_addition": true,
+    "no_split_line_move": true,
+    "no_weight_scan": true,
+    "no_window_extension": true,
+    "no_necessity_claim": true,
+    "no_tail_causality_claim": true
+  },
+  "joint_observation": {
+    "wait_control": "until the actual Q branch's first neighborhood entry: WAIT same-time total core count == 14, upstream 6 + downstream 8 identities traceable, no new births, no periodic-boundary contact",
+    "neighborhood": "frozen pre-run (see joint_construction.neighborhood); first entry = any Q threshold-core pixel enters (bbox/pixel-range test on the 100-tu diagnostics, periodic shortest image); untraceable or common-core mixing => UNDECIDABLE",
+    "q_trajectory": "record Q trajectory/identity until entry and the T042_S6_Q no-downstream control at common 0-72000 diagnostic times (centroid, core counts, key changes); no Q family => no fictional centroid",
+    "crossing": "centroid and whole-core negative crossing of y=-1.35 recorded separately from diagnostics; first-change or crossing adjacent actual fields saved (transitions / pinned output-port events / final window)",
+    "interaction_verdict": "WAIT precondition holds + Q enters traceably from outside + afterwards a traceable Q-root split OR a mixing/merge change with downstream cores => \"固定共同场存在有记录的候选交互\"; entry without such change => \"本窗未观察到定义内变化\"; not entered / WAIT unstable / identity unclear / breakpoint incomplete => record each honestly, never as physical negation",
+    "mixing_is_descriptive_only": true,
+    "no_causal_attribution_past_72000": "the fixed no-receiver T042 control ends at 72000; later differences have no matching control",
+    "no_rescue": true,
+    "no_scan": true
+  },
+  "save": {
+    "actual_initial_full_field": true,
+    "diagnostic_every_tu": 100,
+    "all_threshold_core_geometry": true,
+    "all_association_candidate_edges": true,
+    "full_field_every_tu": 5000,
+    "full_zero_and_terminal_fields": true,
+    "periodic_and_terminal_expected_count": 16,
+    "final_full_field_every_tu": 100,
+    "final_full_fields": 101,
+    "event_actual_prestate_and_direction_history": true,
+    "event_actual_bracket_before_after_fields": true,
+    "Q_termination_complex_diagnostic_before_after_fields": true,
+    "source_archive_per_actual_case_launch": true
+  },
+  "output_root": "results/T043",
+  "dt": 0.25,
+  "diagnostic_every_tu": 100,
+  "snapshot_every_tu": 5000,
+  "execution_policy": {
+    "order": [
+      "T043_JOINT_WAIT",
+      "T043_JOINT_Q"
+    ],
+    "wait_first": true,
+    "skip_completed_for_ordered_resume": true,
+    "max_invocation_wall_seconds": 3600,
+    "engineering_probe_steps_max_total": 800,
+    "no_line_change": true,
+    "no_initial_change": true,
+    "no_threshold_change": true,
+    "no_time_extension": true,
+    "no_extra_cases": true,
+    "no_displacement_scan": true,
+    "no_appended_structure": true,
+    "stage_end_requires_report_to_Agent1": true,
+    "automatic_full_case_retry": false,
+    "unstarted_case_status": "NOT_RUN_STAGE_GATE",
+    "scientific_stop_unstarted_status": "NOT_RUN_SCIENTIFIC_STOP",
+    "undecidable_case_status": "NOT_RUN_UNDECIDABLE_CONSTRUCTION"
+  },
+  "cases": [
+    {
+      "case_id": "T043_JOINT_WAIT",
+      "source": "JOINT_S6_S8",
+      "add_query": false,
+      "initial_recipe": "T042_base_t0 + shift(S8_WAIT_t0 - bg, +13, -152)",
+      "partition": "JOINT",
+      "initial_fields": "results/T043/inputs/T043_JOINT_WAIT.npz",
+      "initial_file_sha256": "bb632b61f829ef199b1c00f7173dbd7782db9de66f3e74ca0a29ed090b250287",
+      "initial_array_sha256": [
+        "e8ba9776d675698441440d602ec4090a233937d57e942a7fb8f779d4720a3db0",
+        "333face6587b1905827d32e6f9bb3886813f993502023e53c4e6951e4a14c3c1"
+      ],
+      "expected_cores_t0": 14,
+      "sources": {
+        "base": {
+          "path": "results/T042/T042_S6_WAIT/initial_fields.npz",
+          "sha256": "4e760f4f9be66b168b77691381b639e454df2e7aaca69aab22600601ab331220",
+          "array_sha256": [
+            "6a3f698100cc144f81daafc1337dadb972b35b2391a434a39826ba13eec7b350",
+            "f6941f028756176734cc62ab0e520672ee890a86d5ea66d99dd6913c2978f604"
+          ]
+        },
+        "shifted_deviation": {
+          "path": "results/T043/inputs/dev8_shifted.npz",
+          "sha256": "0806f52001ccd5fad0bb3bbc12f9c42cb09da049ac851ebc7bd58c8a7097e683",
+          "array_sha256": [
+            "c8be685ba6ed0ebfac028b23bd08547f2d4b55be074e1642e26e5cf7e43f73b9",
+            "1c4379ddaa22113e622705887d8f6c5bf113de8f7529199a236f3b3226917a22"
+          ]
+        }
+      },
+      "dt": 0.25,
+      "T": 120000.0,
+      "steps": 480000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P"
+    },
+    {
+      "case_id": "T043_JOINT_Q",
+      "source": "JOINT_S6_S8",
+      "add_query": true,
+      "initial_recipe": "T042_base_t0 + shift(S8_WAIT_t0 - bg, +13, -152)",
+      "partition": "JOINT",
+      "initial_fields": "results/T043/inputs/T043_JOINT_Q.npz",
+      "initial_file_sha256": "5e575fdf82f4b0b9352ad8a082c9c5b0ea7fb3e7a392616a7aba97f35b513a9d",
+      "initial_array_sha256": [
+        "56e8dee7fed37ed57ad3b15c334194375f1c4f69aa8389281eb71c61a734ecdc",
+        "3c10e40b0cc9a2e993fe40593714e0e09327364976b0e12e86d5b53cd532c98b"
+      ],
+      "expected_cores_t0": 15,
+      "sources": {
+        "base": {
+          "path": "results/T042/T042_S6_Q/initial_fields.npz",
+          "sha256": "c915ee27f0d52974d2e6260af7a6953ff62389d0167a1d91f7b7c39638d21647",
+          "array_sha256": [
+            "6a972f015fc6e2a96058532c63fb5e63df30fe6344c24cf317e5afaa5ee45850",
+            "6723431828041d84366e25f5f1212f5987b078094d1025e7c26b63cf0c5171b9"
+          ]
+        },
+        "shifted_deviation": {
+          "path": "results/T043/inputs/dev8_shifted.npz",
+          "sha256": "0806f52001ccd5fad0bb3bbc12f9c42cb09da049ac851ebc7bd58c8a7097e683",
+          "array_sha256": [
+            "c8be685ba6ed0ebfac028b23bd08547f2d4b55be074e1642e26e5cf7e43f73b9",
+            "1c4379ddaa22113e622705887d8f6c5bf113de8f7529199a236f3b3226917a22"
+          ]
+        }
+      },
+      "dt": 0.25,
+      "T": 120000.0,
+      "steps": 480000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P"
+    }
+  ],
+  "intake_record": "results/T043/intake.json"
+}

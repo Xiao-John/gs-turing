@@ -1,0 +1,41 @@
+{
+  "cases": [
+    {
+      "case_id": "smoke_spot_euler",
+      "worker": "smoke",
+      "init": "blobs",
+      "blobs": [
+        {"cy": 32, "cx": 32, "radius": 5, "u": 0.5, "v": 0.25, "shape": "square"}
+      ],
+      "n": 64,
+      "h": 1.0,
+      "dt": 1.0,
+      "f": 0.055,
+      "k": 0.066,
+      "method": "euler",
+      "every": 200,
+      "T": 1000,
+      "keep_frames": true,
+      "note": "framework smoke test: one square seed, uniform supply, explicit Euler"
+    },
+    {
+      "case_id": "smoke_spot_imex",
+      "worker": "smoke",
+      "init": "blobs",
+      "blobs": [
+        {"cy": 32, "cx": 32, "radius": 5, "u": 0.5, "v": 0.25, "shape": "square"}
+      ],
+      "n": 64,
+      "h": 1.0,
+      "dt": 1.0,
+      "f": 0.055,
+      "k": 0.066,
+      "method": "imex",
+      "spectral_lap": false,
+      "every": 200,
+      "T": 1000,
+      "keep_frames": true,
+      "note": "same state via the IMEX path; should track smoke_spot_euler closely"
+    }
+  ]
+}

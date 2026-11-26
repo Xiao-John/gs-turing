@@ -1,0 +1,469 @@
+{
+  "experiment_protocol": "R027_SINGLE_COMPONENT_v1",
+  "task_id": "T038",
+  "request": "R027",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T038.md",
+  "task_sha256": "4e2110895348f5a5ed41146839680572c4b19bfd4fe63a21e00386cc0545b759",
+  "authorization": {
+    "path": "coordination/tasks/T038.md",
+    "sha256": "4e2110895348f5a5ed41146839680572c4b19bfd4fe63a21e00386cc0545b759",
+    "scope": "exactly four fixed trajectories: two single-component counterfactuals (M_u, M_v) x (WAIT, Q); no mask change, no split-line move, no weight scan, no window extension; T037 R/L and the S6/S8/free-Q endpoints are read-only and are not re-run"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "grid": {
+    "nx": 768,
+    "ny": 256,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "ymax": 0.8951048951048951,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "ideas": [
+    "I001",
+    "I011",
+    "I012",
+    "I014"
+  ],
+  "parent_evidence": {
+    "T037_config": {
+      "path": "configs/T037.json",
+      "sha256": "3cb71a0469ce25278fc603b109551bc46ddaca3fb7c5b2e81356bd9ec3ea6f8a"
+    },
+    "T037_task": {
+      "path": "coordination/tasks/T037.md",
+      "sha256": "ba738d3264ffd2235ef00fda72661fe891e8f7b4b0902fa756162d22655b6c41"
+    },
+    "T037_intake": {
+      "path": "results/T037/intake.json",
+      "sha256": "e71ae4a100d6fc58ad0c4d2c666db9e53e75e3c6b623985f01b56bb96966b25d"
+    },
+    "T017_config": {
+      "path": "configs/T017.json",
+      "sha256": "f56cd72cc0d5692598a79ead9f943146ef2accd544b3438548f19ab47879b303"
+    },
+    "T017_task": {
+      "path": "coordination/tasks/T017.md",
+      "sha256": "b5345772b253346c10f619ec917b3e2ca027cee4db55b1f2b1f2e168127120c5"
+    },
+    "T029_config": {
+      "path": "configs/T029.json",
+      "sha256": "e157a66785afa0411498362dc64971b7e3d199533b33fb18e835da67a5d6feea"
+    },
+    "T017_intake": {
+      "path": "results/T017/intake.json",
+      "sha256": "fbf958aa146cf430be9d1bd1c8c61a727a11c7a0f4563b4a5f54f0d1fe4135dc"
+    }
+  },
+  "sources": {
+    "S6": {
+      "path": "results/T014/T014_MB_Q4_B/final_fields/fields_final_00320000.npz",
+      "sha256": "9418bd6d872fe86ebe710b45920d05fd741a3d56a4537ab7cf0940e0f9c4375a",
+      "original_experiment_t": 80000,
+      "original_record": "results/T014/records/T014_MB_Q4_B.json",
+      "original_record_sha256": "3c9cf3182b927dac8847b948af887d5cf9192cef14b8a40c61a31c71222ef185",
+      "original_launch_manifest": "results/T014/archives/T014_MB_Q4_B_20261018T120551/manifest.json",
+      "original_launch_manifest_sha256": "0e217e4db0e665e2db1ebde91991b3fca5d48aeeef42b2c3df88387006926c6c"
+    },
+    "S8": {
+      "path": "results/T014/T014_MBP_Q4_BP/final_fields/fields_final_00320000.npz",
+      "sha256": "aa1387081a4981abbb08207e670c82dad186d1d7bbae21242363377439dcd3bd",
+      "original_experiment_t": 80000,
+      "original_record": "results/T014/records/T014_MBP_Q4_BP.json",
+      "original_record_sha256": "f5e426746d83bbd7f34d9be09d52112011277fd55d60784b9f33ee7ac7b2d41b",
+      "original_launch_manifest": "results/T014/archives/T014_MBP_Q4_BP_20261018T121019/manifest.json",
+      "original_launch_manifest_sha256": "401bb21341229ad819ced7d5bda43d95e492fc9cfa52d3dee136ab1b84a7c738"
+    }
+  },
+  "counterfactual": {
+    "definition": "Delta_u=u8-u6, Delta_v=v8-v6; SAME frozen mask w as T037 (w=0 x<=0.25, w=1 x>=0.35, w=3z^2-2z^3 z=(x-0.25)/0.10, pointwise on the original periodic grid, same w for u/v); M_u=(u6+w*Delta_u,v6), M_v=(u6,v6+w*Delta_v); float64, no clip/normalize/background adjust; Q branches add the frozen T016 q (both components) once, background counted once; mask discontinuous at periodic seam (reported, not called periodic-smooth)",
+    "fixed_rule_basis": "existing eight-core layout: new right column near x=0.44; inherited unchanged from the frozen T037 registration, NOT selected from this round's results",
+    "single_component_preservation": true,
+    "background_counted_once": true,
+    "complement_max_err": 0.0,
+    "mask_bit_equal_T037": true,
+    "seam_w": {
+      "x_left_edge": -2.6853146853146854,
+      "x_right_edge": 2.678321678321678,
+      "w_left_edge": 0.0,
+      "w_right_edge": 1.0
+    },
+    "region_col_counts": {
+      "left": 420,
+      "ramp": 15,
+      "right": 333
+    },
+    "S6_array_sha256": {
+      "u": "b2c3134a439c4cbb0b40f7ed8a090cf775834526064f9763e0c9576b76775742",
+      "v": "ea95e5e43961f501327f4937955e6847193aa65ef0a0f0678a5ac76c080d8f89"
+    },
+    "S8_array_sha256": {
+      "u": "4e6cd2161ba34d4223d4826552c52646123ee547b192e48f0ad41cd1f2622a75",
+      "v": "49705f1a52beb86131f743e6369f101c2ff4e10a947a5b3c7a97a9a29fa1fd51"
+    },
+    "array_source": "results/T037/inputs/T037_R_WAIT.npz halves are bit-equal by construction; S6/S8 array hashes from results/T017/intake.json checks",
+    "measured_at_intake": {
+      "T038_U_WAIT": {
+        "n_cores_t0": 8,
+        "nearest_core_to_anchor": 0.3319133520016256,
+        "second_core_to_anchor": 0.39854858569969
+      },
+      "T038_U_Q": {
+        "n_cores_t0": 9,
+        "nearest_core_to_anchor": 2.1986410881041173e-06,
+        "second_core_to_anchor": 0.3318931370081801
+      },
+      "T038_V_WAIT": {
+        "n_cores_t0": 6,
+        "nearest_core_to_anchor": 0.3991586937948239,
+        "second_core_to_anchor": 0.5062585376653852
+      },
+      "T038_V_Q": {
+        "n_cores_t0": 7,
+        "nearest_core_to_anchor": 9.35505987331085e-06,
+        "second_core_to_anchor": 0.3991609383898654
+      }
+    }
+  },
+  "query": {
+    "path": "results/T016/static_query.npz",
+    "sha256": "1e167c094c181896c688814c4efe2c4cdcd47627c5f856e5c129c511875e2575",
+    "du_sha256": "67fbd2acef2b0a7f7062878e889407713a41d5f0b43892d432aa1295a13846d8",
+    "dv_sha256": "c0340bf1717398a9ddacf9abfbbb4319a19de6060b26c3b8f08292189e9ff853",
+    "anchor": [
+      0.5244755244755245,
+      0.3986013986013986
+    ],
+    "direction": [
+      0,
+      -1
+    ],
+    "fixed_coordinate_transform": "canonical q(y-ay,-(x-ax)), full periodic image sum",
+    "periodic_images": {
+      "x": [
+        -1,
+        0,
+        1
+      ],
+      "y": [
+        -2,
+        -1,
+        0,
+        1,
+        2
+      ]
+    },
+    "design_analysis": "verify/design_t016_geometry.py",
+    "design_analysis_sha256": "a426228ed6f52af859873c7cb24aa942246c0fc59754f39156ab93ba2a131de8",
+    "geometry": "results/T016/geometry.json",
+    "geometry_sha256": "41ba22d8df20a2d79fcadedf16519bab9fa6fb9eefdf7fd2bcd115f30b814f31",
+    "regenerate": false,
+    "normalize": false
+  },
+  "original_source_t": 80000,
+  "new_experiment_time_zero": true,
+  "measurement": {
+    "core_offsets": [
+      0.1,
+      0.095,
+      0.105
+    ],
+    "connectivity": 4,
+    "minimum_core_pixels": 5,
+    "identity_distance_max": 0.05,
+    "primary_centroid_offset": 0.1,
+    "containment": "all core pixels",
+    "norm": "h*sqrt(sum(du^2+dv^2)); preserve raw and /NS",
+    "diagnostic_cadence_tu": 100,
+    "output_port": {
+      "axis": "y",
+      "coordinate": -0.6993006993006993,
+      "direction": -1,
+      "aperture_axis": "x",
+      "aperture": [
+        0.35,
+        0.7
+      ],
+      "window": [
+        60000,
+        70000
+      ]
+    },
+    "monitor_ports": [
+      {
+        "axis": "y",
+        "coordinate": -0.6993006993006993
+      },
+      {
+        "axis": "y",
+        "coordinate": 0.6
+      },
+      {
+        "axis": "x",
+        "coordinate": -0.8
+      },
+      {
+        "axis": "x",
+        "coordinate": 0.8
+      }
+    ],
+    "shape_e1_max": 0.25,
+    "shape_patch_half": 65,
+    "shape_reference": "fixed downward periodic full template at actual centroid; no fit or source subtraction",
+    "clean_output": "no non-target core intersects periodic 131-square window; record mixed residual otherwise",
+    "direction_history_tu": 5000,
+    "direction_history_points": 51,
+    "direction_components": [
+      "vx",
+      "vy"
+    ],
+    "downward_direction_component": "vy",
+    "event_bracket_width_max_tu": 0.25,
+    "replay_max_steps": 400,
+    "final_window": [
+      62000,
+      72000
+    ],
+    "final_window_samples": 101,
+    "core_displacement_from_first_final_max": 0.02,
+    "all_newborn_and_source_events_preserved": true,
+    "capture": {
+      "conversion_box": {
+        "xmin": 0.2,
+        "xmax": 0.75,
+        "ymin": -0.3,
+        "ymax": 0.3
+      },
+      "holding_box": {
+        "xmin": -0.6,
+        "xmax": 0.8,
+        "ymin": -0.4,
+        "ymax": 0.4
+      },
+      "identity_end_alone_sufficient": false,
+      "root_tags": "initial source roots and Q; union over all candidate edges; rootless newborn UNKNOWN; every birth/complex core possible-related",
+      "holding_population": "ALL surviving full-field cores, not a chosen related subset",
+      "holding_all_thresholds_A_containment": true,
+      "holding_primary_unique_chain_and_no_count_changes": true,
+      "holding_primary_max_displacement": 0.02,
+      "absence_of_output_alone_sufficient": false,
+      "newborn_output_ignored": false,
+      "uncertain_attribution": "INDETERMINATE; preserve known violations",
+      "conversion_requires_saved_raw_before_after_and_candidate_relations": true
+    },
+    "free_pass": "exactly one unique clean standard downward Q output in fixed aperture/window, no extra propagation or pre-output periodic return",
+    "readout_targets": {
+      "S6": 0,
+      "S8": 1,
+      "S8plus": 1
+    }
+  },
+  "output_observation_line_y": -0.55,
+  "output_observation_line_note": "fixed section y=-0.55; crossing brackets measured post-run from diagnostics at 100-tu precision (same method as T025/T029/T034-T036), not a probe port change",
+  "comparison_read_only": {
+    "T037_R_WAIT": "results/T037/T037_R_WAIT/diagnostics.jsonl",
+    "T037_R_Q": "results/T037/T037_R_Q/diagnostics.jsonl",
+    "T037_analysis": "results/T037/analysis_T037.json",
+    "T017_S6_Q": "results/T017/T017_S6_Q/diagnostics.jsonl",
+    "T029_S8_Q": "results/T029/T029_S8_Q/diagnostics.jsonl",
+    "T036_analysis": "results/T036/analysis_T036.json"
+  },
+  "primary_observation": {
+    "per_group": true,
+    "wait_window": [
+      0,
+      20000
+    ],
+    "wait_criterion": "spontaneous core change/movement or boundary anomaly in [0,20000]",
+    "q_bind_criterion": "initial unique Q binding at anchor",
+    "threshold": 0.1,
+    "split_window": [
+      0,
+      20000
+    ],
+    "split_criterion": "at least two Q-root descendant cores discernible within [0,20000] at 0.100; record bracket and candidate parent edges",
+    "crossing_window": [
+      0,
+      72000
+    ],
+    "crossing_criterion": "real negative crossing of y=-0.55 by original Q or descendants; record full core, direction, identity and all Q descendants; mixed/unclear identity = UNDECIDABLE",
+    "secondary_thresholds": [
+      0.095,
+      0.105
+    ],
+    "seam_check": "report seam field/gradient both sides at t0 and seam jumps from saved full fields during run; mask itself discontinuous at periodic seam",
+    "classification_vocabulary": [
+      "early_split",
+      "cross_without_early_split",
+      "other_explicit_behavior",
+      "undecidable"
+    ],
+    "no_mask_addition": true,
+    "no_split_line_move": true,
+    "no_weight_scan": true,
+    "no_window_extension": true,
+    "no_necessity_claim": true,
+    "no_tail_causality_claim": true
+  },
+  "save": {
+    "actual_initial_full_field": true,
+    "diagnostic_every_tu": 100,
+    "all_threshold_core_geometry": true,
+    "all_association_candidate_edges": true,
+    "full_field_every_tu": 5000,
+    "full_zero_and_terminal_fields": true,
+    "periodic_and_terminal_expected_count": 16,
+    "final_full_field_every_tu": 100,
+    "final_full_fields": 101,
+    "event_actual_prestate_and_direction_history": true,
+    "event_actual_bracket_before_after_fields": true,
+    "Q_termination_complex_diagnostic_before_after_fields": true,
+    "source_archive_per_actual_case_launch": true
+  },
+  "output_root": "results/T038",
+  "dt": 0.25,
+  "T": 72000.0,
+  "steps": 288000,
+  "diagnostic_every_tu": 100,
+  "snapshot_every_tu": 5000,
+  "execution_policy": {
+    "order": [
+      "T038_U_WAIT",
+      "T038_U_Q",
+      "T038_V_WAIT",
+      "T038_V_Q"
+    ],
+    "wait_first_per_group": true,
+    "always_run_Q_even_if_WAIT_unstable": true,
+    "attribute_downgrade_if_WAIT_unstable": true,
+    "group_undecidable_does_not_block_other": true,
+    "max_invocation_wall_seconds": 7200,
+    "engineering_probe_steps_max_total": 4000,
+    "no_line_change": true,
+    "no_initial_change": true,
+    "no_threshold_change": true,
+    "no_time_extension": true,
+    "no_extra_cases": true,
+    "no_mask_change": true,
+    "stage_end_requires_report_to_Agent1": true,
+    "automatic_full_case_retry": false,
+    "unstarted_case_status": "NOT_RUN_STAGE_GATE",
+    "scientific_stop_unstarted_status": "NOT_RUN_SCIENTIFIC_STOP",
+    "undecidable_case_status": "NOT_RUN_UNDECIDABLE_INITIAL"
+  },
+  "cases": [
+    {
+      "case_id": "T038_U_WAIT",
+      "source": "SINGLE_U",
+      "add_query": false,
+      "initial_recipe": "M_u",
+      "partition": "U",
+      "initial_fields": "results/T038/inputs/T038_U_WAIT.npz",
+      "initial_file_sha256": "ef8959426acaa62042217d3b34dce996a136a197227036bfe6141e977c200bdd",
+      "initial_array_sha256": [
+        "4d11c02a01afea440c484397374724feaa6ae71963a772e705883f94db81db5a",
+        "ea95e5e43961f501327f4937955e6847193aa65ef0a0f0678a5ac76c080d8f89"
+      ],
+      "expected_cores_t0": 8,
+      "dt": 0.25,
+      "T": 72000.0,
+      "steps": 288000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P"
+    },
+    {
+      "case_id": "T038_U_Q",
+      "source": "SINGLE_U",
+      "add_query": true,
+      "initial_recipe": "M_u+qQ",
+      "partition": "U",
+      "initial_fields": "results/T038/inputs/T038_U_Q.npz",
+      "initial_file_sha256": "3b4d32ea2797bb6b2253f6f5137e39b3f82ae7c1ec4410b5f9b01e636d205d6a",
+      "initial_array_sha256": [
+        "86d78df820ab88ee0f61e728e6fad35fb965bf6a211770305d4efb5f172dc5a4",
+        "4afc2a2e0ad534303c0fcb1fd0283b67d8512e7fd3e50aa5a6c0a93d119507fc"
+      ],
+      "expected_cores_t0": 9,
+      "dt": 0.25,
+      "T": 72000.0,
+      "steps": 288000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P"
+    },
+    {
+      "case_id": "T038_V_WAIT",
+      "source": "SINGLE_V",
+      "add_query": false,
+      "initial_recipe": "M_v",
+      "partition": "V",
+      "initial_fields": "results/T038/inputs/T038_V_WAIT.npz",
+      "initial_file_sha256": "b9acd5de1efd2c0a188e6157e6082230ff80d5e59ac4bd081bcb54cef6f22e5c",
+      "initial_array_sha256": [
+        "b2c3134a439c4cbb0b40f7ed8a090cf775834526064f9763e0c9576b76775742",
+        "ad72823129000eff4c98ea2b6a4bb886a3b8368d01c07b13a29b911e44a85753"
+      ],
+      "expected_cores_t0": 6,
+      "dt": 0.25,
+      "T": 72000.0,
+      "steps": 288000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P"
+    },
+    {
+      "case_id": "T038_V_Q",
+      "source": "SINGLE_V",
+      "add_query": true,
+      "initial_recipe": "M_v+qQ",
+      "partition": "V",
+      "initial_fields": "results/T038/inputs/T038_V_Q.npz",
+      "initial_file_sha256": "6175a07d5086d0bc62af8c7d5182d0822051aa00b8af9b726be0ac3f70f31a5b",
+      "initial_array_sha256": [
+        "cbd2d55a095db49f27aa1b611739d0fb31f3151871585888dfcc3f1b3439a7ba",
+        "96963901d56ce0499ead01327615c36525a0ec5ac1bdc00c57f66bc75bde8768"
+      ],
+      "expected_cores_t0": 7,
+      "dt": 0.25,
+      "T": 72000.0,
+      "steps": 288000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true,
+      "stage": "P"
+    }
+  ],
+  "intake_record": "results/T038/intake.json"
+}

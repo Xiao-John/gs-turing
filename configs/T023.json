@@ -1,0 +1,211 @@
+{
+  "experiment_protocol": "R022_BP_H2_v1",
+  "task_id": "T023",
+  "request": "R022",
+  "status": "READY_IMPLEMENT_AND_STAGE_A",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T023.md",
+  "task_sha256": "9816b9847045801eaeafbfa485ebd59434c62243c48b45ce31605e12b5099187",
+  "authorization": {
+    "path": "coordination/requests/R022.md",
+    "sha256": "119988513d44619f00a2375fccba21d34839bcec006419365ceaefb69c91daf6",
+    "scope": "one fine-grid BP trajectory to T=160000 plus the necessary recovery validation; stage A to T=80000 first"
+  },
+  "design_plan": {
+    "path": "coordination/plans/R021_SPATIAL_DESIGN.md",
+    "sha256": "2e5c938295a42911e6944460afea7090b976eed6e94c14a5d2955023280a9d6c"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "grid": {
+    "nx": 1536,
+    "ny": 512,
+    "h": 0.0034965034965034965
+  },
+  "coarse_reference_grid": {
+    "nx": 768,
+    "ny": 256,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "ymax": 0.8951048951048951,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "receiver_shift_columns": -180,
+  "NS": 0.051983292698308176,
+  "dt": 0.125,
+  "initial": {
+    "path": "results/R021/initial_bilinear_2x.npz",
+    "sha256": "e041c4dac454fd39373a3aadc213cf3f55e47eeffacf416a4a4206796cf0c67a",
+    "coarse_reference": "results/T021/inputs/T021_BP_R.npz",
+    "coarse_reference_sha256": "44f2b2b2422d1f696bc600eaa227c0eede24d72cad6416c1dd7e344d732bcfb2",
+    "restriction": "fine[::2,::2] must equal the coarse field element-wise"
+  },
+  "baseline": {
+    "case": "T022_BP_R_DT0125",
+    "run_dir": "results/T022/T022_BP_R_DT0125",
+    "record": {
+      "path": "results/T022/records/T022_BP_R_DT0125.json",
+      "sha256": "e96ec01069ac26e825c67972b1d377b58e6841cde457ed6b1ff4b6deb7759763"
+    },
+    "diagnostics_sha256": "8dd58504595585afe21ace8967bb76174762b30368d63dab18c6dfeee082f113",
+    "final_field_files": 101
+  },
+  "measurement_patch": {
+    "path": "experiment/t021_science.py",
+    "sha256": "36f381fc19145caf706897e4f3edff0904e36e4fab47b57596c2bbf3bb001013"
+  },
+  "regions": {
+    "VR": {
+      "xmin": -1.8587412587412588,
+      "xmax": -0.6587412587412588,
+      "ymin": -0.35,
+      "ymax": 0.35
+    },
+    "U": {
+      "xmin": -0.6,
+      "xmax": 0.6,
+      "ymin": -0.35,
+      "ymax": 0.35
+    },
+    "HR": {
+      "xmin": -2.0087412587412588,
+      "xmax": -0.6087412587412587,
+      "ymin": -0.45,
+      "ymax": 0.45
+    },
+    "C": {
+      "xmin": -0.25,
+      "xmax": 0.25,
+      "ymin": -0.25,
+      "ymax": 0.25
+    }
+  },
+  "measurement": {
+    "offsets": [
+      0.095,
+      0.1,
+      0.105
+    ],
+    "minimum_core_pixels": 20,
+    "auxiliary_min_core_pixels": 5,
+    "auxiliary_note": "the >=5 fine-pixel statistic is recorded separately and never replaces the 20-pixel main criterion",
+    "upstream_R4_reference_positions": [
+      {
+        "cx": -0.1320941979691517,
+        "cy": 0.07523440862893935
+      },
+      {
+        "cx": -0.13209419796915164,
+        "cy": -0.07523440862897224
+      },
+      {
+        "cx": 0.13209419796915117,
+        "cy": -0.07523440862897193
+      },
+      {
+        "cx": 0.13209419796915156,
+        "cy": 0.07523440862893974
+      }
+    ],
+    "upstream_R4_position_max": 0.02,
+    "connectivity": 4,
+    "cut_x": -0.5293706293706294,
+    "cut_record_all_y": true,
+    "cut_label_aperture_y": [
+      -0.25,
+      0.25
+    ],
+    "final_window": [
+      150000,
+      160000
+    ],
+    "diagnostic_every_tu": 100,
+    "snapshot_every_tu": 5000,
+    "receiver_arrays_every_tu": 100,
+    "U_array_window": [
+      40000,
+      65000
+    ],
+    "cumulative_core_displacement_max": 0.02,
+    "pollution_norm_max_over_NS": 0.25,
+    "consistency_VR_distance_max_over_NS": 0.25,
+    "consistency_operator": "restrict fine u/v to even-even nodes R(a)=a[::2,::2]; coarse VR mask; coarse h=1/143; NS fixed 0.051983292698308176",
+    "auxiliary_field_drift_max_over_NS": 0.05,
+    "boundary_core_guard_width": 0.25,
+    "minimum_preparation_span_tu": 10000,
+    "minimum_preparation_samples": 101,
+    "suffix_first_point_entry_must_be_one_to_one": true,
+    "direction_history_tu": 5000,
+    "direction_history_samples": 51,
+    "event_brackets": "actual diagnostic endpoints; no PDE replay"
+  },
+  "schedule": {
+    "diagnostic_every_steps": 800,
+    "snapshot_every_steps": 40000,
+    "checkpoint_every_steps": 40000,
+    "stage_A_T": 80000,
+    "stage_A_steps": 640000,
+    "full_T": 160000,
+    "full_steps": 1280000
+  },
+  "recovery": {
+    "probe_uninterrupted_steps": 1600,
+    "probe_split_steps": [
+      800,
+      1600
+    ],
+    "split_note": "the split must fall on a registered diagnostic boundary (800 steps = 100 tu); a mid-chunk checkpoint would break the cadence invariant",
+    "controlled_identity_event_check": true,
+    "note": "same-version validation through the actual resume entry; checkpoints carry both fields, tracker/ancestors, previous diagnostic (incl. labels), events and diagnostics state"
+  },
+  "save": {
+    "launch_source_per_actual_case": true,
+    "initial_fields": true,
+    "full_field_event_endpoints": true,
+    "all_candidate_parent_graphs": true,
+    "raw_unsubtracted_regions": true,
+    "recoverable_checkpoints_every_tu": 5000
+  },
+  "output_root": "results/T023",
+  "cases": [
+    {
+      "case_id": "T023_BP_R_H2",
+      "recipe": "BP+qR bilinear-2x mapped initial",
+      "expected_VR_cores": 8,
+      "expected_U_cores": 0,
+      "execution_released": true,
+      "dt": 0.125,
+      "T": 160000,
+      "steps": 1280000
+    }
+  ],
+  "resource_reference": {
+    "nominal_full_wall_minutes": 75,
+    "nominal_stage_A_wall_minutes": 40,
+    "nominal_stage_A_disk_GB": 1.4,
+    "engineering_probe_steps_max_total": 4096,
+    "memory_note": "one fine scalar field ~6 MiB; u/v pair ~12 MiB"
+  },
+  "report": "coordination/reports/T023_STAGE_A.md"
+}

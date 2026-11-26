@@ -1,0 +1,311 @@
+{
+  "experiment_protocol": "R026_SECOND_CELL_v1",
+  "task_id": "T028",
+  "request": "R026",
+  "status": "READY_IMPLEMENT_AND_RUN",
+  "execution_enabled": true,
+  "task": "coordination/tasks/T028.md",
+  "task_sha256": "2af56fc9d56bd69ff14e36d50cd5d6e1e8eae1e7b66a7dfbabf10acdc28f078e",
+  "authorization": {
+    "path": "coordination/tasks/T028.md",
+    "sha256": "2af56fc9d56bd69ff14e36d50cd5d6e1e8eae1e7b66a7dfbabf10acdc28f078e",
+    "scope": "exactly three fixed cases (DOWN_WAIT, BP_JOINT, ABP_JOINT); no position change, no domain change, no window extension, no extra branches"
+  },
+  "model": {
+    "F": 0.06,
+    "k": 0.0609,
+    "Du": 2e-05,
+    "Dv": 1e-05,
+    "u_res": 1,
+    "boundary": "periodic",
+    "method": "euler",
+    "dtype": "float64",
+    "laplacian": "five_point",
+    "spectral_lap": false,
+    "dealias": false,
+    "clip": false,
+    "external_drive": false
+  },
+  "grid": {
+    "nx": 768,
+    "ny": 256,
+    "h": 0.006993006993006993
+  },
+  "domain": {
+    "xmin": -2.6853146853146854,
+    "xmax": 2.6853146853146854,
+    "ymin": -0.8951048951048951,
+    "ymax": 0.8951048951048951,
+    "coordinates": "x=xmin+i*h; y=ymin+j*h; endpoints excluded"
+  },
+  "background": {
+    "u": 0.42008441954161924,
+    "v": 0.287799295512844
+  },
+  "NS": 0.051983292698308176,
+  "standard": {
+    "path": "Researched/01/GS_Standard_Signal_v01.npz",
+    "sha256": "c7c6ef57d78d583490b8373b73609f3d02caa3e47a70744cee0026df4d55c9fe"
+  },
+  "ideas": [
+    "I001",
+    "I011",
+    "I012",
+    "I014"
+  ],
+  "parent_evidence": {
+    "T010_config": {
+      "path": "configs/T010.json",
+      "sha256": "c6208239ed2ce3a17b69e21a188e1d34ad34680556730ea13110ea4f753472b1"
+    },
+    "T021_config": {
+      "path": "configs/T021.json",
+      "sha256": "e7cd45d2b7634f336633a983a32e8e296009c06c1d3c2011af176677716789e0"
+    },
+    "T028_static": {
+      "path": "results/T028/static_T028.json",
+      "sha256": "def4254c6a579f99fe2e1900ab994bc84e6083fd56300d6e1e7213517cb18df7"
+    },
+    "T021_science": {
+      "path": "experiment/t021_science.py",
+      "sha256": "36f381fc19145caf706897e4f3edff0904e36e4fab47b57596c2bbf3bb001013"
+    }
+  },
+  "sources": {
+    "BP": {
+      "path": "results/T009/inputs/R007B_B0_BP_c.npz",
+      "sha256": "e79225acb37ae1feabbf4a53a908666d1cccb49f30603ee4b2aedd4fe89985dd"
+    },
+    "ABP": {
+      "path": "results/T009/inputs/R007B_B0_ABP_c.npz",
+      "sha256": "5e1703dd1e1005c74416d7d892bd5d711aab75e657274d9925eb56ba162df870"
+    },
+    "AB": {
+      "path": "results/T009/inputs/R007B_B0_AB_c.npz",
+      "sha256": "e9dbf63b059c9210e1af6690945b2e4adee66cbee09d0bfbebfef2028811dbbb"
+    }
+  },
+  "E_source": {
+    "path": "configs/T021.json",
+    "sha256": "e7cd45d2b7634f336633a983a32e8e296009c06c1d3c2011af176677716789e0",
+    "note": "E is the frozen background (ub,vb) from T021/T010; design_t020 uses the same E"
+  },
+  "receiver_shift_columns": -180,
+  "downstream_center_x": -1.2587412587412588,
+  "recipe_joint": "X_up + roll_x(X_AB - E, -180); full periodic; no crop; background once",
+  "recipe_down_wait": "E + roll_x(X_AB - E, -180)",
+  "no_mature_Q4": true,
+  "regions": {
+    "VR": {
+      "xmin": -1.8587412587412588,
+      "xmax": -0.6587412587412588,
+      "ymin": -0.35,
+      "ymax": 0.35
+    },
+    "U": {
+      "xmin": -0.6,
+      "xmax": 0.6,
+      "ymin": -0.35,
+      "ymax": 0.35
+    },
+    "HR": {
+      "xmin": -2.0087412587412588,
+      "xmax": -0.6087412587412587,
+      "ymin": -0.45,
+      "ymax": 0.45
+    },
+    "C": {
+      "xmin": -0.25,
+      "xmax": 0.25,
+      "ymin": -0.25,
+      "ymax": 0.25
+    }
+  },
+  "measurement": {
+    "offsets": [
+      0.095,
+      0.1,
+      0.105
+    ],
+    "minimum_core_pixels": 5,
+    "connectivity": 4,
+    "cut_x": -0.5293706293706294,
+    "cut_record_all_y": true,
+    "cut_label_aperture_y": [
+      -0.25,
+      0.25
+    ],
+    "final_window": [
+      150000,
+      160000
+    ],
+    "diagnostic_every_tu": 100,
+    "snapshot_every_tu": 5000,
+    "final_full_fields_every_tu": 100,
+    "receiver_arrays_every_tu": 100,
+    "U_array_window": [
+      40000,
+      65000
+    ],
+    "minimum_preparation_span_tu": 10000,
+    "minimum_preparation_samples": 101,
+    "cumulative_core_displacement_max": 0.02,
+    "pollution_norm_max_over_NS": 0.25,
+    "blocked_wait_VR_distance_max_over_NS": 0.25,
+    "pass_pair_VR_distance_min_strict_over_NS": 0.25,
+    "auxiliary_field_drift_max_over_NS": 0.05,
+    "boundary_core_guard_width": 0.25,
+    "upstream_formation_window": [
+      40000,
+      50000
+    ],
+    "upstream_R4_reference_positions": [
+      {
+        "cx": -0.1320941979691517,
+        "cy": 0.07523440862893935
+      },
+      {
+        "cx": -0.13209419796915164,
+        "cy": -0.07523440862897224
+      },
+      {
+        "cx": 0.13209419796915117,
+        "cy": -0.07523440862897193
+      },
+      {
+        "cx": 0.13209419796915156,
+        "cy": 0.07523440862893974
+      }
+    ],
+    "upstream_R4_position_max": 0.02,
+    "direction_history_tu": 5000,
+    "direction_history_samples": 51,
+    "event_brackets": "actual diagnostic endpoints; no PDE replay",
+    "upstream_formation_region": "C",
+    "downstream_output_x": -1.8587412587412588,
+    "downstream_output_aperture_y": [
+      -0.25,
+      0.25
+    ],
+    "downstream_output_direction": -1,
+    "control_formation": {
+      "window_tu": [
+        40000,
+        50000
+      ],
+      "expected_cores_in_VR": 4,
+      "note": "downstream four-core wait; formation need not be exactly [18000,18100]"
+    },
+    "min_downstream_cores_t0": 2,
+    "forbid_forced_P": true,
+    "identity_separation": "upstream A/B/P vs downstream DA/DB distinct roots"
+  },
+  "save": {
+    "launch_source_per_actual_case": true,
+    "initial_fields": true,
+    "full_field_event_endpoints": true,
+    "all_candidate_parent_graphs": true,
+    "raw_unsubtracted_regions": true,
+    "checkpoint_every_tu": 5000
+  },
+  "output_root": "results/T028",
+  "cases": [
+    {
+      "case_id": "T028_DOWN_WAIT",
+      "stage": "control",
+      "recipe": "E + roll_x(X_AB - E, -180)",
+      "expected_signals": [],
+      "initial_fields": "results/T028/inputs/T028_DOWN_WAIT.npz",
+      "initial_file_sha256": "de89eb105da91916f95e138c57846c80c5013d0abf220c6cad5e3181842de622",
+      "initial_array_sha256": [
+        "4b1eec96aaa636e0466111fa67389c159ce004f36dfb33c0e4ec240a788176f2",
+        "57dd11396f648dab7e8fbc599fac1b376634b264ccb8af923afcbb04d599f574"
+      ],
+      "static_key": "DOWN_WAIT",
+      "expected_total_cores_t0": 2,
+      "expected_VR_cores_t0": 2,
+      "dt": 0.25,
+      "T": 160000,
+      "steps": 640000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true
+    },
+    {
+      "case_id": "T028_BP_JOINT",
+      "stage": "joint",
+      "recipe": "X_BP + roll_x(X_AB - E, -180)",
+      "expected_signals": [
+        "B",
+        "P"
+      ],
+      "initial_fields": "results/T028/inputs/T028_BP.npz",
+      "initial_file_sha256": "5ddd542e06d3a1b786cb6593bb02b4abe84104185a00128a22c3b931766a4124",
+      "initial_array_sha256": [
+        "8145fc963eabf5a1438254def82e571cdb3adaa4681d413229d60d63fc8789bc",
+        "e6416f2f59b322a53be2d5aad7f6999343ee2b092b737f6e2621e24f4501b0b2"
+      ],
+      "static_key": "BP",
+      "expected_total_cores_t0": 4,
+      "expected_VR_cores_t0": 2,
+      "dt": 0.25,
+      "T": 160000,
+      "steps": 640000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true
+    },
+    {
+      "case_id": "T028_ABP_JOINT",
+      "stage": "joint",
+      "recipe": "X_ABP + roll_x(X_AB - E, -180)",
+      "expected_signals": [
+        "A",
+        "B",
+        "P"
+      ],
+      "initial_fields": "results/T028/inputs/T028_ABP.npz",
+      "initial_file_sha256": "65d380017266fc8dd43549a38c1062769992da921628ac75498da971dd26cb14",
+      "initial_array_sha256": [
+        "f685815e88d4dd6105ff09b4dc14474facc44e0b0df44c84bf3d14fecd9afba6",
+        "824e2d6ac7725b96f6b89480151b5ca0576d2a70603f864fd54ff8fdbdc5e7e3"
+      ],
+      "static_key": "ABP",
+      "expected_total_cores_t0": 5,
+      "expected_VR_cores_t0": 2,
+      "dt": 0.25,
+      "T": 160000,
+      "steps": 640000,
+      "diagnostic_every_steps": 400,
+      "snapshot_every_steps": 20000,
+      "execution_released": true
+    }
+  ],
+  "execution_policy": {
+    "order": [
+      "T028_DOWN_WAIT",
+      "T028_BP_JOINT",
+      "T028_ABP_JOINT"
+    ],
+    "controls_first": true,
+    "stop_loss_if_control_fails_formation": true,
+    "ABP_may_run_after_BP_negative_to_distinguish_upstream_block": true,
+    "max_invocation_wall_seconds": 3600,
+    "engineering_probe_steps_max_total": 2000,
+    "no_geometry_scan": true,
+    "no_window_extension": true,
+    "no_extra_branches": true,
+    "stage_end_requires_report_to_Agent1": true,
+    "automatic_full_case_retry": false,
+    "unstarted_case_status": "NOT_RUN_STAGE_GATE",
+    "scientific_stop_unstarted_status": "NOT_RUN_SCIENTIFIC_STOP"
+  },
+  "schedule": {
+    "diagnostic_every_steps": 400,
+    "snapshot_every_steps": 20000
+  },
+  "resource_reference": {
+    "nominal_wall_minutes_per_case": 12
+  },
+  "report": "coordination/reports/T028_AGENT2.md"
+}

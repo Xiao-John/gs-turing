@@ -1,0 +1,14 @@
+# Gray-Scott toolchain dependencies.
+#
+# Keep this list short on purpose.  The numerical core is numpy plus an optional
+# compiled C kernel (core/solver.c, built on demand with cc and ad-hoc signed on
+# macOS so a hardened interpreter can load it).  Rendering uses Pillow only.
+# scipy is needed by exactly two modules, numerics/jacobian.py and the optional
+# sparse path in numerics/spectrum.py; everything else runs without it.
+numpy==2.5.3
+Pillow==12.3.0
+scipy==1.18.1
+
+# Not used anywhere: matplotlib, pandas, numba.
+# Figures are written with Pillow (experiment/plot.py) so that a headless batch
+# has no display or font-cache dependency.
